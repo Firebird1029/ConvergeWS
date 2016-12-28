@@ -1,5 +1,5 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = true;
+var debug = false;
 
 // ADJUSTABLE - Change these variables if Airtable base structure changes (added fields, changed name of table, etc.)
 var apiKey = "keyFUzYF3ZYAosZWm", // https://airtable.com/account - TODO We need a universal API key.
