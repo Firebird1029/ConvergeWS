@@ -1,5 +1,5 @@
 "use strict"; /* eslint-env browser */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = false;
+var debug = true;
 
 $("#nav > ul").dropotron({
 	// mode: "fade",
@@ -73,9 +73,10 @@ function insertTemplate (options, records) {
 
 		if (records[key].style) {
 			// There has been a template style specified in the Airtable record.
-			var templateStyle = "div.template-" + records[key].style;
+			var templateStyle = "template-" + records[key].style;
+			debug && console.log(templateStyle);
 			
-			$template = $(templateStyle).clone().removeClass(templateStyle); // TODO change to ID??
+			$template = $("div." + templateStyle).clone().removeClass(templateStyle); // TODO change to ID??
 			$template.find(".dynamicTemplate").each(function (index, element) {
 				var $el = $(element), // The current child DOM element to work with.
 					elClasses = $el.attr("class").split(" "); // The class list of the element.
