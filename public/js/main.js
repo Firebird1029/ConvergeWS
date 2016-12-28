@@ -1,6 +1,15 @@
 "use strict"; /* eslint-env browser */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = true;
+var debug = false;
 
+// DOM Animation Settings
+
+// Fix scroll glitch
+$(document).scrollTop(0);
+$(window).on("beforeunload", function () {
+	$(window).scrollTop(0);
+});
+
+// Navigation Dropotron Settings
 $("#nav > ul").dropotron({
 	// mode: "fade",
 	// speed: 300,
@@ -54,6 +63,9 @@ function directDOMChange (options, records) {
 			for (var j = 0; j < elClasses.length; j++) {
 				var field = records[key][elClasses[j]];
 				if (field) {
+					// Animation
+					$el.hide();
+
 					// The class matches a field (or title of a column) in the Airtable records.
 					// TODO deal with an array in an airtable record
 					if (Array.isArray(field)) {
@@ -61,6 +73,9 @@ function directDOMChange (options, records) {
 					} else {
 						$el.content(field);
 					}
+
+					// Animation
+					$el.fadeIn(1000); // TODO make dynamic
 				}
 			}
 		});
@@ -100,8 +115,10 @@ function insertTemplate (options, records) {
 			});
 		}
 
-		// Append to current view
+		// Append to current view, with animation
+		$template.hide();
 		$template.appendTo($("div.container"));
+		$template.fadeIn(500); // TODO make dynamic
 	});
 }
 
