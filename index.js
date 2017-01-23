@@ -10,11 +10,15 @@ var apiKey = "keyFUzYF3ZYAosZWm", // https://airtable.com/account - TODO We need
 	bases = {
 		"About Sections": {
 			baseID: "appXpFAar7Nro7fRZ",
-			tables: ["Front Page", "About Sections", "Settings"]
+			tables: ["Front Page", "About Converge", "CoYA Mission", "CLCH Mission", "Settings"]
 		},
 		"About Staff": {
 			baseID: "appj3Hm417P5gE0oM",
 			tables: ["Leads"]
+		},
+		"Sitewide Settings": {
+			baseID: "appYS8E1z23NKbFtH",
+			tables: ["Settings"]
 		}
 	};
 

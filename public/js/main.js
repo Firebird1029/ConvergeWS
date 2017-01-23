@@ -15,6 +15,20 @@ $("#nav > ul").dropotron({
 	// noOpenerFade: true
 });
 
+// Make banner dynamic height
+var navHeight = $("#nav").height();
+var navulHeight = $("#nav > ul").height();
+$("#bannerBackground").css("height", navulHeight + navHeight);
+$("#firstContentAterBanner").css("marginTop", $("#bannerBackground").height() - navHeight);
+
+$(window).resize(function() {
+	navHeight = $("#nav").height();
+	navulHeight = $("#nav > ul").height();
+	$("#bannerBackground").css("height", navulHeight + navHeight);
+	$("#firstContentAterBanner").css("marginTop", $("#bannerBackground").height() - navHeight);
+});
+
+
 // Setup Variables
 var socket = io.connect();
 
