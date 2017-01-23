@@ -1,7 +1,5 @@
 "use strict"; /* eslint-env browser */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = false;
-
-// DOM Animation Settings
+var debug = true;
 
 // Fix scroll glitch
 $(document).scrollTop(0);

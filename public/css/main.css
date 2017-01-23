@@ -63,12 +63,23 @@ textarea {
 	margin: 0;
 	padding: 0;
 	left: 0;
-	top; 0;
+	top: 0;
 	position: absolute;
 
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+#bannerBackground {
+	margin: 0;
+	padding: 0;
+	left: 0;
+	top: 0;
+	position: absolute;
+	
+	width: 100vw;
+	height: 2em;
 }
 
 #hero {
@@ -199,6 +210,11 @@ textarea {
 
 #firstContent {
 	margin-top: 100vh;
+}
+
+#firstContentAterBanner {
+	padding: 0;
+	margin-top: 2em;
 }
 
 .imageContainerFlexRow {
