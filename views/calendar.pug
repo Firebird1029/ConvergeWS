@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;") Calendar
+			.hero-foot
+		article.article
+			include includes/body.pug
+			+section("Coming soon!")
+
+		//- Footer
+		include includes/footer.pug

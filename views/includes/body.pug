@@ -1,0 +1,16 @@
+mixin section(title)
+	section.section
+		.container.has-text-justified
+			.content
+				h1.dynamicHeader= title
+				block
+
+mixin icon(iconClasses, spanClasses)
+	span.icon(class=spanClasses)
+		i.fa(class=iconClasses)
+
+mixin addImg(image)
+	if image
+		img(src=image[0].url)
+	else
+		img

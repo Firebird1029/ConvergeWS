@@ -1,0 +1,33 @@
+mixin addCard(record)
+	.card
+		.card-image
+			figure.image.is-square.is-marginless
+				+addImg(record.thumbnail)
+		.card-content
+			.content
+				h4= (record.name || "")
+				strong: em= (record.role) ? record.role.join(", ") : ""
+				p: em= (record.description || "")
+				p= (record.bio || "")
+
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;") Our Staff
+			.hero-foot
+		article.article
+			include includes/body.pug
+			+section()
+				.columns.is-multiline
+					each record in records
+						.column.is-one-third
+							+addCard(record)
+
+		//- Footer
+		include includes/footer.pug

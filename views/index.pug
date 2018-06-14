@@ -1,0 +1,42 @@
+//- TODO
+//- Add phone number, address, etc to footer
+//- Create all the other pages of the website
+//- Get line breaks to work
+
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section#frontPageHero.hero.is-fullheight
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					//- h1.title.is-1(style="padding-top: 1rem;") CONVERGE
+			.hero-foot
+		article.article
+			include includes/body.pug
+			#firstContent
+			each record in records
+				+section(record.title)
+					case record.style
+						when "right"
+							.columns
+								.column.is-two-thirds: p= record.body
+								.column: figure.image: img(src=record.img[0].url)
+						when "left"
+							.columns
+								.column: figure.image: img(src=record.img[0].url)
+								.column.is-two-thirds: p= record.body
+						when "top"
+							.columns.is-centered
+								.column.is-half: figure.image: img(src=record.img[0].url)
+							.columns.is-centered
+								.column: p= record.body
+			+section("Map")
+				.columns.is-centered: .column.is-three-quarters
+					#map.is-fullwidth(style="height: 20rem;")
+
+		//- Footer
+		include includes/footer.pug
+		script(async, defer, type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB77nR_TKpRV6CJ_B5kgqOzK8NshI61AhI&callback=initMap")

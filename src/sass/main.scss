@@ -1,0 +1,14 @@
+// Override Bulma vars here. Use https://bulma.io/documentation/overview/colors/, not Bulma vars.
+// $primary: hsl(217, 71%, 53%);
+@import "./node_modules/bulma/bulma.sass";
+
+body {
+	font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#frontPageHero {
+	background-image: url("https://dl.airtable.com/uRer0v2QXKKZ35ToxXzQ_full_Converge%20Window%20Decal.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% auto;
+}

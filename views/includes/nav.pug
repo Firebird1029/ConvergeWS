@@ -1,0 +1,49 @@
+mixin dropdown(link)
+	.navbar-item.has-dropdown.is-hoverable
+		a.navbar-link= link
+		.navbar-dropdown
+			block
+
+nav.navbar.is-primary(style="width: 100%; position: fixed; z-index: 100;")
+	//-  box-shadow: 0px 3px 6px #888888;
+	.navbar-brand
+		a.navbar-item(href="/index.html")
+			//- img(src="assets/img/logo.png")
+			span Logo
+		a.navbar-burger(data-target="navMenu")
+			- for (var x = 0; x < 3; x++)
+				span
+	#navMenu.navbar-menu
+		.navbar-start
+			.navbar-item &nbsp;
+			a.navbar-item(href="/index.html#firstContent") New Here?
+			+dropdown("About")
+				a.navbar-item(href="/about-clch.html") CLCH
+				a.navbar-item(href="/about-converge.html") Converge
+				a.navbar-item(href="/about-coya.html") CoYA
+				a.navbar-item(href="/about-staff.html") Our Staff
+			+dropdown("Experience")
+				a.navbar-item(href="/calendar.html") Calendar
+				//- a.navbar-item(href="/bible-studies.html") Bible Studies
+				a.navbar-item(href="/classes.html") Classes
+			+dropdown("Community")
+				a.navbar-item(href="/ministries.html") Ministries
+				a.navbar-item(href="/activities.html") Activities
+				a.navbar-item(href="/photos.html") Photos
+			+dropdown("Resources")
+				a.navbar-item(href="/authentic-peace.html") Authentic Peace
+				a.navbar-item(href="/articles-and-blogs.html") Articles &amp; Blogs
+				a.navbar-item(href="/helps.html") Helps
+				a.navbar-item(href="/sermons.html") Sermons
+			a.navbar-item(href="/hebrews.html") HEbrews
+			+dropdown("Contact")
+				a.navbar-item(href="/more-info.html") More Info
+				a.navbar-item(href="/serve.html") Serve
+				a.navbar-item(href="/prayer.html") Prayer
+		//- .navbar-end
+		//- 	.navbar-item.is-paddingless
+		//- 		a.button.is-info(href="bob.html")
+		//- 			span Bob
+		//- 	.navbar-item
+		//- 		a.button.is-danger(href="bob.html")
+		//- 			span Bob
