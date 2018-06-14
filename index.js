@@ -1,5 +1,5 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = false;
+var debug = true;
 
 // ADJUSTABLE - Change these variables if Airtable base structure changes (added fields, changed name of table, etc.)
 var apiKey = "keyFUzYF3ZYAosZWm", // https://airtable.com/account - TODO We need a universal API key.
@@ -154,7 +154,7 @@ function scanEveryTable (bases, callback) {
 // 00 */2 * * * * -- every 2 hours
 // */6 * * * * * -- every 10 seconds
 // */12 * * * * * -- every 5 seconds
-var job = new CronJob("*/6 * * * * *", function () {
+var job = new CronJob("00 * * * * *", function () {
 	scanEveryTable(bases, function scanEveryTableCallback (errors, data) {
 			// TODO process errrors
 			
@@ -171,7 +171,7 @@ var job = new CronJob("*/6 * * * * *", function () {
 
 // Socket.io Control
 listener.sockets.on("connection", function connectionDetected (socket) {
-	socket.on("refreshRequest", function refrreshRequestRecieved (options) {
+	socket.on("refreshRequest", function refreshRequestRecieved (options) {
 		jsonfile.readFile(`${__dirname}/bases/${options.base}_${options.table}.json`, function jsonReadFileCallback (error, fileData) {
 			// TODO handle error
 			
