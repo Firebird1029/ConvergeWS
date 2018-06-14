@@ -1,10 +1,10 @@
 {
-	"name": "Converge Website",
+	"name": "ConvergeWS",
 	"version": "1.0.0",
 	"description": "",
-	"homepage": "https://github.com/Firebird1029/Template",
+	"homepage": "https://github.com/Firebird1029/ConvergeWS",
 	"bugs": {
-		"url": "https://github.com/Firebird1029/Template/issues",
+		"url": "https://github.com/Firebird1029/ConvergeWS/issues",
 		"email": "brandon.yee150@gmail.com"
 	},
 	"license": "MIT",
@@ -14,7 +14,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Firebird1029/Template.git"
+		"url": "https://github.com/Firebird1029/ConvergeWS.git"
 	},
 	"main": "index.js",
 	"engines": {
