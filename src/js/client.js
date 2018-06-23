@@ -21,6 +21,7 @@ function initMap () {
 }
 
 // Add Background Behind Navbar
+// https://stackoverflow.com/questions/7182342/how-to-detect-when-the-user-has-scrolled-to-a-certain-area-on-the-page-using-jqu
 $(document).on("scroll", function () {
 	if($(this).scrollTop() >= $(".hero-foot").position().top) {
 		$(".navbar").addClass("navbarBackground");
