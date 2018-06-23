@@ -17,6 +17,8 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			#firstContent
+
+			//- BEGIN ARTICLE.PUG CODE
 			each record in records
 				+section(record.title)
 					case record.style
@@ -33,6 +35,8 @@ html(lang="en")
 								.column.is-half: figure.image: img(src=record.img[0].url)
 							.columns.is-centered
 								.column: p= record.body
+			//- END ARTICLE.PUG CODE
+
 			+section("Map")
 				.columns.is-centered: .column.is-three-quarters
 					#map.is-fullwidth(style="height: 20rem;")

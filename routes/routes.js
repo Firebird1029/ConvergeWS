@@ -5,66 +5,87 @@ var debug = true;
 var express = require("express"),
 	path = require("path"),
 	router = express.Router(),
+	utils = require("../utils.js"),
 	models = require("./models.js");
 
 module.exports = router;
 
-// router.get("/", function (req, res) {
-// 	res.sendFile(path.join(__dirname, "../public/index.html"));
-// });
+function renderPage (req, res, baseName, tableName, viewToRender, pageTitle) {
+	// If multiple tables are requested, then waterfall over the array to collect all the records of all tables requested.
+	if (tableName.constructor === Array) {
+		var allRecords = [];
+		utils.waterfallOverArray(tableName, function (table, report) {
+			// Retrieve data from the specified JSON file.
+			models.getFileData(baseName, table, function gotFileData (fileData) {
+				allRecords.push(Object.values(fileData));
+				report();
+			});
+		}, function () {
+			// Render the page with all the data retrieved.
+			res.render(viewToRender, {
+				records: allRecords,
+				pageTitle: pageTitle
+			});
+		});
+		
+	} else {
+		// Retrieve data from the specified JSON file, then render the page with the data retrieved.
+		models.getFileData(baseName, tableName, function gotFileData (fileData) {
+			res.render(viewToRender, {
+				records: Object.values(fileData),
+				pageTitle: pageTitle
+			});
+		});
+	}
+}
 
 router.get("/", (req, res) => {
-	models.getFileData("About Sections", "Front Page", function gotFileData (fileData) {
-		res.render("index.pug", {
-			records: Object.values(fileData)
-		});
-	});
+	renderPage(req, res, "About Sections", "Front Page", "index.pug", "Converge");
 });
 
 router.get("/index.html", (req, res) => {
-	models.getFileData("About Sections", "Front Page", function gotFileData (fileData) {
-		res.render("index.pug", {
-			records: Object.values(fileData)
-		});
-	});
+	renderPage(req, res, "About Sections", "Front Page", "index.pug", "Converge");
+});
+
+// About
+router.get("/about-clch.html", (req, res) => {
+	renderPage(req, res, "About Sections", "About CLCH", "aboutSections.pug", "About CLCH");
 });
 
 router.get("/about-converge.html", (req, res) => {
-	models.getFileData("About Sections", "About Converge", function gotFileData (fileData) {
-		res.render("aboutSections.pug", {
-			records: Object.values(fileData)
-		});
-	});
-});
-
-router.get("/about-clch.html", (req, res) => {
-	models.getFileData("About Sections", "About CLCH", function gotFileData (fileData) {
-		res.render("aboutSections.pug", {
-			records: Object.values(fileData)
-		});
-	});
+	renderPage(req, res, "About Sections", "About Converge", "aboutSections.pug", "About Converge");
 });
 
 router.get("/about-coya.html", (req, res) => {
-	models.getFileData("About Sections", "CoYA", function gotFileData (fileData) {
-		res.render("aboutSections.pug", {
-			records: Object.values(fileData)
-		});
-	});
+	renderPage(req, res, "About Sections", "CoYA", "aboutSections.pug", "About CoYA");
 });
 
 router.get("/about-staff.html", (req, res) => {
-	models.getFileData("About Staff", "Leads", function gotFileData (fileData) {
-		res.render("aboutStaff.pug", {
-			records: Object.values(fileData)
-		});
-	});
+	renderPage(req, res, "About Staff", "Leads", "aboutStaff.pug", "Our Staff");
 });
 
+// Experience
 router.get("/calendar.html", (req, res) => {
-	models.getFileData("Experience and Community", "Calendar", function gotFileData (fileData) {
-		res.render("calendar.pug", {
-			records: Object.values(fileData)
-		});
-	});
+	renderPage(req, res, "Experience and Community", "Calendar", "calendar.pug", "Calendar");
+});
+
+router.get("/classes.html", (req, res) => {
+	renderPage(req, res, "Experience and Community", "Classes", "aboutSections.pug", "Classes");
+});
+
+// Community
+
+
+// Resources
+router.get("/helps.html", (req, res) => {
+	renderPage(req, res, "Resources", "Helps", "aboutSections.pug", "Helps");
+});
+
+// HE brews
+router.get("/hebrews.html", (req, res) => {
+	renderPage(req, res, "HE brews", ["HE brews", "Menu"], "hebrews.pug", "HE brews");
+});
+
+router.get("/he-brews.html", (req, res) => {
+	renderPage(req, res, "HE brews", ["HE brews", "Menu"], "hebrews.pug", "HE brews");
 });

@@ -20,6 +20,15 @@ function initMap () {
 	});
 }
 
+// Add Background Behind Navbar
+$(document).on("scroll", function () {
+	if($(this).scrollTop() >= $(".hero-foot").position().top) {
+		$(".navbar").addClass("navbarBackground");
+	} else {
+		$(".navbar").removeClass("navbarBackground");
+	}
+})
+
 // Socket.io
 var socket = io.connect();
 

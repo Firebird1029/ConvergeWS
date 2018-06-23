@@ -1,6 +1,8 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
 var debug = true;
 
+debug && console.log("Server started!");
+
 // Load Node Modules & Custom Modules
 var express = require("express"),
 	app = express(),
@@ -35,14 +37,18 @@ var bases = {
 	"Experience and Community": {
 		baseID: "appkvA9WfE62DYGIl",
 		tables: ["Calendar", "Classes", "Ministries", "Activities", "Photos", "Leaders"]
+	},
+	"HE brews": {
+		baseID: "appamTiUaVqXSiBhf",
+		tables: ["HE brews", "Menu"]
 	}
 }
 
 // Express Middleware
 app.set("view engine", "pug");
-var router = require("./routes/routes.js");
-app.use(express.static(__dirname + "/dist"));
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/dist"));
+var router = require("./routes/routes.js");
 // app.use(pugStatic(__dirname + "/views"));
 app.use("/", router);
 

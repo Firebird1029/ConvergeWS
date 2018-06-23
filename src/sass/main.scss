@@ -2,13 +2,30 @@
 // $primary: hsl(217, 71%, 53%);
 @import "./node_modules/bulma/bulma.sass";
 
+$navbarArrowColor: $grey-dark;
+
 body {
 	font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #frontPageHero {
-	background-image: url("https://dl.airtable.com/uRer0v2QXKKZ35ToxXzQ_full_Converge%20Window%20Decal.jpg");
+	background-image: url("../../assets/img/decal_large.jpg");
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 100% auto;
+}
+
+.navbar {
+	width: 100%;
+	position: fixed;
+	z-index: 100;
+	
+}
+
+.hero .navbar.navbarBackground {
+	background-color: white;
+}
+
+.navbar-link::after {
+	border-color: $navbarArrowColor;
 }
