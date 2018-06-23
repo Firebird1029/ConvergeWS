@@ -38,6 +38,14 @@ var bases = {
 		baseID: "appkvA9WfE62DYGIl",
 		tables: ["Calendar", "Classes", "Ministries", "Activities", "Photos", "Leaders"]
 	},
+	"Resources": {
+		baseID: "appeBfEsO2Q2eEIMX",
+		tables: ["Authentic Peace", "Helps"]
+	},
+	"Articles and Blogs": {
+		baseID: "appaTv4YjcvFV6f4l",
+		tables: ["Posts", "Authors"]
+	},
 	"HE brews": {
 		baseID: "appamTiUaVqXSiBhf",
 		tables: ["HE brews", "Menu"]
