@@ -3,9 +3,9 @@ var debug = true;
 
 /*
  * TODO
+ * Create all the other pages of the website (layout?)
  * Add phone number, address, etc to footer
- * Create all the other pages of the website
- * Get line breaks to work
+ * Photoswipe
 */
 
 // Load Node Modules & Custom Modules
