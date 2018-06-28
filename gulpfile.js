@@ -7,6 +7,7 @@ var gulp = require("gulp"),
 	// sourcemaps = require("gulp-sourcemaps");
 
 gulp.task("default", ["css", "js", "watch", "serve"]);
+gulp.task("production", ["css", "js"]);
 
 gulp.task("css", function () {
 	return gulp.src(["./src/sass/main.scss"])
@@ -45,7 +46,10 @@ gulp.task("serve", function () {
 		    target: "http://localhost:8000",
 		    ws: true
 		},
-		port: 8001
+		// files: ["views/**/*.*"],
+		// browser: "google chrome",
+		port: 8001,
+		open: false
 	});
 
 	gulp.watch("*.pug").on("change", browserSync.reload);
