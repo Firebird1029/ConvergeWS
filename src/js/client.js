@@ -9,7 +9,7 @@ var e=t.dataset.target,n=document.getElementById(e);t.classList.toggle("is-activ
 function initMap () {
 	var clchCoordinates = {lat: 21.322523, lng: -157.859298};
 	var map = new google.maps.Map($("#map")[0], {
-		zoom: 16,
+		zoom: 15,
 		center: clchCoordinates
 	});
 
