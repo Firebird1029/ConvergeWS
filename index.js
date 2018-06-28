@@ -1,7 +1,12 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
 var debug = true;
 
-debug && console.log("Server started!");
+/*
+ * TODO
+ * Add phone number, address, etc to footer
+ * Create all the other pages of the website
+ * Get line breaks to work
+*/
 
 // Load Node Modules & Custom Modules
 var express = require("express"),
@@ -59,8 +64,6 @@ app.use(express.static(__dirname + "/dist"));
 var router = require("./routes/routes.js");
 // app.use(pugStatic(__dirname + "/views"));
 app.use("/", router);
-
-app.set("bob", "123")
 
 // Playground
 // scanTable("appXpFAar7Nro7fRZ", "Front Page", function (error, dataToSend) {})
