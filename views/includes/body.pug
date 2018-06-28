@@ -9,6 +9,11 @@ mixin icon(iconClasses, spanClasses)
 	span.icon(class=spanClasses)
 		i.fa(class=iconClasses)
 
+mixin addText(text)
+	if text
+		each paragraph in text.split("%\n")
+			p!= paragraph
+
 mixin addImg(image)
 	if image
 		img(src=image[0].url)

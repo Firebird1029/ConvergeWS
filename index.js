@@ -78,13 +78,12 @@ function scanTable (baseID, tableName, callback) {
 	}).eachPage(function processPage (records, fetchNextPage) {
 		records.forEach(function processRecord (record) {
 			// "record.id" to get ID, "record.fields" to get object literal, "record.get('FIELD NAME')" to get value.
-			// console.log(record.fields);
 			dataToSend[record.id] = record.fields;
 		});
 		fetchNextPage();
 	}, function doneProcessing (err) {
 		if (debug && err) { throw new Error(err); }
-		debug && console.log(`Table ${tableName} successfully scanned!`);
+		// debug && console.log(`Table ${tableName} successfully scanned!`);
 		callback(dataToSend);
 	});
 }
@@ -114,7 +113,7 @@ function scanEveryTable (bases, callback) {
 // 00 */2 * * * * -- every 2 hours
 // */6 * * * * * -- every 10 seconds
 // */12 * * * * * -- every 5 seconds
-var job = new CronJob("*/12 * * * * *", function () {
+var job = new CronJob("* * * * * *", function () {
 	scanEveryTable(bases, function scanEveryTableCallback (data) {			
 			// Process Full Data
 			Object.keys(data).forEach(function processFullDataCallback (key) {
@@ -122,7 +121,7 @@ var job = new CronJob("*/12 * * * * *", function () {
 					if (debug && err) { throw new Error(err); }
 				});
 			});
-			debug && console.log(`Cron job successful! Files ${__dirname}/models/*.json updated.`);
+			// debug && console.log(`Cron job successful! Files ${__dirname}/models/*.json updated.`);
 	});
 }, function () {
 	console.log("Cron job stopped.");

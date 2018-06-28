@@ -19,17 +19,18 @@ html(lang="en")
 					case record.style
 						when "right"
 							.columns
-								.column.is-two-thirds: p= record.body
-								.column: figure.image: img(src=record.img[0].url)
+								.column.is-two-thirds: +addText(record.body)
+								.column: figure.image: +addImg(record.img)
 						when "left"
 							.columns
-								.column: figure.image: img(src=record.img[0].url)
-								.column.is-two-thirds: p= record.body
+								.column: figure.image: +addImg(record.img)
+								.column.is-two-thirds: +addText(record.body)
 						when "top"
+						default
 							.columns.is-centered
-								.column.is-half: figure.image: img(src=record.img[0].url)
+								.column.is-half: figure.image: +addImg(record.img)
 							.columns.is-centered
-								.column: p= record.body
+								.column: +addText(record.body)
 			//- END ARTICLE.PUG CODE
 
 			+section("Map")
