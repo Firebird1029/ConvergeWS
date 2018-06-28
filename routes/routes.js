@@ -39,6 +39,10 @@ function renderPage (req, res, baseName, tableName, viewToRender, pageTitle) {
 	}
 }
 
+router.get("/test.html", (req, res) => {
+	renderPage(req, res, "About Sections", "Front Page", "TEST.pug", "Converge");
+});
+
 router.get("/", (req, res) => {
 	renderPage(req, res, "About Sections", "Front Page", "index.pug", "Converge");
 });

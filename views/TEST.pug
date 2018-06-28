@@ -1,0 +1,88 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section#frontPageHero.hero.is-fullheight
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					//- h1.title.is-1(style="padding-top: 1rem;") CONVERGE
+			.hero-foot
+		article.article
+			include includes/body.pug
+			#firstContent
+
+			//- BEGIN ARTICLE.PUG CODE
+			each record in records
+				+section(record.title)
+					case record.style
+						when "right"
+							.columns
+								.column.is-two-thirds: p= record.body
+								.column: figure.image: img(src=record.img[0].url)
+						when "left"
+							.columns
+								.column: figure.image: img(src=record.img[0].url)
+								.column.is-two-thirds: p= record.body
+						when "top"
+							.columns.is-centered
+								.column.is-half: figure.image: img(src=record.img[0].url)
+							.columns.is-centered
+								.column: p= record.body
+			//- END ARTICLE.PUG CODE
+
+			+section("Map")
+				.columns.is-centered: .column.is-three-quarters
+					#map.is-fullwidth(style="height: 20rem;")
+
+			+section("Photos")
+				// Galley wrapper that contains all items
+				//- .columns.is-centered: .column.is-three-quarters
+				#gallery.gallery.columns.is-centered.is-multiline(itemscope="", itemtype="http://schema.org/ImageGallery")
+					// Use figure for a more semantic html
+					.column.is-one-fourth: figure.image.is-4by3
+						// Link to the big image, not mandatory, but usefull when there is no JS
+						a(href="https://unsplash.it/1200/900/?image=702", data-caption="Sea side, south shore<br><em class='text-muted'>© Dominik Schröder</em>", data-width="1200", data-height="900")
+							// Thumbnail
+							img(src="https://unsplash.it/1200/900/?image=702")
+					|					 
+					.column.is-one-fourth: figure.image.is-4by3
+						a(href="https://unsplash.it/1200/900/?image=695", data-caption="Sunset in the wheat field<br><em class='text-muted'>© Jordan McQueen</em>", data-width="1200", data-height="900")
+							img(src="https://unsplash.it/1200/900/?image=695")
+					|					 
+					.column.is-one-fourth: figure.image.is-4by3
+						a(href="https://unsplash.it/1200/900/?image=675", data-caption="Mysterious ocean<br><em class='text-muted'>© Barn Images</em>", data-width="1200", data-height="900")
+							img(src="https://unsplash.it/1200/900/?image=675")
+					|					 
+					.column.is-one-fourth: figure.image.is-4by3
+						a(href="https://unsplash.it/1200/900/?image=651", data-caption="Cloud over the mountains<br><em class='text-muted'>© James Pritchett</em>", data-width="1200", data-height="900")
+							img(src="https://unsplash.it/1200/900/?image=651")
+
+		// Root element of PhotoSwipe. Must have class pswp.
+		.pswp
+			.pswp__bg
+			.pswp__scroll-wrap
+				.pswp__container
+					.pswp__item
+					.pswp__item
+					.pswp__item
+				// Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.
+				.pswp__ui.pswp__ui--hidden
+					.pswp__top-bar
+						// Controls are self-explanatory. Order can be changed.
+						.pswp__counter
+						button.pswp__button.pswp__button--close(title="Close (Esc)")
+						button.pswp__button.pswp__button--share(title="Share")
+						button.pswp__button.pswp__button--fs(title="Toggle fullscreen")
+						button.pswp__button.pswp__button--zoom(title="Zoom in/out")
+						// Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR
+						// element will get class pswp__preloader--active when preloader is running
+						.pswp__preloader: .pswp__preloader__icn: .pswp__preloader__cut: .pswp__preloader__donut
+					.pswp__share-modal.pswp__share-modal--hidden.pswp__single-tap: .pswp__share-tooltip
+					button.pswp__button.pswp__button--arrow--left(title="Previous (arrow left)")
+					button.pswp__button.pswp__button--arrow--right(title="Next (arrow right)")
+					.pswp__caption: .pswp__caption__center
+		//- Footer
+		include includes/footer.pug
+		script(async, defer, type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB77nR_TKpRV6CJ_B5kgqOzK8NshI61AhI&callback=initMap")
