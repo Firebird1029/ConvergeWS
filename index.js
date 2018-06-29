@@ -4,8 +4,23 @@ var debug = true;
 /*
  * TODO
  * Create all the other pages of the website (layout?)
+ *
+ * Calendar: stage 4 (calendar Bulma extension)
+ * Classes: stage 2 (Ministry-style)
+ * Ministries: stage 1
+ * Activities: stage 2
+ * Photos: Photoswipe: stage 3
+ * Authentic Peace: stage 5 (magazine style with left/right arrows + archive)
+ * Sermons: stage 2, Ministry-style
+ * More Info: Name, contact info, inquiry/interest
+ * Serve: Name, ministry, other
+ * Prayer: Name, request
+ *
+ * Next:
  * Add phone number, address, etc to footer
- * Photoswipe
+ * Show He brews
+ * Show multiline (%), adding bold content
+ * Heroku temporary
 */
 
 // Load Node Modules & Custom Modules

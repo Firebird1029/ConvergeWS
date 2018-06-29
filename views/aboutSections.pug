@@ -16,18 +16,24 @@ html(lang="en")
 					case record.style
 						when "right"
 							.columns
-								.column.is-two-thirds: +addText(record.body)
+								.column.is-two-thirds
+									+addDate(record.date)
+									+addText(record.body)
 								.column: figure.image: +addImg(record.img)
 						when "left"
 							.columns
 								.column: figure.image: +addImg(record.img)
-								.column.is-two-thirds: +addText(record.body)
+								.column.is-two-thirds
+									+addDate(record.date)
+									+addText(record.body)
 						when "top"
 						default
 							.columns.is-centered
 								.column.is-half: figure.image: +addImg(record.img)
 							.columns.is-centered
-								.column: +addText(record.body)
+								.column
+									+addDate(record.date)
+									+addText(record.body)
 
 		//- Footer
 		include includes/footer.pug

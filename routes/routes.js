@@ -82,11 +82,7 @@ router.get("/authentic-peace/:article", (req, res) => {
 });
 
 router.get("/articles-and-blogs.html", (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "articlesAndBlogs.pug", "Articles & Blogs");
-});
-
-router.get("/helps.html", (req, res) => {
-	renderPage(req, res, "Resources", "Helps", "aboutSections.pug", "Helps");
+	renderPage(req, res, "Articles and Blogs", "Posts", "aboutSections.pug", "Articles & Blogs");
 });
 
 // HE brews

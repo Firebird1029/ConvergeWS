@@ -19,3 +19,7 @@ mixin addImg(image)
 		img(src=image[0].url)
 	else
 		img
+
+mixin addDate(date)
+	if date
+		h4= date.replace(/(\d+)-(\d+)-(\d+)/, "$2/$3/$1")
