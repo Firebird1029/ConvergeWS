@@ -70,11 +70,13 @@ router.get("/calendar.html", (req, res) => {
 });
 
 router.get("/classes.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", "Classes", "aboutSections.pug", "Classes");
+	renderPage(req, res, "Experience and Community", "Classes", "tiles.pug", "Classes");
 });
 
 // Community
-
+router.get("/ministries.html", (req, res) => {
+	renderPage(req, res, "Experience and Community", ["Ministries", "Leaders"], "tiles.pug", "Ministries");
+});
 
 // Resources
 router.get("/authentic-peace/:article", (req, res) => {

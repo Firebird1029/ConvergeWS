@@ -10,7 +10,7 @@ var debug = true;
  * Ministries: stage 1
  * Activities: stage 2
  * Photos: Photoswipe: stage 3
- * Authentic Peace: stage 5 (magazine style with left/right arrows + archive)
+ * Authentic Peace: stage 5 (magazine style with left/right arrows + archive) https://bulma.io/documentation/components/pagination/
  * Sermons: stage 2, Ministry-style
  * More Info: Name, contact info, inquiry/interest
  * Serve: Name, ministry, other

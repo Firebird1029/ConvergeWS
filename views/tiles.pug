@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;")= (pageTitle || "")
+			.hero-foot
+		article.article
+			include includes/body.pug
+			+section()
+				each record in records[0]
+					.box
+						.columns
+							.column: h1= record.title
+							.column.is-three-quarters
+								//- +addDate(record.date)
+								+addText(record.body)
+								p: strong= Object.keys(records[1])
+
+		//- Footer
+		include includes/footer.pug
