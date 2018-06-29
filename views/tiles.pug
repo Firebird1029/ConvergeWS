@@ -13,13 +13,29 @@ html(lang="en")
 			include includes/body.pug
 			+section()
 				each record in records[0]
-					.box
-						.columns
+					if record.publish
+						.box: .columns
 							.column: h1= record.title
 							.column.is-three-quarters
-								//- +addDate(record.date)
 								+addText(record.body)
-								p: strong= Object.keys(records[1])
+								if record.date
+									p
+										strong Date: &nbsp;
+										+addDate(record.date, "span")
+								if record.speaker
+									p
+										span: strong Speaker: &nbsp;
+											+addText(records[1][record.speaker[0]]["name"], "span")
+										| &nbsp; (
+										+addText(records[1][record.speaker[0]]["email"], "span")
+										| )
+								if record.contact
+									p
+										span: strong Contact: &nbsp;
+											+addText(records[1][record.contact[0]]["name"], "span")
+										| &nbsp; (
+										+addText(records[1][record.contact[0]]["email"], "span")
+										| )
 
 		//- Footer
 		include includes/footer.pug

@@ -9,10 +9,15 @@ mixin icon(iconClasses, spanClasses)
 	span.icon(class=spanClasses)
 		i.fa(class=iconClasses)
 
-mixin addText(text)
+mixin addText(text, style)
 	if text
 		each paragraph in text.split("%\n")
-			p!= paragraph
+			case style
+				when "span"
+					span!= paragraph
+				when "p"
+				default
+					p!= paragraph
 
 mixin addImg(image)
 	if image
@@ -20,6 +25,11 @@ mixin addImg(image)
 	else
 		img
 
-mixin addDate(date)
+mixin addDate(date, style)
 	if date
-		h4= date.replace(/(\d+)-(\d+)-(\d+)/, "$2/$3/$1")
+		case style
+			when "span"
+				span= date.replace(/(\d+)-(\d+)-(\d+)/, "$2/$3/$1")
+			when "h4"
+			default
+				h4= date.replace(/(\d+)-(\d+)-(\d+)/, "$2/$3/$1")
