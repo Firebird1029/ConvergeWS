@@ -4,8 +4,21 @@ var debug = true;
 /*
  * TODO
  * Create all the other pages of the website (layout?)
+ * Switch all pages to multiple read JSON (so record[0], no more just record, automatically assume array as param input into render function)
+ * Add logo to navbar
+ * 
+ * Calendar: stage 4 (calendar Bulma extension)
+ * Photos: Photoswipe: stage 3
+ * Authentic Peace: stage 5 (magazine style with left/right arrows + archive) https://bulma.io/documentation/components/pagination/
+ * More Info: Name, contact info, inquiry/interest
+ * Serve: Name, ministry, other
+ * Prayer: Name, request
+ *
+ * Next:
  * Add phone number, address, etc to footer
- * Photoswipe
+ * Show He brews
+ * Show multiline (%), adding bold content
+ * Heroku temporary
 */
 
 // Load Node Modules & Custom Modules
@@ -50,6 +63,10 @@ var bases = {
 	"Articles and Blogs": {
 		baseID: "appaTv4YjcvFV6f4l",
 		tables: ["Posts", "Authors"]
+	},
+	"Sermons": {
+		baseID: "appwoW5IMGdHcKf14",
+		tables: ["Sermons", "Speakers", "Series"]
 	},
 	"HE brews": {
 		baseID: "appamTiUaVqXSiBhf",

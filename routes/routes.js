@@ -17,7 +17,7 @@ function renderPage (req, res, baseName, tableName, viewToRender, pageTitle) {
 		utils.waterfallOverArray(tableName, function (table, report) {
 			// Retrieve data from the specified JSON file.
 			models.getFileData(baseName, table, function gotFileData (fileData) {
-				allRecords.push(Object.values(fileData));
+				allRecords.push(fileData);
 				report();
 			});
 		}, function () {
@@ -32,7 +32,7 @@ function renderPage (req, res, baseName, tableName, viewToRender, pageTitle) {
 		// Retrieve data from the specified JSON file, then render the page with the data retrieved.
 		models.getFileData(baseName, tableName, function gotFileData (fileData) {
 			res.render(viewToRender, {
-				records: Object.values(fileData),
+				records: fileData,
 				pageTitle: pageTitle
 			});
 		});
@@ -74,11 +74,17 @@ router.get("/calendar.html", (req, res) => {
 });
 
 router.get("/classes.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", "Classes", "aboutSections.pug", "Classes");
+	renderPage(req, res, "Experience and Community", ["Classes", "Leaders"], "tiles.pug", "Classes");
 });
 
 // Community
+router.get("/ministries.html", (req, res) => {
+	renderPage(req, res, "Experience and Community", ["Ministries", "Leaders"], "tiles.pug", "Ministries");
+});
 
+router.get("/activities.html", (req, res) => {
+	renderPage(req, res, "Experience and Community", ["Activities"], "tiles.pug", "Activities");
+});
 
 // Resources
 router.get("/authentic-peace/:article", (req, res) => {
@@ -86,11 +92,11 @@ router.get("/authentic-peace/:article", (req, res) => {
 });
 
 router.get("/articles-and-blogs.html", (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "articlesAndBlogs.pug", "Articles & Blogs");
+	renderPage(req, res, "Articles and Blogs", "Posts", "aboutSections.pug", "Articles & Blogs");
 });
 
-router.get("/helps.html", (req, res) => {
-	renderPage(req, res, "Resources", "Helps", "aboutSections.pug", "Helps");
+router.get("/sermons.html", (req, res) => {
+	renderPage(req, res, "Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", "Sermons");
 });
 
 // HE brews
