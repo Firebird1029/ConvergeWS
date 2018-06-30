@@ -3,7 +3,7 @@ var debug = true;
 
 // Load Node Modules & Custom Modules
 var express = require("express"),
-	path = require("path"),
+	_ = require("lodash"),
 	router = express.Router(),
 	utils = require("../utils.js"),
 	models = require("./models.js");
@@ -101,6 +101,6 @@ router.get("/more-info.html", (req, res) => {
 router.post("/more-info.html", (req, res) => {
 	console.log(req.body);
 	console.log(req.url);
-	// var results = models.processForm();
-	renderPage(req, res, "Contact Responses", "More Info", "moreInfo.pug", "More Info", {fields: {input1: "joe"}});
+	var results = models.processForm();
+	renderPage(req, res, "Contact Responses", "More Info", "moreInfo.pug", "More Info", _.merge(results, {pageTitle: "More Info"}));
 });
