@@ -6,6 +6,7 @@ var debug = true;
  * Create all the other pages of the website (layout?)
  * Switch all pages to multiple read JSON (so record[0], no more just record, automatically assume array as param input into render function)
  * Add logo to navbar
+ * Fuzzy string matching (stage 9)
  * 
  * Calendar: stage 4 (calendar Bulma extension)
  * Photos: Photoswipe: stage 3
