@@ -12,8 +12,45 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+section()
+				//-	* More Info: Name, contact info, message/interest
 				form(action="/more-info.html", method="post")
-					input.input(type="text", name="name", value=options.fields.name)
+					.field
+						label.label Name
+						.control: input.input(type="text", name="name", value=options.fields.name)
+					.field
+						- var emailInvalid = options.invalid.indexOf("email") >= 0
+						label.label Email
+						.control.has-icons-left.has-icons-right
+							input.input(type="email", name="email", value=options.fields.email, class=(emailInvalid && "is-danger"))
+							span.icon.is-small.is-left
+								i.fas.fa-envelope
+							if emailInvalid
+								span.icon.is-small.is-right
+									i.fas.fa-exclamation-triangle
+						if emailInvalid
+							p.help.is-danger This email is invalid
+					.field
+						- var phoneInvalid = options.invalid.indexOf("phone") >= 0
+						label.label Phone Number
+						.control.has-icons-left.has-icons-right
+							input.input(type="tel", name="phone", value=options.fields.phone, class=(phoneInvalid && "is-danger"))
+							span.icon.is-small.is-left
+								i.fas.fa-phone
+							if phoneInvalid
+								span.icon.is-small.is-right
+									i.fas.fa-exclamation-triangle
+						if phoneInvalid
+							p.help.is-danger This phone number is invalid
+					.field
+						- var messageInvalid = options.invalid.indexOf("message") >= 0
+						label.label Inquiry
+						.control
+							textarea.textarea(name="message", value=options.fields.message, class=(messageInvalid && "is-danger"))
+						if messageInvalid
+							p.help.is-danger The inquiry is too long
+
+
+
 					input.button(type="submit")
 
 		//- Footer

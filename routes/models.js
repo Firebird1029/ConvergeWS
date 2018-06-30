@@ -102,9 +102,14 @@ function getFileData (base, table, callback) {
 }
 
 // Process User-Submitted Form (Validate, Sanitize)
+// https://www.w3schools.com/tags/att_input_type.asp
+// https://www.sitepoint.com/forms-file-uploads-security-node-express/
 function processForm (userData) {
-	var finalData = Object.assign({fields: {}}, userData); // Default keys/values in object to pass back to client-side
-	finalData.fields.name = userData.name + "yoyo"
+	var finalData = {fields: {}, invalid: []}; // Default keys/values in object to pass back to client-side
+	finalData.fields = Object.assign({}, userData);
+
+	// 
+
 	return finalData;
 }
 

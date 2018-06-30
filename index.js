@@ -10,7 +10,6 @@ var debug = true;
  * Calendar: stage 4 (calendar Bulma extension)
  * Photos: Photoswipe: stage 3
  * Authentic Peace: stage 5 (magazine style with left/right arrows + archive) https://bulma.io/documentation/components/pagination/
- * More Info: Name, contact info, inquiry/interest
  * Serve: Name, ministry, other
  * Prayer: Name, request
  *
