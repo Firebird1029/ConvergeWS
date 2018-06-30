@@ -10,7 +10,7 @@ var express = require("express"),
 
 module.exports = router;
 
-function renderPage (req, res, baseName, tableName, viewToRender, pageTitle) {
+function renderPage (req, res, baseName, tableName, viewToRender, pageTitle, options = {}) {
 	// If multiple tables are requested, then waterfall over the array to collect all the records of all tables requested.
 	if (tableName.constructor === Array) {
 		var allRecords = [];
@@ -24,7 +24,8 @@ function renderPage (req, res, baseName, tableName, viewToRender, pageTitle) {
 			// Render the page with all the data retrieved.
 			res.render(viewToRender, {
 				records: allRecords,
-				pageTitle: pageTitle
+				pageTitle: pageTitle,
+				options: options
 			});
 		});
 		
@@ -33,7 +34,8 @@ function renderPage (req, res, baseName, tableName, viewToRender, pageTitle) {
 		models.getFileData(baseName, tableName, function gotFileData (fileData) {
 			res.render(viewToRender, {
 				records: fileData,
-				pageTitle: pageTitle
+				pageTitle: pageTitle,
+				options: options
 			});
 		});
 	}
@@ -102,4 +104,16 @@ router.get("/hebrews.html", (req, res) => {
 
 router.get("/he-brews.html", (req, res) => {
 	renderPage(req, res, "HE brews", ["HE brews", "Menu"], "hebrews.pug", "HE brews");
+});
+
+// Contact
+router.get("/more-info.html", (req, res) => {
+	renderPage(req, res, "Contact Responses", "More Info", "moreInfo.pug", "More Info", {fields: {}});
+});
+
+router.post("/more-info.html", (req, res) => {
+	console.log(req.body);
+	console.log(req.url);
+	// var results = models.processForm();
+	renderPage(req, res, "Contact Responses", "More Info", "moreInfo.pug", "More Info", {fields: {input1: "joe"}});
 });

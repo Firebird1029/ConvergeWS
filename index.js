@@ -31,12 +31,12 @@ var express = require("express"),
 	io = require("socket.io"),
 	listener = io.listen(server),
 	pugStatic = require("pug-static"),
-	utils = require("./utils.js"),
-	models = require("./routes/models.js"),
-
+	bodyParser = require('body-parser'),
 	jsonfile = require("jsonfile"),
 	CronJob = require("cron").CronJob,
-	airtable = require("airtable");
+	airtable = require("airtable"),
+	utils = require("./utils.js"),
+	models = require("./routes/models.js");
 
 // Setup Airtable API
 airtable.configure({ // Module for Airtable API.
@@ -72,11 +72,16 @@ var bases = {
 	"HE brews": {
 		baseID: "appamTiUaVqXSiBhf",
 		tables: ["HE brews", "Menu"]
+	},
+	"Contact Responses": {
+		baseID: "app5uJTO5UJ1AMpiD",
+		tables: ["More Info", "Serve", "Prayer Requests"]
 	}
 }
 
 // Express Middleware
 app.set("view engine", "pug");
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dist"));
 var router = require("./routes/routes.js");
@@ -131,7 +136,7 @@ function scanEveryTable (bases, callback) {
 // 00 */2 * * * * -- every 2 hours
 // */6 * * * * * -- every 10 seconds
 // */12 * * * * * -- every 5 seconds
-var job = new CronJob("* * * * * *", function () {
+var job = new CronJob("*/12 * * * * *", function () {
 	scanEveryTable(bases, function scanEveryTableCallback (data) {			
 			// Process Full Data
 			Object.keys(data).forEach(function processFullDataCallback (key) {
