@@ -22,13 +22,19 @@ function initMap () {
 
 // Add Background Behind Navbar
 // https://stackoverflow.com/questions/7182342/how-to-detect-when-the-user-has-scrolled-to-a-certain-area-on-the-page-using-jqu
-$(document).on("scroll", function () {
-	if($(this).scrollTop() >= $(".hero-foot").position().top) {
-		$(".navbar").addClass("navbarBackground");
-	} else {
-		$(".navbar").removeClass("navbarBackground");
-	}
-})
+if ($(".hero-body > .container > h1").length) {
+	// If it contains just a regular heading at the top of the page, add the navbar background automatically.
+   $(".navbar").addClass("navbarBackground");
+} else {
+	// If it contains a full height banner with no text heading, add the navbar background after scrolling past the banner.
+	$(document).on("scroll", function () {
+		if($(this).scrollTop() >= $(".hero-foot").position().top) {
+			$(".navbar").addClass("navbarBackground");
+		} else {
+			$(".navbar").removeClass("navbarBackground");
+		}
+	});
+}
 
 // Socket.io
 var socket = io.connect();
