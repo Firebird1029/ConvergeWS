@@ -95,7 +95,7 @@ router.get("/he-brews.html", (req, res) => {
 
 // Contact
 router.get("/more-info.html", (req, res) => {
-	renderPage(req, res, "Contact Responses", "More Info", "moreInfo.pug", "More Info", {fields: {}});
+	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", {pageTitle: "More Info", fields: {}});
 });
 
 router.post("/more-info.html", (req, res) => {
