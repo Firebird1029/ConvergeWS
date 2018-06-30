@@ -10,7 +10,7 @@ var express = require("express"),
 
 module.exports = router;
 
-function renderPage (req, res, baseName, tableName, viewToRender, options) {
+function renderPage (req, res, baseName, tableName, viewToRender, options = {}) {
 	// Waterfall over the array of requested tables to collect all the records of all tables requested.
 	var allRecords = [];
 	utils.waterfallOverArray(tableName, function (table, report) {
