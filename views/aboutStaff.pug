@@ -25,7 +25,7 @@ html(lang="en")
 			include includes/body.pug
 			+section()
 				.columns.is-multiline
-					each record in records
+					each record in records[0]
 						.column.is-one-third
 							+addCard(record)
 

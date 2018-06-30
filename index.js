@@ -4,7 +4,6 @@ var debug = true;
 /*
  * TODO
  * Create all the other pages of the website (layout?)
- * Switch all pages to multiple read JSON (so record[0], no more just record, automatically assume array as param input into render function)
  * Add logo to navbar
  * Fuzzy string matching + TextRazor NLP API (stage 9)
  * 

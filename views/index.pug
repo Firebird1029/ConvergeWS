@@ -14,7 +14,7 @@ html(lang="en")
 			#firstContent
 
 			//- BEGIN ARTICLE.PUG CODE
-			each record in records
+			each record in records[0]
 				+section(record.title)
 					case record.style
 						when "right"
