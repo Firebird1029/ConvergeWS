@@ -102,8 +102,10 @@ function getFileData (base, table, callback) {
 }
 
 // Process User-Submitted Form (Validate, Sanitize)
-function processForm () {
-	// 
+function processForm (userData) {
+	var finalData = Object.assign({fields: {}}, userData); // Default keys/values in object to pass back to client-side
+	finalData.fields.name = userData.name + "yoyo"
+	return finalData;
 }
 
 module.exports = {
