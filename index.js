@@ -81,6 +81,9 @@ app.use(express.static(__dirname + "/dist"));
 var router = require("./routes/routes.js");
 // app.use(pugStatic(__dirname + "/views"));
 app.use("/", router);
+app.use((req, res, next) => {
+	res.status(404).render("404.pug");
+});
 
 // Playground
 // scanTable("appXpFAar7Nro7fRZ", "Front Page", function (error, dataToSend) {})
