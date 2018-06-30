@@ -99,6 +99,5 @@ router.get("/more-info.html", (req, res) => {
 });
 
 router.post("/more-info.html", (req, res) => {
-	var results = models.processForm(req.body);
-	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(results, {pageTitle: "More Info"}));
+	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.processForm(req.body), {pageTitle: "More Info"}));
 });

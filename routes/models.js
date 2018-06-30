@@ -109,9 +109,18 @@ function processForm (userData) {
 	var finalData = {fields: {}, invalid: {}}; // Default keys/values in object to pass back to client-side
 	finalData.fields = Object.assign({}, userData); // Preserve user data to automatically re-input when page refreshed
 
-	!validator.isAlpha(userData.name) && (finalData.invalid.name = "Name is invalid")
-	!validator.isLength(userData.name, {min: 1}) && (finalData.invalid.name = "Name is required")
+	// Validation
+	!validator.isLength(userData.name, {min: 1}) && (finalData.invalid.name = "Name is required");
+	!validator.isEmail(userData.email) && (finalData.invalid.email = "Email is invalid");
+	!validator.isLength(userData.email, {min: 1}) && (finalData.invalid.email = "Email is required");
+	!(validator.isEmpty(userData.phone) || validator.isMobilePhone(userData.phone, "any")) && (finalData.invalid.phone = "Phone number is invalid");
+	!validator.isLength(userData.message, {min: 1}) && (finalData.invalid.message = "Inquiry is required");
 
+	finalData.passedValidation = !(_.size(finalData.invalid)); // If no invalid fields, data passed validation, vice versa.
+
+	if (finalData.passedValidation) {
+		// Upload to Airtable
+	}
 	return finalData;
 }
 
