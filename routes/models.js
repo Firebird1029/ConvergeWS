@@ -6,6 +6,7 @@ var path = require("path"),
 	_ = require("lodash"),
 	jsonfile = require("jsonfile"),
 	airtable = require("airtable"),
+	validator = require("validator"),
 	utils = require("../utils.js");
 
 // Setup Airtable API
@@ -105,10 +106,11 @@ function getFileData (base, table, callback) {
 // https://www.w3schools.com/tags/att_input_type.asp
 // https://www.sitepoint.com/forms-file-uploads-security-node-express/
 function processForm (userData) {
-	var finalData = {fields: {}, invalid: []}; // Default keys/values in object to pass back to client-side
-	finalData.fields = Object.assign({}, userData);
+	var finalData = {fields: {}, invalid: {}}; // Default keys/values in object to pass back to client-side
+	finalData.fields = Object.assign({}, userData); // Preserve user data to automatically re-input when page refreshed
 
-	// 
+	!validator.isAlpha(userData.name) && (finalData.invalid.name = "Name is invalid")
+	!validator.isLength(userData.name, {min: 1}) && (finalData.invalid.name = "Name is required")
 
 	return finalData;
 }

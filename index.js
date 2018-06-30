@@ -34,15 +34,18 @@ var express = require("express"),
 	CronJob = require("cron").CronJob,
 	jsonfile = require("jsonfile"),
 	utils = require("./utils.js"),
+	router = require("./routes/routes.js"),
 	models = require("./routes/models.js");
 
 // Express Middleware
 app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({extended: false}));
+// app.use(validator());
+
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dist"));
-var router = require("./routes/routes.js");
 // app.use(pugStatic(__dirname + "/views"));
+
 app.use("/", router);
 app.use((req, res, next) => {
 	res.status(404).render("404.pug");
