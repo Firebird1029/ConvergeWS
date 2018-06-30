@@ -44,6 +44,9 @@ app.use(express.static(__dirname + "/dist"));
 var router = require("./routes/routes.js");
 // app.use(pugStatic(__dirname + "/views"));
 app.use("/", router);
+app.use((req, res, next) => {
+	res.status(404).render("404.pug");
+});
 
 // Scheduling By Cron Job
 // 00 */2 * * * * -- every 2 hours
