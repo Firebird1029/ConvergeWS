@@ -58,6 +58,10 @@ html(lang="en")
 								textarea.textarea(name="message", class=(messageInvalid && "is-danger"))= options.fields.message
 							if messageInvalid
 								p.help.is-danger= options.invalid.message
+						.field
+							.g-recaptcha(data-sitekey="6LcQoGEUAAAAAMcI9kVW_Fm0m-W6Ge6CspUqaP5n")
+							if options.invalid.hasOwnProperty("reCaptcha")
+								p.help.is-danger= options.invalid.reCaptcha
 						input.button(type="submit")
 
 		//- Footer

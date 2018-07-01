@@ -112,12 +112,16 @@ function getFileData (base, table, callback) {
 	});
 }
 
+// Default Form Render Object (Default keys/values to pass back to client-side)
+var defaultFormRender = {fields: {}, invalid: {}};
+
 // Process User-Submitted Form (Validate, Sanitize)
 // https://www.w3schools.com/tags/att_input_type.asp
 // https://www.sitepoint.com/forms-file-uploads-security-node-express/
-function processForm (baseName, tableName, userData) {
-	var finalData = {fields: {}, invalid: {}}; // Default keys/values in object to pass back to client-side
+function processForm (baseName, tableName, userData, sysData) {
+	var finalData = Object.assign({}, defaultFormRender); // Duplicate defaultFormRender object
 	finalData.fields = Object.assign({}, userData); // Preserve user data to automatically re-input when page refreshed
+	finalData.invalid = {}; // Reset invalid fields, to go through validation processing again
 
 	// Validation
 	!validator.isLength(userData.name, {min: 1}) && (finalData.invalid.name = "Name is required");
@@ -126,8 +130,14 @@ function processForm (baseName, tableName, userData) {
 	!(validator.isEmpty(userData.phone) || validator.isMobilePhone(userData.phone, "any")) && (finalData.invalid.phone = "Phone number is invalid");
 	!validator.isLength(userData.message, {min: 1}) && (finalData.invalid.message = "Inquiry is required");
 
-	finalData.passedValidation = !(_.size(finalData.invalid)); // If no invalid fields, data passed validation, vice versa.
+	// reCAPTCHA
+	if (!sysData.reCaptcha) {
+		// Failed reCAPTCHA
+		finalData.invalid.reCaptcha = "reCAPTCHA is invalid";
+	}
+	delete finalData.fields["g-recaptcha-response"]; // The reCAPTCHA is not an actual field, so delete it.
 
+	finalData.passedValidation = !(_.size(finalData.invalid)); // If no invalid fields, data passed validation, vice versa.
 	if (finalData.passedValidation) {
 		// Create record in Airtable
 		createAirtableRecord(bases[baseName].baseID, tableName, finalData.fields, function finishedCreatingAirtableRecord (record) {
@@ -138,10 +148,11 @@ function processForm (baseName, tableName, userData) {
 }
 
 module.exports = {
-	bases: bases,
+	bases: bases, // Object
 	scanTable: scanTable,
 	scanEveryTable: scanEveryTable,
 	createAirtableRecord: createAirtableRecord,
 	getFileData: getFileData,
+	defaultFormRender: defaultFormRender, // Object
 	processForm: processForm
 }

@@ -3,6 +3,7 @@ var debug = true;
 
 // Load Node Modules & Custom Modules
 var express = require("express"),
+	request = require("request"),
 	_ = require("lodash"),
 	router = express.Router(),
 	utils = require("../utils.js"),
@@ -95,10 +96,20 @@ router.get("/he-brews.html", (req, res) => {
 
 // Contact
 router.get("/more-info.html", (req, res) => {
-	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", {pageTitle: "More Info", fields: {}, invalid: []});
+	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.defaultFormRender, {pageTitle: "More Info"}));
 });
 
 router.post("/more-info.html", (req, res) => {
-	var processedFormData = models.processForm("Contact Responses", "More Info", req.body);
-	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info"}));
+	// Process reCAPTCHA
+	request.post({
+		url: "https://www.google.com/recaptcha/api/siteverify",
+		form: {secret: "6LcQoGEUAAAAAD4O3uh6Nw4THDYnB-YgJdL8pZ4w", response: req.body["g-recaptcha-response"]}
+	}, function (err, response, body) {
+		if (debug && err) { throw new Error(err); }
+		var reCaptcha = JSON.parse(body).success;
+
+		// Sending to models.js for validation and sanitization.
+		var processedFormData = models.processForm("Contact Responses", "More Info", req.body, {reCaptcha: reCaptcha});
+		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info"}));
+	});
 });
