@@ -16,7 +16,7 @@ html(lang="en")
 					p We have received your inquiry and will get back to you soon. Thank you!
 				else
 					//-	* More Info: Name, contact info, message/interest
-					form(action="/more-info.html", method="post")
+					form(action=`/more-info.html?_csrf=${options.csrfToken}`, method="post")
 						.field
 							- var nameInvalid = options.invalid.hasOwnProperty("name")
 							label.label Name
@@ -62,7 +62,7 @@ html(lang="en")
 							.g-recaptcha(data-sitekey="6LcQoGEUAAAAAMcI9kVW_Fm0m-W6Ge6CspUqaP5n")
 							if options.invalid.hasOwnProperty("reCaptcha")
 								p.help.is-danger= options.invalid.reCaptcha
-						input(type="hidden", name="_csrf", value=options.csrfToken)
+						//- input(type="hidden", name="_csrf", value="#{options.csrfToken}")
 						input.button(type="submit")
 
 		//- Footer
