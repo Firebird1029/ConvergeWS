@@ -94,6 +94,16 @@ function scanEveryTable (bases, callback) {
 	});
 }
 
+function createAirtableRecord (baseID, tableName, data, callback) {
+	var base = airtable.base(baseID),
+		table = base(tableName);
+
+	table.create(data, function (err, record) {
+			if (debug && err) { throw new Error(err); }
+			callback(record);
+	});
+}
+
 // Get Data From JSON Model
 function getFileData (base, table, callback) {
 	jsonfile.readFile(path.join(__dirname, `../models/${base}_${table}.json`), function jsonReadFileCallback (err, fileData) {
@@ -105,7 +115,7 @@ function getFileData (base, table, callback) {
 // Process User-Submitted Form (Validate, Sanitize)
 // https://www.w3schools.com/tags/att_input_type.asp
 // https://www.sitepoint.com/forms-file-uploads-security-node-express/
-function processForm (userData) {
+function processForm (baseName, tableName, userData) {
 	var finalData = {fields: {}, invalid: {}}; // Default keys/values in object to pass back to client-side
 	finalData.fields = Object.assign({}, userData); // Preserve user data to automatically re-input when page refreshed
 
@@ -119,7 +129,10 @@ function processForm (userData) {
 	finalData.passedValidation = !(_.size(finalData.invalid)); // If no invalid fields, data passed validation, vice versa.
 
 	if (finalData.passedValidation) {
-		// Upload to Airtable
+		// Create record in Airtable
+		createAirtableRecord(bases[baseName].baseID, tableName, finalData.fields, function finishedCreatingAirtableRecord (record) {
+			return _.defaults({fields: {}}, finalData); // Clear input data
+		});
 	}
 	return finalData;
 }
@@ -128,6 +141,7 @@ module.exports = {
 	bases: bases,
 	scanTable: scanTable,
 	scanEveryTable: scanEveryTable,
+	createAirtableRecord: createAirtableRecord,
 	getFileData: getFileData,
 	processForm: processForm
 }
