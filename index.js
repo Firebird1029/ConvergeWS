@@ -26,12 +26,12 @@ var express = require("express"),
 	server = app.listen(process.env.PORT || (process.argv[2] || 8000), function expressServerListening () {
 		console.log(server.address());
 	}),
-	session = require("express-session"),
-	cookieParser = require("cookie-parser"),
 
 	helmet = require("helmet"),
-	csrf = require("csurf"),
+	session = require("express-session"),
+	cookieParser = require("cookie-parser"),
 	bodyParser = require("body-parser"),
+	csrf = require("csurf"),
 	pugStatic = require("pug-static"),
 
 	CronJob = require("cron").CronJob,
@@ -47,18 +47,16 @@ var express = require("express"),
 // Express Middleware
 app.set("view engine", "pug");
 app.use(helmet());
-app.use(cookieParser());
 app.use(session({
 	secret: "jdfgyt3478h3n4v74y3vb3487yvb3487fvn3f",
-	// ???
-	// key: "f93fhn9v4h394hf34nv934hv934hnv93fhn",
 	resave: false,
 	saveUninitialized: false,
 	cookie: { maxAge: 60000 },
 	secure: true
 }));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(csrf());
+app.use(csrf({cookies: true}));
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dist"));

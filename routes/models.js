@@ -138,7 +138,7 @@ function processForm (baseName, tableName, userData, sysData) {
 
 	// Delete non-fields
 	delete finalData.fields["g-recaptcha-response"]; // The reCAPTCHA is not an actual field, so delete it.
-	delete finalData.fields["_csrf"];
+	delete finalData.fields["_csrf"]; // Regenerate a CSRF token every rendering.
 
 	finalData.passedValidation = !(_.size(finalData.invalid)); // If no invalid fields, data passed validation, vice versa.
 	if (finalData.passedValidation) {
