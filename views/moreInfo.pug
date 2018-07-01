@@ -62,6 +62,7 @@ html(lang="en")
 							.g-recaptcha(data-sitekey="6LcQoGEUAAAAAMcI9kVW_Fm0m-W6Ge6CspUqaP5n")
 							if options.invalid.hasOwnProperty("reCaptcha")
 								p.help.is-danger= options.invalid.reCaptcha
+						input(type="hidden", name="_csrf", value=options.csrfToken)
 						input.button(type="submit")
 
 		//- Footer

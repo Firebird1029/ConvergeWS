@@ -29,16 +29,23 @@ var express = require("express"),
 	_ = require("lodash"),
 	io = require("socket.io"),
 	listener = io.listen(server),
+
+	helmet = require("helmet"),
+	csrf = require("csurf"),
+	bodyParser = require("body-parser"),
 	pugStatic = require("pug-static"),
-	bodyParser = require('body-parser'),
+
 	CronJob = require("cron").CronJob,
 	jsonfile = require("jsonfile"),
+
 	utils = require("./utils.js"),
 	router = require("./routes/routes.js"),
 	models = require("./routes/models.js");
 
 // Express Middleware
 app.set("view engine", "pug");
+app.use(helmet());
+app.use(csrf({cookie: true}));
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(__dirname + "/public"));

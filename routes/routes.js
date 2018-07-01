@@ -96,7 +96,7 @@ router.get("/he-brews.html", (req, res) => {
 
 // Contact
 router.get("/more-info.html", (req, res) => {
-	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.defaultFormRender, {pageTitle: "More Info"}));
+	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.defaultFormRender, {pageTitle: "More Info", csrfToken: req.csrfToken()}));
 });
 
 router.post("/more-info.html", (req, res) => {
@@ -110,6 +110,6 @@ router.post("/more-info.html", (req, res) => {
 
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "More Info", req.body, {reCaptcha: reCaptcha});
-		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info"}));
+		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info", csrfToken: req.csrfToken()}));
 	});
 });
