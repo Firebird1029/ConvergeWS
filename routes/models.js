@@ -136,10 +136,14 @@ function processForm (baseName, tableName, userData, sysData) {
 		finalData.invalid.reCaptcha = "reCAPTCHA is invalid";
 	}
 
+	// Sanitization
+	
+
 	// Delete non-fields
 	delete finalData.fields["g-recaptcha-response"]; // The reCAPTCHA is not an actual field, so delete it.
 	delete finalData.fields["_csrf"]; // Regenerate a CSRF token every rendering.
 
+	// After Validation & Sanitization
 	finalData.passedValidation = !(_.size(finalData.invalid)); // If no invalid fields, data passed validation, vice versa.
 	if (finalData.passedValidation) {
 		// Create record in Airtable
