@@ -24,8 +24,7 @@
 		"start": "node index.js",
 		"dev": "nodemon --ignore 'models/*.json'",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"preinstall": "node models/resetModels.js",
-		"postinstall": "gulp production"
+		"postinstall": "node models/resetModels.js && gulp production"
 	},
 	"dependencies": {
 		"airtable": "^0.5.6",
