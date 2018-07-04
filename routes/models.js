@@ -128,7 +128,7 @@ function processForm (baseName, tableName, userData, sysData) {
 	!validator.isEmail(userData.email) && (finalData.invalid.email = "Email is invalid");
 	!validator.isLength(userData.email, {min: 1}) && (finalData.invalid.email = "Email is required");
 	!(validator.isEmpty(userData.phone) || validator.isMobilePhone(userData.phone, "any")) && (finalData.invalid.phone = "Phone number is invalid");
-	!validator.isLength(userData.message, {min: 1}) && (finalData.invalid.message = "Inquiry is required");
+	!validator.isLength(userData.message, {min: 1}) && (finalData.invalid.message = "Message is required");
 
 	// reCAPTCHA
 	if (!sysData.reCaptcha) {

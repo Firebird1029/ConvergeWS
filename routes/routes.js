@@ -11,6 +11,7 @@ var express = require("express"),
 
 module.exports = router;
 
+// Render .pug with data from the models to pass into Pug functions
 function renderPage (req, res, baseName, tableName, viewToRender, options = {}) {
 	// Waterfall over the array of requested tables to collect all the records of all tables requested.
 	var allRecords = [];
@@ -26,6 +27,17 @@ function renderPage (req, res, baseName, tableName, viewToRender, options = {}) 
 			records: allRecords,
 			options: options
 		});
+	});
+}
+
+// Send a POST request to Google to process reCAPTCHA
+function processReCaptcha (req, callback) {
+	request.post({
+		url: "https://www.google.com/recaptcha/api/siteverify",
+		form: {secret: "6LcQoGEUAAAAAD4O3uh6Nw4THDYnB-YgJdL8pZ4w", response: req.body["g-recaptcha-response"]}
+	}, function (err, response, body) {
+		if (debug && err) { throw new Error(err); }
+		callback(JSON.parse(body).success);
 	});
 }
 
@@ -100,16 +112,21 @@ router.get("/more-info.html", (req, res) => {
 });
 
 router.post("/more-info.html", (req, res) => {
-	// Process reCAPTCHA
-	request.post({
-		url: "https://www.google.com/recaptcha/api/siteverify",
-		form: {secret: "6LcQoGEUAAAAAD4O3uh6Nw4THDYnB-YgJdL8pZ4w", response: req.body["g-recaptcha-response"]}
-	}, function (err, response, body) {
-		if (debug && err) { throw new Error(err); }
-		var reCaptcha = JSON.parse(body).success;
-
+	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "More Info", req.body, {reCaptcha: reCaptcha});
 		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info", csrfToken: req.csrfToken()}));
+	});
+});
+
+router.get("/serve.html", (req, res) => {
+	renderPage(req, res, "Contact Responses", ["Serve"], "serve.pug", _.merge(models.defaultFormRender, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
+});
+
+router.post("/serve.html", (req, res) => {
+	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
+		// Sending to models.js for validation and sanitization.
+		var processedFormData = models.processForm("Contact Responses", "Serve", req.body, {reCaptcha: reCaptcha});
+		renderPage(req, res, "Contact Responses", ["Serve"], "serve.pug", _.merge(processedFormData, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
 	});
 });

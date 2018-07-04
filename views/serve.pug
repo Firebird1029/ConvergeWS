@@ -1,0 +1,71 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;")= (options.pageTitle || "")
+			.hero-foot
+		article.article
+			include includes/body.pug
+			+section()
+				if options.passedValidation
+					p We have received your request and will get back to you soon. Thank you!
+				else
+					//-	* More Info: Name, contact info, message/interest
+					form(action="/serve.html", method="post")
+						.field
+							- var nameInvalid = options.invalid.hasOwnProperty("name")
+							label.label Name
+							.control.has-icons-right
+								input.input(type="text", name="name", value=options.fields.name, class=(nameInvalid && "is-danger"))
+								if nameInvalid
+									span.icon.is-small.is-right
+										i.fas.fa-exclamation-triangle
+							if nameInvalid
+								p.help.is-danger= options.invalid.name
+						.field
+							
+						.field
+							- var emailInvalid = options.invalid.hasOwnProperty("email")
+							label.label Email
+							.control.has-icons-left.has-icons-right
+								input.input(type="email", name="email", value=options.fields.email, class=(emailInvalid && "is-danger"))
+								span.icon.is-small.is-left
+									i.fas.fa-envelope
+								if emailInvalid
+									span.icon.is-small.is-right
+										i.fas.fa-exclamation-triangle
+							if emailInvalid
+								p.help.is-danger= options.invalid.email
+						.field
+							- var phoneInvalid = options.invalid.hasOwnProperty("phone")
+							label.label Phone Number
+							.control.has-icons-left.has-icons-right
+								input.input(type="tel", name="phone", value=options.fields.phone, class=(phoneInvalid && "is-danger"))
+								span.icon.is-small.is-left
+									i.fas.fa-phone
+								if phoneInvalid
+									span.icon.is-small.is-right
+										i.fas.fa-exclamation-triangle
+							if phoneInvalid
+								p.help.is-danger= options.invalid.phone
+						.field
+							- var messageInvalid = options.invalid.hasOwnProperty("message")
+							label.label Additional Notes
+							.control
+								textarea.textarea(name="message", class=(messageInvalid && "is-danger"))= options.fields.message
+							if messageInvalid
+								p.help.is-danger= options.invalid.message
+						.field
+							.g-recaptcha(data-sitekey="6LcQoGEUAAAAAMcI9kVW_Fm0m-W6Ge6CspUqaP5n")
+							if options.invalid.hasOwnProperty("reCaptcha")
+								p.help.is-danger= options.invalid.reCaptcha
+						input(type="hidden", name="_csrf", value=(options.csrfToken))
+						input.button(type="submit")
+
+		//- Footer
+		include includes/footer.pug
