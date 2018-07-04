@@ -28,7 +28,20 @@ html(lang="en")
 							if nameInvalid
 								p.help.is-danger= options.invalid.name
 						.field
-							
+							- var selectionInvalid = options.invalid.hasOwnProperty("selection")
+							label.label Ministry
+							.control.has-icons-left
+								.select: select(name="selection", value=options.fields.selection, class=(selectionInvalid && "is-danger"))
+									each val in ["Activities", "Fellowship", "Youth Group Games", "Graphics", "Media", "Photography", "Praise & Worship", "HE brews (coffee bar)", "Small Group Leadership"]
+										option= val
+								if selectionInvalid
+									span.icon.is-small.is-left
+										i.fas.fa-exclamation-triangle
+								else
+									span.icon.is-small.is-left
+										i.fas.fa-arrow-right
+							if selectionInvalid
+								p.help.is-danger= options.invalid.selection
 						.field
 							- var emailInvalid = options.invalid.hasOwnProperty("email")
 							label.label Email

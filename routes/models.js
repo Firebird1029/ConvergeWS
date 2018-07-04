@@ -47,7 +47,7 @@ var bases = {
 	},
 	"Contact Responses": {
 		baseID: "app5uJTO5UJ1AMpiD",
-		tables: ["More Info", "Serve", "Prayer Requests"]
+		tables: ["More Info", "Serve", "Prayer"]
 	}
 }
 
@@ -124,11 +124,29 @@ function processForm (baseName, tableName, userData, sysData) {
 	finalData.invalid = {}; // Reset invalid fields, to go through validation processing again
 
 	// Validation
-	!validator.isLength(userData.name, {min: 1}) && (finalData.invalid.name = "Name is required");
-	!validator.isEmail(userData.email) && (finalData.invalid.email = "Email is invalid");
-	!validator.isLength(userData.email, {min: 1}) && (finalData.invalid.email = "Email is required");
-	!(validator.isEmpty(userData.phone) || validator.isMobilePhone(userData.phone, "any")) && (finalData.invalid.phone = "Phone number is invalid");
-	!validator.isLength(userData.message, {min: 1}) && (finalData.invalid.message = "Message is required");
+	var validation = {
+		name: function () {
+			!validator.isLength(userData.name, {min: 1}) && (finalData.invalid.name = "Name is required");
+		},
+		selection: function () {
+			!validator.isLength(userData.selection, {min: 1}) && (finalData.invalid.selection = "Selection is required");
+		},
+		email: function () {
+			!validator.isEmail(userData.email) && (finalData.invalid.email = "Email is invalid");
+			!validator.isLength(userData.email, {min: 1}) && (finalData.invalid.email = "Email is required");
+		},
+		phone: function () {
+			!(validator.isEmpty(userData.phone) || validator.isMobilePhone(userData.phone, "any")) && (finalData.invalid.phone = "Phone number is invalid");
+		},
+		message: function () {
+			!validator.isLength(userData.message, {min: 1}) && (finalData.invalid.message = "Message is required");
+		}
+	}
+
+	// Iterate through the expected fields, and validate them.
+	for (var i = 0; i < sysData.expectedFields.length; i++) {
+		validation[sysData.expectedFields[i]]();
+	}
 
 	// reCAPTCHA
 	if (!sysData.reCaptcha) {
