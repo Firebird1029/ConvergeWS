@@ -12,12 +12,7 @@ mixin icon(iconClasses, spanClasses)
 mixin addText(text, style)
 	if text
 		each paragraph in text.split("%\n")
-			case style
-				when "span"
-					span!= paragraph
-				when "p"
-				default
-					p!= paragraph
+			p!= paragraph
 
 mixin addImg(image)
 	if image
