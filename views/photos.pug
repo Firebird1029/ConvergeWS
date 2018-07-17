@@ -1,0 +1,56 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;")= (options.pageTitle || "")
+			.hero-foot
+		article.article
+			include includes/body.pug
+			+section()
+				// Galley wrapper that contains all items
+				//- .columns.is-centered: .column.is-three-quarters
+				each record in records[0]
+					if record.publish
+						.columns
+							.column.is-half: h1= record.title
+							.column.is-half: strong #{records[1][record.ministry[0]]["title"]} Ministry
+						#gallery.gallery.columns.is-centered.is-multiline(itemscope="", itemtype="http://schema.org/ImageGallery")
+							each recordImg in record.img
+								.column.is-one-quarter: figure.image
+									// Link to the big image, not mandatory, but useful when there is no JS
+									a.photoswipeElement(href=recordImg.url, data-caption=record.title, data-width="1200", data-height="900")
+										// Thumbnail
+										img(src=recordImg.url)
+
+		// Root element of PhotoSwipe. Must have class pswp.
+		.pswp
+			.pswp__bg
+			.pswp__scroll-wrap
+				.pswp__container
+					.pswp__item
+					.pswp__item
+					.pswp__item
+				// Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.
+				.pswp__ui.pswp__ui--hidden
+					.pswp__top-bar
+						// Controls are self-explanatory. Order can be changed.
+						.pswp__counter
+						button.pswp__button.pswp__button--close(title="Close (Esc)")
+						button.pswp__button.pswp__button--share(title="Share")
+						button.pswp__button.pswp__button--fs(title="Toggle fullscreen")
+						button.pswp__button.pswp__button--zoom(title="Zoom in/out")
+						// Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR
+						// element will get class pswp__preloader--active when preloader is running
+						.pswp__preloader: .pswp__preloader__icn: .pswp__preloader__cut: .pswp__preloader__donut
+					.pswp__share-modal.pswp__share-modal--hidden.pswp__single-tap: .pswp__share-tooltip
+					button.pswp__button.pswp__button--arrow--left(title="Previous (arrow left)")
+					button.pswp__button.pswp__button--arrow--right(title="Next (arrow right)")
+					.pswp__caption: .pswp__caption__center
+
+		//- Footer
+		include includes/footer.pug

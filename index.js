@@ -16,6 +16,10 @@ var debug = true;
  * Show He brews
  * Show multiline (%), adding bold content
  * Heroku temporary
+ *
+ * Deploy:
+ * https://www.phusionpassenger.com/library/walkthroughs/deploy/
+ * https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
 */
 
 // Load Node Modules & Custom Modules

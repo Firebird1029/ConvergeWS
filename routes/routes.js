@@ -41,6 +41,10 @@ function processReCaptcha (req, callback) {
 	});
 }
 
+router.get("/test.html", (req, res) => {
+	renderPage(req, res, "About Sections", ["Front Page"], "TEST.pug", {pageTitle: "Converge"});
+});
+
 router.get("/", (req, res) => {
 	renderPage(req, res, "About Sections", ["Front Page"], "index.pug", {pageTitle: "Converge"});
 });
@@ -82,6 +86,10 @@ router.get("/ministries.html", (req, res) => {
 
 router.get("/activities.html", (req, res) => {
 	renderPage(req, res, "Experience and Community", ["Activities"], "tiles.pug", {pageTitle: "Activities"});
+});
+
+router.get("/photos.html", (req, res) => {
+	renderPage(req, res, "Experience and Community", ["Photos", "Ministries"], "photos.pug", {pageTitle: "Photos"});
 });
 
 // Resources
