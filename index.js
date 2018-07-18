@@ -9,9 +9,6 @@ var debug = true;
  * Calendar: stage 4
  *
  * Fix:
- * Mobile formatting
- * Move nav hamburger to bottom right
- * Articles & blogs: change to tiles.pug instead of aboutSections.pug
  * Make tiles collapsible
  * Authentic peace not adding navbar background
  * Once domain: add to FA Pro

@@ -2,19 +2,19 @@ doctype html
 html(lang="en")
 	include includes/head.pug
 	body
-		section#frontPageHero.hero.is-fullheight.is-hidden-touch
+		section#frontPageHero.hero.is-fullheight-desktop
 			.hero-head
 				include includes/nav.pug
-			.hero-body
+			.hero-body.is-hidden-touch
 				.container.has-text-centered
 					//- h1.title.is-1(style="padding-top: 1rem;") CONVERGE
 			.hero-foot
-		section.is-fullwidth.is-hidden-desktop
-			include includes/nav.pug
-			img(src="../../assets/img/decal_large.jpg", style="margin-top: 5rem")
+		img.is-hidden-desktop(src="../../assets/img/decal_large.jpg")
 		article.article
 			include includes/body.pug
 			#firstContent
+			.container.has-text-centered.is-hidden-desktop
+				h1.title.is-1= (options.pageTitle || "")
 
 			//- BEGIN ARTICLE.PUG CODE
 			each record in records[0]
