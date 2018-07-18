@@ -36,8 +36,8 @@ html(lang="en")
 					thead
 						tr
 							th Drink
-							th Small
-							th Large
+							th Small*
+							th Large*
 							th &nbsp;
 					tbody
 						each record in records[1]
@@ -49,6 +49,9 @@ html(lang="en")
 									td= (record.smallCost) ? "$" + record.smallCost : ""
 									td= (record.largeCost) ? "$" + record.largeCost : ""
 									td= (record.notes || "")
+				br
+				br
+				p.has-text-right *All prices are suggested donations. Mahalo for your support! &nbsp;
 			//- END HEBREWS.PUG SPECIFIC CODE
 
 		//- Footer

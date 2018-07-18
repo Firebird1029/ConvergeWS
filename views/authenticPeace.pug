@@ -1,0 +1,41 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;")= (options.pageTitle || "")
+			.hero-foot
+		article.article
+			include includes/body.pug
+			- var articleFound = false
+			each record in records[0]
+				if record.id == options.id
+					- articleFound = true
+					+section(record.title)
+						if record.archived
+							p This article has been archived.
+						else
+							if record.pdf
+								object(data=record.pdf[0].url, type="application/pdf", width="100%", height="100%", style="height: 80vh;")
+									iframe(src=record.pdf[0].url, width="100%", height="100%", style="border: none; height: 80vh;")
+										p This browser does not support PDFs. Please download the PDF to view it: 
+										a(href=record.pdf[0].url) Download PDF
+						//- Navigation
+						nav.pagination.is-centered(style="margin-top: 2rem;")
+							a.pagination-previous(href=(record.id - 1)) Previous
+							if !record["Most Recent Article?"]
+								a.pagination-next(href=(record.id + 1)) Next
+
+			if !articleFound
+				+section("")
+					p Sorry, the article could not be found. Click #[a(href="/authentic-peace.html") here] to go to the latest article.
+
+			+section("Archive")
+				p Click #[a(href="/authentic-peace/archive.html") here] to go to the archive.
+
+		//- Footer
+		include includes/footer.pug

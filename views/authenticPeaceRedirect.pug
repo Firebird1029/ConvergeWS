@@ -1,0 +1,7 @@
+doctype html
+html(lang="en")
+	- var recordsString = JSON.stringify(records[0])
+	// Redirects to the latest Authentic Peace article
+	script.
+		var records = (JSON.parse(!{JSON.stringify(recordsString)}));
+		window.location.replace("authentic-peace/" + records[Object.keys(records)[Object.keys(records).length - 1]].id);

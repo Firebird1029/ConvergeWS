@@ -29,7 +29,7 @@ html(lang="en")
 								p.help.is-danger= options.invalid.name
 						.field
 							- var messageInvalid = options.invalid.hasOwnProperty("message")
-							label.label Inquiry
+							label.label Request
 							.control
 								textarea.textarea(name="message", class=(messageInvalid && "is-danger"))= options.fields.message
 							if messageInvalid

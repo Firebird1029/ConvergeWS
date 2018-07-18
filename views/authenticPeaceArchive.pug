@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;")= (options.pageTitle || "")
+			.hero-foot
+		article.article
+			include includes/body.pug
+			+section("Archive")
+				table.table.is-hoverable.is-fullwidth
+					thead
+						tr
+							th Article
+							th Download
+					tbody
+						each record in records[0]
+							if record.archived
+								tr
+									td= (record.title || "")
+									td
+										if record.pdf
+											a(href=record.pdf[0].url)
+												span.icon: i.fa.fa-file-download
+										else
+											span.icon: i.far.fa-file-download
+
+			+section()
+				p Click #[a(href="/authentic-peace.html") here] to go to the latest article.
+
+		//- Footer
+		include includes/footer.pug

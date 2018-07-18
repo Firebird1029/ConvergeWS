@@ -2,13 +2,16 @@ doctype html
 html(lang="en")
 	include includes/head.pug
 	body
-		section#frontPageHero.hero.is-fullheight
+		section#frontPageHero.hero.is-fullheight.is-hidden-touch
 			.hero-head
 				include includes/nav.pug
 			.hero-body
 				.container.has-text-centered
 					//- h1.title.is-1(style="padding-top: 1rem;") CONVERGE
 			.hero-foot
+		section.is-fullwidth.is-hidden-desktop
+			include includes/nav.pug
+			img(src="../../assets/img/decal_large.jpg", style="margin-top: 5rem")
 		article.article
 			include includes/body.pug
 			#firstContent

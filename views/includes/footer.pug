@@ -9,28 +9,30 @@ footer.footer
 			.column.is-one-third
 				h3 Contact
 				p
+					span.icon: i.fa.fa-map-marked
+					span &nbsp; 1640 Liliha St, Honolulu, HI 96817
+				p
 					span.icon: i.fa.fa-phone
 					span &nbsp; (808) 550-8261
 				p
 					span.icon: i.fa.fa-envelope
-					span &nbsp; ?
-				p
-					span.icon: i.fa.fa-map-marked
-					span &nbsp; 1640 Liliha St., Honolulu, HI 96817
-				br
+					span &nbsp; converge@clch.org
 				p
 					span.icon: i.fab.fa-facebook-f
-						a(href="")
+					a(href="https://www.facebook.com/convergehawaii") @convergehawaii
+				p
+					span.icon: i.fab.fa-instagram
+					a(href="https://www.instagram.com/convergehawaii/") @convergehawaii
 			.column.is-one-third
 				h3 Location
 				#map(style="left: 10%; width: 80%; height: 12rem;")
 		.columns
 			.column
-				p &copy;
+				//- p &copy;
 	script(src="https://cdn.jsdelivr.net/combine/npm/jquery@3,npm/lodash@4,npm/html5shiv@3,npm/html5shiv@3/dist/html5shiv-printshiv.min.js,npm/socket.io-client@2/dist/socket.io.min.js")
 	script(async, defer, type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB77nR_TKpRV6CJ_B5kgqOzK8NshI61AhI&callback=initMap")
 
 	script(src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.min.js")
 	script(src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe-ui-default.min.js")
 
-	script(src="js/all.js")
+	script(src="/js/all.js")

@@ -93,12 +93,18 @@ router.get("/photos.html", (req, res) => {
 });
 
 // Resources
-router.get("/authentic-peace/:article", (req, res) => {
-	renderPage(req, res, "Resources", ["Authentic Peace"], "authenticPeace.pug", req.params.article);
+router.get("/authentic-peace.html", (req, res) => {
+	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceRedirect.pug", {pageTitle: "Authentic Peace"});
+});
+router.get("/authentic-peace/archive.html", (req, res) => {
+	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceArchive.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});
+});
+router.get("/authentic-peace/:articleID", (req, res) => {
+	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});
 });
 
 router.get("/articles-and-blogs.html", (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Posts"], "aboutSections.pug", {pageTitle: "Articles & Blogs"});
+	renderPage(req, res, "Articles and Blogs", ["Posts"], "tiles.pug", {pageTitle: "Articles & Blogs"});
 });
 
 router.get("/sermons.html", (req, res) => {
@@ -134,7 +140,7 @@ router.get("/serve.html", (req, res) => {
 router.post("/serve.html", (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
-		var processedFormData = models.processForm("Contact Responses", "Serve", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "service", "email", "phone"]});
+		var processedFormData = models.processForm("Contact Responses", "Serve", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "email", "phone"]});
 		renderPage(req, res, "Contact Responses", ["Serve"], "serve.pug", _.merge(processedFormData, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
 	});
 });

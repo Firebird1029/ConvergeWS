@@ -3,23 +3,18 @@ var debug = true;
 
 /*
  * TODO
- * Create all the other pages of the website (layout?)
  * Add logo to navbar
  * Fuzzy string matching + TextRazor NLP API (stage 9)
  * 
- * Calendar: stage 4 (calendar Bulma extension)
- * Photos: Photoswipe: stage 3
- * Authentic Peace: stage 5 (magazine style with left/right arrows + archive) https://bulma.io/documentation/components/pagination/
+ * Calendar: stage 4
  *
- * Next:
- * Add phone number, address, etc to footer
- * Show He brews
- * Show multiline (%), adding bold content
- * Heroku temporary
- *
- * Deploy:
- * https://www.phusionpassenger.com/library/walkthroughs/deploy/
- * https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
+ * Fix:
+ * Mobile formatting
+ * Move nav hamburger to bottom right
+ * Articles & blogs: change to tiles.pug instead of aboutSections.pug
+ * Make tiles collapsible
+ * Authentic peace not adding navbar background
+ * Once domain: add to FA Pro
 */
 
 // Load Node Modules & Custom Modules

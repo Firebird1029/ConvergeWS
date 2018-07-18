@@ -29,13 +29,9 @@ var bases = {
 		baseID: "appkvA9WfE62DYGIl",
 		tables: ["Calendar", "Classes", "Ministries", "Activities", "Photos", "Leaders"]
 	},
-	"Resources": {
-		baseID: "appeBfEsO2Q2eEIMX",
-		tables: ["Authentic Peace", "Helps"]
-	},
 	"Articles and Blogs": {
 		baseID: "appaTv4YjcvFV6f4l",
-		tables: ["Posts", "Authors"]
+		tables: ["Posts", "Authors", "Authentic Peace"]
 	},
 	"Sermons": {
 		baseID: "appwoW5IMGdHcKf14",
@@ -116,6 +112,7 @@ function getFileData (base, table, callback) {
 var defaultFormRender = {fields: {}, invalid: {}};
 
 // Process User-Submitted Form (Validate, Sanitize)
+// https://github.com/chriso/validator.js
 // https://www.w3schools.com/tags/att_input_type.asp
 // https://www.sitepoint.com/forms-file-uploads-security-node-express/
 function processForm (baseName, tableName, userData, sysData) {
