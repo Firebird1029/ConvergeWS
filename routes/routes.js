@@ -1,5 +1,5 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = true;
+var debug = !process.env.NODE_ENV;
 
 // Load Node Modules & Custom Modules
 var express = require("express"),
@@ -94,7 +94,7 @@ router.get("/photos.html", (req, res) => {
 
 // Resources
 router.get("/authentic-peace.html", (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceRedirect.pug", {pageTitle: "Authentic Peace"});
+	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceRedirect.pug", {pageTitle: "Redirecting..."});
 });
 router.get("/authentic-peace/archive.html", (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceArchive.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});

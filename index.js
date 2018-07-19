@@ -1,5 +1,5 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = true;
+var debug = !process.env.NODE_ENV;
 
 /*
  * TODO
@@ -10,7 +10,6 @@ var debug = true;
  *
  * Fix:
  * Make tiles collapsible
- * Authentic peace not adding navbar background
  * Once domain: add to FA Pro
 */
 

@@ -1,5 +1,5 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
-var debug = true;
+var debug = !process.env.NODE_ENV;
 
 // Load Node Modules & Custom Modules
 var path = require("path"),

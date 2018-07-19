@@ -1,7 +1,22 @@
 doctype html
 html(lang="en")
-	- var recordsString = JSON.stringify(records[0])
-	// Redirects to the latest Authentic Peace article
-	script.
-		var records = (JSON.parse(!{JSON.stringify(recordsString)}));
-		window.location.replace("authentic-peace/" + records[Object.keys(records)[Object.keys(records).length - 1]].id);
+	include includes/head.pug
+	body
+		section.hero.is-full-height
+			.hero-head
+				include includes/nav.pug
+			.hero-body
+				.container.has-text-centered
+					h1.title.is-1(style="padding-top: 1rem;")= (options.pageTitle || "")
+			.hero-foot
+		article.article
+			include includes/body.pug
+			
+			- var recordsString = JSON.stringify(records[0])
+			// Redirects to the latest Authentic Peace article
+			script.
+				var records = (JSON.parse(!{JSON.stringify(recordsString)}));
+				window.location.replace("authentic-peace/" + records[Object.keys(records)[Object.keys(records).length - 1]].id);
+
+		//- Footer
+		include includes/footer.pug

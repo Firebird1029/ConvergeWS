@@ -2,18 +2,18 @@ doctype html
 html(lang="en")
 	include includes/head.pug
 	body
-		section#frontPageHero.hero.is-fullheight-desktop
+		section#frontPageHero.hero.is-fullheight-aspect-ratio
 			.hero-head
 				include includes/nav.pug
 			.hero-body.is-hidden-touch
 				.container.has-text-centered
 					//- h1.title.is-1(style="padding-top: 1rem;") CONVERGE
 			.hero-foot
-		img.is-hidden-desktop(src="../../assets/img/decal_large.jpg")
+		img.is-hidden-aspect-ratio(src="../../assets/img/decal_large.jpg")
 		article.article
 			include includes/body.pug
 			#firstContent
-			.container.has-text-centered.is-hidden-desktop
+			.container.has-text-centered.is-hidden-aspect-ratio
 				h1.title.is-1= (options.pageTitle || "")
 
 			//- BEGIN ARTICLE.PUG CODE

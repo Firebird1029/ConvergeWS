@@ -17,17 +17,25 @@ body {
 }
 
 #frontPageHero {
-	@media screen and (min-width: 1088px) {
+	@media screen and (min-aspect-ratio: 220/131) {
+		// min-width: 1088px
 		background-image: url("../../assets/img/decal_large.jpg");
 		background-repeat: no-repeat;
-		background-position: center center;
+		background-position: center top;
 		background-size: 100% auto;
+		background-attachment: fixed;
 	}
 }
 
-.is-fullheight-desktop {
-	@media screen and (min-width: 1088px) {
+.is-fullheight-aspect-ratio {
+	@media screen and (min-aspect-ratio: 220/131) {
 		min-height: 100vh;
+	}
+}
+
+.is-hidden-aspect-ratio {
+	@media screen and (min-aspect-ratio: 220/131) {
+		display: none!important;
 	}
 }
 
@@ -39,7 +47,15 @@ body {
 }
 
 .hero .navbar.navbarBackground {
-	background-color: white;
+	background-color: rgba(255, 255, 255, 0.8);
+	transition: opacity 0.3s;
+	-webkit-transition: background 0.3s;
+	-o-transition: background 0.3s;
+	transition: background 0.3s;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 1.0);
+	}
 }
 
 .navbar-link::after {
