@@ -12,18 +12,21 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+section()
+				- var counter = 0
 				each record in records[0]
+					- counter++;
 					if record.publish
 						.box: .columns
 							.column
 								//- All
 								if record.title
-									h1= record.title
+									div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
+										h1(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
 
 								//- Ministries + Articles & Blogs
-								.has-text-centered
+								.has-text-centered(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
 									+addImg(record.img)
-							.column.is-three-quarters
+							.column.is-three-quarters(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
 								+addText(record.passage) //- Sermons
 								+addText(record.body) //- All
 
@@ -42,6 +45,12 @@ html(lang="en")
 									if record.meetingPlace
 										.column: p #[strong Meeting Place: ] #{record.meetingPlace}
 
+								//- Articles & Blogs
+								if record.author
+									p
+										strong Author: &nbsp;
+										span= records[1][record.author[0]]["name"]
+
 								//- Sermons
 								.columns
 									if record.speaker
@@ -54,7 +63,7 @@ html(lang="en")
 									if record.slides
 										.column: a(href=(record.slides[0].url), target="_blank") Download slides
 								if record.audio
-										audio(controls, style="margin-bottom: 3.5rem"): source(src=(record.audio[0].url))
+										audio(controls, style="margin-bottom: 4.5rem"): source(src=(record.audio[0].url))
 
 								//- Most
 								if record.contact

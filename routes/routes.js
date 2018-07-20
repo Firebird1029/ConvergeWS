@@ -104,11 +104,11 @@ router.get("/authentic-peace/:articleID", (req, res) => {
 });
 
 router.get("/articles-and-blogs.html", (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Posts"], "tiles.pug", {pageTitle: "Articles & Blogs"});
+	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles & Blogs", collapsible: true});
 });
 
 router.get("/sermons.html", (req, res) => {
-	renderPage(req, res, "Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Sermons"});
+	renderPage(req, res, "Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Sermons", collapsible: true});
 });
 
 // HE brews

@@ -41,6 +41,25 @@ $(window).on("load resize", function () {
 	}
 });
 
+// Collapsible Tiles
+$(".collapsibleButton").each((index, collBtnEl) => {
+	var boxID = $(collBtnEl).data("boxgroup");
+	$(collBtnEl).click(() => {
+		$(".collapsibleHeading[data-boxgroup=" + boxID + "]").toggleClass("has-text-grey");
+		$(".collapsibleContent[data-boxgroup=" + boxID + "]").each((index, collContEl) => {
+			if ($(collContEl).css("maxHeight") === "0px") {
+				// Currently hidden/collapsed, will now show content
+				$(collContEl).css("maxHeight", "" + $(collContEl).prop("scrollHeight") + "px");
+				$(collContEl).css("padding", "0.75rem");
+			} else {
+				// Content currently being shown, will not hide/collapse
+				$(collContEl).css("maxHeight", "0px");
+				$(collContEl).css("padding", "0rem 0.75rem");
+			}
+		});
+	});
+});
+
 // Photoswipe
 // Init empty gallery array
 var container = [];

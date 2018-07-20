@@ -1,5 +1,7 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
 var debug = !process.env.NODE_ENV;
+console.log("Environment: ", process.env.NODE_ENV || "dev");
+console.log("Debugging: ", debug);
 
 /*
  * TODO
@@ -7,9 +9,10 @@ var debug = !process.env.NODE_ENV;
  * Fuzzy string matching + TextRazor NLP API (stage 9)
  * 
  * Calendar: stage 4
+ * Set env var
  *
  * Fix:
- * Make tiles collapsible
+ * Fix photos page --> more like tiles
  * Once domain: add to FA Pro
 */
 

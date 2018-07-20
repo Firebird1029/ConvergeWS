@@ -61,3 +61,22 @@ body {
 .navbar-link::after {
 	border-color: $navbarArrowColor;
 }
+
+.collapsibleButton {
+	cursor: pointer;
+}
+
+.collapsibleHeading {
+	-webkit-transition: color 0.3s;
+	-o-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+.collapsibleContent {
+	max-height: 0;
+	overflow: hidden;
+	padding: 0rem 0.75rem; // Fixes glitch
+	-webkit-transition: max-height 0.3s, padding 0.3s;
+	-o-transition: max-height 0.3s, padding 0.3s;
+	transition: max-height 0.3s, padding 0.3s;
+}
