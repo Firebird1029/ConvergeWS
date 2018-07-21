@@ -9,10 +9,9 @@ console.log("Debugging: ", debug);
  * Fuzzy string matching + TextRazor NLP API (stage 9)
  * 
  * Calendar: stage 4
- * Set env var
+ * Comment all code
  *
  * Fix:
- * Fix photos page --> more like tiles
  * Once domain: add to FA Pro
 */
 

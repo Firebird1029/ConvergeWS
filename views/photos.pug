@@ -12,20 +12,28 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+section()
-				// Galley wrapper that contains all items
-				//- .columns.is-centered: .column.is-three-quarters
+				- var counter = 0
 				each record in records[0]
-					if record.publish
-						.columns
-							.column.is-half: h1= record.title
-							.column.is-half: strong #{records[1][record.ministry[0]]["title"]} Ministry
-						#gallery.gallery.columns.is-centered.is-multiline(itemscope="", itemtype="http://schema.org/ImageGallery")
-							each recordImg in record.img
-								.column.is-one-quarter: figure.image
-									// Link to the big image, not mandatory, but useful when there is no JS
-									a.photoswipeElement(href=recordImg.url, data-caption=record.title, data-width="1200", data-height="900")
-										// Thumbnail
-										img(src=recordImg.url)
+					- counter++;
+					if (record.publish && record.title)
+						.box
+							div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
+								h1(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
+
+							div(data-boxgroup=counter)
+								if record.ministry
+									span #{records[1][record.ministry[0]]["title"]} Ministry, 
+								if record.date
+									+addDate(record.date, "span")
+								br
+							div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
+								.gallery.columns.is-centered.is-multiline(itemscope="", itemtype="http://schema.org/ImageGallery")
+									each recordImg in record.img
+										.column.is-one-third: figure.image
+											// Link to the big image, not mandatory, but useful when there is no JS
+											a.photoswipeElement(href=recordImg.url, data-caption=record.title, data-width="1200", data-height="900")
+												// Thumbnail
+												img(src=recordImg.url)
 
 		// Root element of PhotoSwipe. Must have class pswp.
 		// https://gist.github.com/Yago/7edf4963fb286543ea18

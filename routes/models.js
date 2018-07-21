@@ -12,7 +12,7 @@ var path = require("path"),
 // Setup Airtable API
 airtable.configure({ // Module for Airtable API.
 	endpointUrl: "https://api.airtable.com",
-	apiKey: "keyFUzYF3ZYAosZWm" // https://airtable.com/account
+	apiKey: process.env.API_KEY // https://airtable.com/account
 });
 
 // Bases To Pull From Airtable

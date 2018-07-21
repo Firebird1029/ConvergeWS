@@ -89,7 +89,7 @@ router.get("/activities.html", (req, res) => {
 });
 
 router.get("/photos.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", ["Photos", "Ministries"], "photos.pug", {pageTitle: "Photos"});
+	renderPage(req, res, "Experience and Community", ["Photos", "Ministries"], "photos.pug", {pageTitle: "Photos", collapsible: true});
 });
 
 // Resources
