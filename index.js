@@ -5,23 +5,21 @@ console.log("Debugging: ", debug);
 
 /*
  * TODO
+ * Comment all code, update TemplateAug2018
+ * Calendar
+ * Once domain is set: add domain to FA CDN account
  * Add logo to navbar
- * Fuzzy string matching + TextRazor NLP API (stage 9)
- * 
- * Calendar: stage 4
- * Comment all code
- *
- * Fix:
- * Once domain: add to FA Pro
+ * Fuzzy string matching + TextRazor NLP API (optional)
 */
 
-// Load Node Modules & Custom Modules
+// Load Node Dependencies & Custom Modules
 var express = require("express"),
 	app = express(),
 	server = app.listen(process.env.PORT || (process.argv[2] || 8000), function expressServerListening () {
-		console.log(server.address());
+		debug && console.log(server.address());
 	}),
 
+	// Express Middleware
 	helmet = require("helmet"),
 	session = require("express-session"),
 	cookieParser = require("cookie-parser"),
@@ -29,17 +27,19 @@ var express = require("express"),
 	csrf = require("csurf"),
 	pugStatic = require("pug-static"),
 
+	// Project-Specific Dependencies
 	CronJob = require("cron").CronJob,
 	jsonfile = require("jsonfile"),
 	io = require("socket.io"),
 	listener = io.listen(server),
 
+	// Utilities & Custom Modules
 	_ = require("lodash"),
 	utils = require("./utils.js"),
 	router = require("./routes/routes.js"),
 	models = require("./routes/models.js");
 
-// Express Middleware
+// Setup Express Middleware
 app.set("view engine", "pug");
 app.use(helmet());
 app.use(session({
@@ -50,13 +50,11 @@ app.use(session({
 	secure: true
 }));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(csrf({cookies: true}));
+app.use(bodyParser.urlencoded({extended: false})); // Used for sending HTML form data within POST requests
+app.use(csrf({cookies: true})); // HTML form security
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dist"));
-// app.use(pugStatic(__dirname + "/views"));
-
 app.use("/", router);
 app.use((req, res, next) => {
 	res.status(404).render("404.pug");
@@ -67,24 +65,24 @@ app.use((req, res, next) => {
 // */6 * * * * * -- every 10 seconds
 // */12 * * * * * -- every 5 seconds
 var job = new CronJob("*/12 * * * * *", function () {
+	// Actual scanning happens in routes/models.js. This function simply transfers the pulled data into JSON files.
 	models.scanEveryTable(models.bases, function scanEveryTableCallback (data) {			
-			// Process Full Data
-			Object.keys(data).forEach(function processFullDataCallback (key) {
-				jsonfile.writeFile(`${__dirname}/models/${key}.json`, data[key], function jsonWriteFileCallback (err) {
-					if (debug && err) { throw new Error(err); }
-				});
+		Object.keys(data).forEach(function processFullDataCallback (key) {
+			jsonfile.writeFile(`${__dirname}/models/${key}.json`, data[key], function jsonWriteFileCallback (err) {
+				if (debug && err) { throw new Error(err); }
 			});
-			// debug && console.log(`Cron job successful! Files ${__dirname}/models/*.json updated.`);
+		});
+		// debug && console.log(`Cron job successful! Files ${__dirname}/models/*.json updated.`);
 	});
 }, function () {
-	console.log("Cron job stopped.");
+	debug && console.log("Cron job stopped.");
 }, true, "Pacific/Honolulu");
 
-// Socket.io Control
-listener.sockets.on("connection", function connectionDetected (socket) {
-	socket.on("refreshRequest", function processRefreshRequest (options) {
-		models.getFileData(options.base, options.table, function gotFileData (fileData) {
-			socket.emit("refreshResponse", fileData);
-		});
-	});
-});
+// Socket.io Control -- Not being used
+// listener.sockets.on("connection", function connectionDetected (socket) {
+// 	socket.on("refreshRequest", function processRefreshRequest (options) {
+// 		models.getFileData(options.base, options.table, function gotFileData (fileData) {
+// 			socket.emit("refreshResponse", fileData);
+// 		});
+// 	});
+// });
