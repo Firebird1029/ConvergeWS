@@ -54,11 +54,9 @@ $(".collapsibleButton").each((index, collBtnEl) => {
 			if ($(collContEl).css("maxHeight") === "0px") {
 				// Content was hidden/collapsed, will now show content
 				$(collContEl).css("maxHeight", "" + $(collContEl).prop("scrollHeight") + "px");
-				$(collContEl).css("padding", "0.75rem");
 			} else {
 				// Content was being shown, will now hide/collapse
 				$(collContEl).css("maxHeight", "0px");
-				$(collContEl).css("padding", "0rem 0.75rem");
 			}
 		});
 	});

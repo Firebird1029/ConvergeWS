@@ -75,10 +75,6 @@ body {
 .collapsibleContent {
 	max-height: 0; // For collapsible
 	overflow: hidden; // For collapsible
-	// Fixes glitch where padding sticks out
-	padding: 0rem 0.75rem;
-	margin-top: 0.75rem;
-	margin-bottom: 0.75rem;
 
 	// Transitions for collapsible
 	-webkit-transition: max-height 0.3s, padding 0.3s;

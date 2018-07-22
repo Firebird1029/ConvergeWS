@@ -18,7 +18,7 @@ html(lang="en")
 					if (record.publish && record.title)
 						.box
 							div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
-								h1(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
+								h1.is-unselectable(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
 
 							div(data-boxgroup=counter)
 								if record.ministry
@@ -27,7 +27,10 @@ html(lang="en")
 									+addDate(record.date, "span")
 								br
 							div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
-								.gallery.columns.is-centered.is-multiline(data-boxgroup=counter, itemscope="", itemtype="http://schema.org/ImageGallery")
+								//- Fixes glitch where padding sticks out
+								p &nbsp;
+
+								.gallery.columns.is-centered.is-multiline(data-boxgroup=counter)
 									- var pictureCounter = 0
 									each recordImg in record.img
 										.column.is-one-third: figure.image
@@ -38,6 +41,7 @@ html(lang="en")
 										- pictureCounter++;
 
 					//- https://gist.github.com/Yago/7edf4963fb286543ea18
+					//- Photoswipe element for every gallery
 					.pswp(data-boxgroup=counter)
 						.pswp__bg
 						.pswp__scroll-wrap

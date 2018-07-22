@@ -21,12 +21,14 @@ html(lang="en")
 								//- title: All
 								if record.title
 									div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
-										h1(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
+										h1.is-unselectable(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
 
 								//- img: Ministries + Articles & Blogs
 								.has-text-centered(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
 									+addImg(record.img)
 							.column.is-three-quarters(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
+								//- Fixes glitch where padding sticks out
+								p &nbsp;
 								+addText(record.passage) //- passage: Sermons
 								+addText(record.body) //- body: All
 
