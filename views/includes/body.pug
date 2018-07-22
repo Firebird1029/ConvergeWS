@@ -1,8 +1,9 @@
 mixin section(title)
 	section.section
-		.container.has-text-justified
+		.container
 			.content
-				h1.dynamicHeader= title
+				if title
+					h1= title
 				block
 
 mixin icon(iconClasses, spanClasses)
