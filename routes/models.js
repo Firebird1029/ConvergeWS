@@ -1,7 +1,7 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
 var debug = !process.env.NODE_ENV;
 
-// Load Node Modules & Custom Modules
+// Load Node Dependencies & Custom Modules
 var path = require("path"),
 	_ = require("lodash"),
 	jsonfile = require("jsonfile"),
@@ -12,10 +12,11 @@ var path = require("path"),
 // Setup Airtable API
 airtable.configure({ // Module for Airtable API.
 	endpointUrl: "https://api.airtable.com",
-	apiKey: process.env.API_KEY // https://airtable.com/account
+	apiKey: process.env.AIRTABLE_KEY // https://airtable.com/account
 });
 
 // Bases To Pull From Airtable
+// https://airtable.com/api to get base ID.
 var bases = {
 	"About Sections": {
 		baseID: "appXpFAar7Nro7fRZ",
@@ -47,16 +48,13 @@ var bases = {
 	}
 }
 
-// Playground
-// scanTable("appXpFAar7Nro7fRZ", "Front Page", function (error, dataToSend) {})
-
 // Airtable: Scan Table
 function scanTable (baseID, tableName, callback) {
 	var dataToSend = {},
 		base = airtable.base(baseID),
 		table = base(tableName);
 	table.select({
-		view: "Main View"
+		view: "Main View" // This is a common cause for an error, since creating a new Airtable table sets the view as "Grid view" not "Main View".
 	}).eachPage(function processPage (records, fetchNextPage) {
 		records.forEach(function processRecord (record) {
 			// "record.id" to get ID, "record.fields" to get object literal, "record.get('FIELD NAME')" to get value.
@@ -90,13 +88,14 @@ function scanEveryTable (bases, callback) {
 	});
 }
 
+// Airtable: Create a Record in a Table
 function createAirtableRecord (baseID, tableName, data, callback) {
 	var base = airtable.base(baseID),
 		table = base(tableName);
 
 	table.create(data, function (err, record) {
-			if (debug && err) { throw new Error(err); }
-			callback(record);
+		if (debug && err) { throw new Error(err); }
+		callback(record);
 	});
 }
 
@@ -116,9 +115,13 @@ var defaultFormRender = {fields: {}, invalid: {}};
 // https://www.w3schools.com/tags/att_input_type.asp
 // https://www.sitepoint.com/forms-file-uploads-security-node-express/
 function processForm (baseName, tableName, userData, sysData) {
+	// baseName and tableName will be used to determine which base & table to create a record in.
+	// userData is the HTML form data that the user has submitted, in object format.
+	// sysData is server-side data about which fields need to be validated, and also contains the reCAPTCHA result.
+	// The reCAPTCHA result is determined in routes.js rather than models.js because reCAPTCHA is not part of any model processing.
 	var finalData = Object.assign({}, defaultFormRender); // Duplicate defaultFormRender object
 	finalData.fields = Object.assign({}, userData); // Preserve user data to automatically re-input when page refreshed
-	finalData.invalid = {}; // Reset invalid fields, to go through validation processing again
+	finalData.invalid = {}; // Reset any invalid fields if this is the second time form is being processed (fields need to go through validation again)
 
 	// Validation
 	var validation = {
@@ -152,9 +155,8 @@ function processForm (baseName, tableName, userData, sysData) {
 	}
 
 	// Sanitization
-	
 
-	// Delete non-fields
+	// Delete fields not part of HTML form
 	delete finalData.fields["g-recaptcha-response"]; // The reCAPTCHA is not an actual field, so delete it.
 	delete finalData.fields["_csrf"]; // Regenerate a CSRF token every rendering.
 
@@ -171,10 +173,10 @@ function processForm (baseName, tableName, userData, sysData) {
 
 module.exports = {
 	bases: bases, // Object
-	scanTable: scanTable,
-	scanEveryTable: scanEveryTable,
-	createAirtableRecord: createAirtableRecord,
-	getFileData: getFileData,
+	scanTable: scanTable, // Function
+	scanEveryTable: scanEveryTable, // Function
+	createAirtableRecord: createAirtableRecord, // Function
+	getFileData: getFileData, // Function
 	defaultFormRender: defaultFormRender, // Object
-	processForm: processForm
+	processForm: processForm // Function
 }

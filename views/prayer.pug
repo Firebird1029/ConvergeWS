@@ -15,8 +15,8 @@ html(lang="en")
 				if options.passedValidation
 					p We have received your request and will get back to you soon. Thank you!
 				else
-					//-	* More Info: Name, contact info, message/interest
 					form(action="/prayer.html", method="post")
+						//- Name
 						.field
 							- var nameInvalid = options.invalid.hasOwnProperty("name")
 							label.label Name
@@ -27,6 +27,8 @@ html(lang="en")
 										i.fas.fa-exclamation-triangle
 							if nameInvalid
 								p.help.is-danger= options.invalid.name
+
+						//- Message, aka Request
 						.field
 							- var messageInvalid = options.invalid.hasOwnProperty("message")
 							label.label Request
@@ -34,8 +36,10 @@ html(lang="en")
 								textarea.textarea(name="message", class=(messageInvalid && "is-danger"))= options.fields.message
 							if messageInvalid
 								p.help.is-danger= options.invalid.message
+
+						//- reCAPTCHA & CSRF
 						.field
-							.g-recaptcha(data-sitekey="6LcQoGEUAAAAAMcI9kVW_Fm0m-W6Ge6CspUqaP5n")
+							.g-recaptcha(data-sitekey="6Ld7k2UUAAAAADi8qXd_VEB6WAfMimFA63LqwS_D")
 							if options.invalid.hasOwnProperty("reCaptcha")
 								p.help.is-danger= options.invalid.reCaptcha
 						input(type="hidden", name="_csrf", value=(options.csrfToken))

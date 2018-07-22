@@ -12,31 +12,31 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+section()
+				//- The counter allows collapsible tiles to show/hide in their respective boxes, by correlating the heading (button) and the content.
 				- var counter = 0
 				each record in records[0]
-					- counter++;
 					if record.publish
 						.box: .columns
 							.column
-								//- All
+								//- title: All
 								if record.title
 									div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
 										h1(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
 
-								//- Ministries + Articles & Blogs
+								//- img: Ministries + Articles & Blogs
 								.has-text-centered(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
 									+addImg(record.img)
 							.column.is-three-quarters(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
-								+addText(record.passage) //- Sermons
-								+addText(record.body) //- All
+								+addText(record.passage) //- passage: Sermons
+								+addText(record.body) //- body: All
 
-								//- Most
+								//- date: Most
 								if record.date
 									p
 										strong Date: &nbsp;
 										+addDate(record.date, "span")
 
-								//- Ministries
+								//- demographic, meetingTimes, meetingPlace: Ministries
 								.columns
 									if record.demographic
 										.column: p #[strong Demographic: ] #{record.demographic}
@@ -45,13 +45,13 @@ html(lang="en")
 									if record.meetingPlace
 										.column: p #[strong Meeting Place: ] #{record.meetingPlace}
 
-								//- Articles & Blogs
+								//- author: Articles & Blogs
 								if record.author
 									p
 										strong Author: &nbsp;
 										span= records[1][record.author[0]]["name"]
 
-								//- Sermons
+								//- speaker, series, handout, slides, audio: Sermons
 								.columns
 									if record.speaker
 										.column: p #[span: strong Speaker: ] &nbsp; #{records[1][record.speaker[0]]["name"]} &nbsp; (#{records[1][record.speaker[0]]["email"]})
@@ -65,9 +65,10 @@ html(lang="en")
 								if record.audio
 										audio(controls, style="margin-bottom: 4.5rem"): source(src=(record.audio[0].url))
 
-								//- Most
+								//- contact: Most
 								if record.contact
 									p #[span: strong Contact: ] &nbsp; #{records[1][record.contact[0]]["name"]} &nbsp; (#{records[1][record.contact[0]]["email"]})
+					- counter++;
 
 		//- Footer
 		include includes/footer.pug

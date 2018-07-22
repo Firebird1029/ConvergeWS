@@ -13,8 +13,6 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			#firstContent
-			//- .container.has-text-centered.is-hidden-aspect-ratio
-				h1.title.is-1= (options.pageTitle || "")
 
 			//- BEGIN ARTICLE.PUG CODE
 			each record in records[0]
@@ -42,10 +40,5 @@ html(lang="en")
 									+addText(record.body)
 			//- END ARTICLE.PUG CODE
 
-			//- +section("Map")
-			//- 	.columns.is-centered: .column.is-three-quarters
-			//- 		#map.is-fullwidth(style="height: 20rem;")
-
 		//- Footer
 		include includes/footer.pug
-		//- script(async, defer, type="text/javascript", src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB77nR_TKpRV6CJ_B5kgqOzK8NshI61AhI&callback=initMap")

@@ -5,12 +5,11 @@ console.log("Debugging: ", debug);
 
 /*
  * TODO
- * Comment all code, update TemplateAug2018
  * Calendar
- * Once domain is set: add domain to FA CDN account
+ * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics
  * Add logo to navbar
  * Fuzzy string matching + TextRazor NLP API (optional)
-*/
+ */
 
 // Load Node Dependencies & Custom Modules
 var express = require("express"),
@@ -25,7 +24,6 @@ var express = require("express"),
 	cookieParser = require("cookie-parser"),
 	bodyParser = require("body-parser"),
 	csrf = require("csurf"),
-	pugStatic = require("pug-static"),
 
 	// Project-Specific Dependencies
 	CronJob = require("cron").CronJob,
@@ -77,12 +75,3 @@ var job = new CronJob("*/12 * * * * *", function () {
 }, function () {
 	debug && console.log("Cron job stopped.");
 }, true, "Pacific/Honolulu");
-
-// Socket.io Control -- Not being used
-// listener.sockets.on("connection", function connectionDetected (socket) {
-// 	socket.on("refreshRequest", function processRefreshRequest (options) {
-// 		models.getFileData(options.base, options.table, function gotFileData (fileData) {
-// 			socket.emit("refreshResponse", fileData);
-// 		});
-// 	});
-// });

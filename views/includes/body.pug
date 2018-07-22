@@ -9,17 +9,20 @@ mixin icon(iconClasses, spanClasses)
 	span.icon(class=spanClasses)
 		i.fa(class=iconClasses)
 
-mixin addText(text, style)
+//- In Airtable, use % in a record to create a newline.
+mixin addText(text)
 	if text
 		each paragraph in text.split("%\n")
 			p!= paragraph
 
+//- This checks if an image is provided before displaying it, since accessing the .url property of an undefined object returns an error
 mixin addImg(image)
 	if image
 		img(src=image[0].url)
 	else
 		img
 
+//- This changes the format of the Date string provided by Airtable into mm/dd/yy format.
 mixin addDate(date, style)
 	if date
 		case style

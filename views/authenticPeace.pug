@@ -20,6 +20,7 @@ html(lang="en")
 							p This article has been archived.
 						else
 							if record.pdf
+								//- https://pdfobject.com/static.html
 								object(data=record.pdf[0].url, type="application/pdf", width="100%", height="100%", style="height: 80vh;")
 									iframe(src=record.pdf[0].url, width="100%", height="100%", style="border: none; height: 80vh;")
 										p This browser does not support PDFs. Please download the PDF to view it: 
@@ -28,14 +29,15 @@ html(lang="en")
 						nav.pagination.is-centered(style="margin-top: 2rem;")
 							a.pagination-previous(href=(record.id - 1)) Previous
 							if !record["Most Recent Article?"]
+								//- In Airtable, selecting this checkbox will prevent the Next button from being visible.
 								a.pagination-next(href=(record.id + 1)) Next
 
 			if !articleFound
 				+section("")
-					p Sorry, the article could not be found. Click #[a(href="/authentic-peace.html") here] to go to the latest article.
+					p Sorry, the article could not be found. #[a(href="/authentic-peace.html") Click here] to go to the latest article.
 
 			+section("Archive")
-				p Click #[a(href="/authentic-peace/archive.html") here] to go to the archive.
+				p #[a(href="/authentic-peace/archive.html") Click here] to go to the archive.
 
 		//- Footer
 		include includes/footer.pug

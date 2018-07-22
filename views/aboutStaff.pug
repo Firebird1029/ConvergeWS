@@ -1,15 +1,3 @@
-mixin addCard(record)
-	.card
-		.card-image
-			figure.image.is-square.is-marginless
-				+addImg(record.img)
-		.card-content
-			.content
-				h4= (record.name || "")
-				strong: em= (record.role) ? record.role.join(", ") : ""
-				p: em= (record.description || "")
-				p= (record.bio || "")
-
 doctype html
 html(lang="en")
 	include includes/head.pug
@@ -27,7 +15,16 @@ html(lang="en")
 				.columns.is-multiline
 					each record in records[0]
 						.column.is-one-third
-							+addCard(record)
+							.card
+								.card-image
+									figure.image.is-square.is-marginless
+										+addImg(record.img)
+								.card-content
+									.content.has-text-left
+										h4= (record.name || "")
+										strong: em= (record.role) ? record.role.join(", ") : ""
+										em: +addText(record.description)
+										+addText(record.bio)
 
 		//- Footer
 		include includes/footer.pug

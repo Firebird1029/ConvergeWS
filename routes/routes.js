@@ -1,7 +1,7 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
 var debug = !process.env.NODE_ENV;
 
-// Load Node Modules & Custom Modules
+// Load Node Dependencies & Custom Modules
 var express = require("express"),
 	request = require("request"),
 	_ = require("lodash"),
@@ -11,18 +11,18 @@ var express = require("express"),
 
 module.exports = router;
 
-// Render .pug with data from the models to pass into Pug functions
-function renderPage (req, res, baseName, tableName, viewToRender, options = {}) {
+// Render .pug view with data from the models to pass into functions inside the Pug views
+function renderPage (req, res, baseName, tableNames, viewToRender, options = {}) {
 	// Waterfall over the array of requested tables to collect all the records of all tables requested.
 	var allRecords = [];
-	utils.waterfallOverArray(tableName, function (table, report) {
-		// Retrieve data from the specified JSON file, using models.js.
+	utils.waterfallOverArray(tableNames, function (table, report) {
+		// Retrieve data from the specified JSON file, using a models.js function.
 		models.getFileData(baseName, table, function gotFileData (fileData) {
 			allRecords.push(fileData);
 			report();
 		});
 	}, function () {
-		// Render the page with all the data retrieved.
+		// Render the Pug view after all the data has been retrieved.
 		res.render(viewToRender, {
 			records: allRecords,
 			options: options
@@ -33,17 +33,14 @@ function renderPage (req, res, baseName, tableName, viewToRender, options = {}) 
 // Send a POST request to Google to process reCAPTCHA
 function processReCaptcha (req, callback) {
 	request.post({
+		// https://www.google.com/recaptcha/admin
 		url: "https://www.google.com/recaptcha/api/siteverify",
-		form: {secret: "6LcQoGEUAAAAAD4O3uh6Nw4THDYnB-YgJdL8pZ4w", response: req.body["g-recaptcha-response"]}
+		form: {secret: process.env.reCAPTCHA_SECRET, response: req.body["g-recaptcha-response"]}
 	}, function (err, response, body) {
 		if (debug && err) { throw new Error(err); }
 		callback(JSON.parse(body).success);
 	});
 }
-
-router.get("/test.html", (req, res) => {
-	renderPage(req, res, "About Sections", ["Front Page"], "TEST.pug", {pageTitle: "Converge"});
-});
 
 router.get("/", (req, res) => {
 	renderPage(req, res, "About Sections", ["Front Page"], "index.pug", {pageTitle: "Converge"});

@@ -12,10 +12,13 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			
+			//- Prepares the records object to be accessed in the script tag
 			- var recordsString = JSON.stringify(records[0])
-			// Redirects to the latest Authentic Peace article
+			//- Redirects to the latest Authentic Peace article
 			script.
-				var records = (JSON.parse(!{JSON.stringify(recordsString)}));
+				var records = (JSON.parse(!{JSON.stringify(recordsString)})); //- Accesses records object which is outside script tag scope
+
+				//- Redirects user to last record in records object, which should be the most recent article (if Airtable is sorted properly)
 				window.location.replace("authentic-peace/" + records[Object.keys(records)[Object.keys(records).length - 1]].id);
 
 		//- Footer
