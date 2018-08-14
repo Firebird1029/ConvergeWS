@@ -68,7 +68,8 @@ html(lang="en")
 									if record.slides
 										.column: a(href=(record.slides[0].url), target="_blank") Download slides
 								if record.audio
-										audio(controls, style="margin-top: 3rem; margin-bottom: 4.5rem"): source(src=(record.audio[0].url))
+										audio(controls, style="margin-top: 3rem;"): source(src=(record.audio[0].url))
+										//- margin-bottom: 4.5rem;
 
 								//- contact: Most
 								if record.contact

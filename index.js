@@ -6,7 +6,6 @@ console.log("Debugging: ", debug);
 /*
  * TODO
  * Fix mobile formatting: navbar-hamburger too small, mobile navbar does not scroll
- * Converge TV (embed links in Airtable becomes videos)
  * Calendar
  * 
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics

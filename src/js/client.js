@@ -20,6 +20,20 @@ function initMap () {
 	});
 }
 
+// Go to Welcome Section on Home Page When Nav Button is Clicked
+function jumpToWelcome () {
+	if ($("#welcome").length) {
+		// If on home page, scroll to Welcome section
+		$('html, body').animate({
+			scrollTop: $("#welcome").offset().top
+		}, 1000);
+	} else {
+		// If not on home page, redirect user
+		window.location.href = "/index.html#welcome";
+	}
+	return false;
+}
+
 // Add Background Behind Navbar (if full navbar is present)
 // https://stackoverflow.com/questions/7182342/how-to-detect-when-the-user-has-scrolled-to-a-certain-area-on-the-page-using-jqu
 $(window).on("load resize", function () {

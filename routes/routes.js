@@ -114,7 +114,7 @@ router.get("/articles-and-blogs.html", (req, res) => {
 });
 
 router.get("/tv.html", (req, res) => {
-	renderPage(req, res, "Converge TV", ["Converge TV", "Topics"], "tv.pug", {pageTitle: "Converge TV"});
+	renderPage(req, res, "Converge TV", ["Converge TV", "Topics", "Speakers"], "tv.pug", {pageTitle: "Converge TV"});
 });
 
 router.get("/sermons.html", (req, res) => {
