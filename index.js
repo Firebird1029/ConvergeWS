@@ -6,12 +6,12 @@ console.log("Debugging: ", debug);
 /*
  * TODO
  * Fix mobile formatting: navbar-hamburger too small, mobile navbar does not scroll
- * Fix font, it does not work on mobile (Converge font?)
+ * Fix font glitch (See main.scss)
  * Converge TV (embed links in Airtable becomes videos)
  * Calendar
- * Favicon
+ * 
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics
- * Add logo to navbar
+ * Add logo to navbar, Favicon (Sandy)
  * Fuzzy string matching + TextRazor NLP API (optional)
  */
 

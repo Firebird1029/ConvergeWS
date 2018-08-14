@@ -24,13 +24,16 @@ html(lang="en")
 										h1.is-unselectable(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
 
 								//- img: Ministries + Articles & Blogs
-								.has-text-centered(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
-									+addImg(record.img)
+								if record.img
+									.has-text-centered(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
+										+addImg(record.img)
 							.column.is-three-quarters(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
 								//- Fixes glitch where padding sticks out
 								p &nbsp;
-								+addText(record.passage) //- passage: Sermons
-								+addText(record.body) //- body: All
+								//- passage: Sermons
+								+addText(record.passage)
+								//- body: All
+								+addText(record.body)
 
 								//- date: Most
 								if record.date
@@ -65,7 +68,7 @@ html(lang="en")
 									if record.slides
 										.column: a(href=(record.slides[0].url), target="_blank") Download slides
 								if record.audio
-										audio(controls, style="margin-bottom: 4.5rem"): source(src=(record.audio[0].url))
+										audio(controls, style="margin-top: 3rem; margin-bottom: 4.5rem"): source(src=(record.audio[0].url))
 
 								//- contact: Most
 								if record.contact

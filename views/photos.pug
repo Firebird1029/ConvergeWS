@@ -22,7 +22,8 @@ html(lang="en")
 
 							div(data-boxgroup=counter)
 								if record.ministry
-									span #{records[1][record.ministry[0]]["title"]} Ministry, 
+									span= record.ministry
+									span  Ministry, 
 								if record.date
 									+addDate(record.date, "span")
 								br

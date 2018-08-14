@@ -51,42 +51,51 @@ router.get("/index.html", (req, res) => {
 });
 
 // About
-router.get("/about-clch.html", (req, res) => {
-	renderPage(req, res, "About Sections", ["About CLCH"], "aboutSections.pug", {pageTitle: "About CLCH"});
+router.get("/history.html", (req, res) => {
+	renderPage(req, res, "About Sections", ["History"], "aboutSections.pug", {pageTitle: "History"});
 });
 
-router.get("/about-converge.html", (req, res) => {
-	renderPage(req, res, "About Sections", ["About Converge"], "aboutSections.pug", {pageTitle: "About Converge"});
+router.get("/staff.html", (req, res) => {
+	renderPage(req, res, "About Staff", ["Staff"], "staff.pug", {pageTitle: "Our Staff"});
 });
 
-router.get("/about-coya.html", (req, res) => {
-	renderPage(req, res, "About Sections", ["CoYA"], "aboutSections.pug", {pageTitle: "About CoYA"});
+// Community
+router.get("/youth.html", (req, res) => {
+	renderPage(req, res, "Community", ["Youth"], "aboutSections.pug", {pageTitle: "Converge Youth"});
 });
 
-router.get("/about-staff.html", (req, res) => {
-	renderPage(req, res, "About Staff", ["Leads"], "aboutStaff.pug", {pageTitle: "Our Staff"});
+router.get("/coya.html", (req, res) => {
+	renderPage(req, res, "Community", ["CoYA"], "aboutSections.pug", {pageTitle: "Converge Co.Y.A."});
+});
+
+router.get("/small-groups.html", (req, res) => {
+	renderPage(req, res, "Community", ["Small Groups"], "tiles.pug", {pageTitle: "Small Groups"});
+});
+
+router.get("/ministries.html", (req, res) => {
+	renderPage(req, res, "Community", ["Ministries", "Leaders"], "tiles.pug", {pageTitle: "Ministries"});
 });
 
 // Experience
 router.get("/calendar.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", ["Calendar"], "calendar.pug", {pageTitle: "Calendar"});
+	renderPage(req, res, "Experience", ["Calendar"], "calendar.pug", {pageTitle: "Calendar"});
 });
 
 router.get("/classes.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", ["Classes", "Leaders"], "tiles.pug", {pageTitle: "Classes"});
-});
-
-// Community
-router.get("/ministries.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", ["Ministries", "Leaders"], "tiles.pug", {pageTitle: "Ministries"});
-});
-
-router.get("/activities.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", ["Activities"], "tiles.pug", {pageTitle: "Activities"});
+	renderPage(req, res, "Experience", ["Classes", "Leaders"], "tiles.pug", {pageTitle: "Classes"});
 });
 
 router.get("/photos.html", (req, res) => {
-	renderPage(req, res, "Experience and Community", ["Photos", "Ministries"], "photos.pug", {pageTitle: "Photos", collapsible: true});
+	renderPage(req, res, "Experience", ["Photos"], "photos.pug", {pageTitle: "Photos", collapsible: true});
+});
+
+// HE Brews
+router.get("/hebrews.html", (req, res) => {
+	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "HE Brews"});
+});
+
+router.get("/he-brews.html", (req, res) => {
+	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "HE Brews"});
 });
 
 // Resources
@@ -104,17 +113,12 @@ router.get("/articles-and-blogs.html", (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles & Blogs", collapsible: true});
 });
 
+router.get("/tv.html", (req, res) => {
+	renderPage(req, res, "Converge TV", ["Converge TV", "Topics"], "tv.pug", {pageTitle: "Converge TV"});
+});
+
 router.get("/sermons.html", (req, res) => {
-	renderPage(req, res, "Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Sermons", collapsible: true});
-});
-
-// HE brews
-router.get("/hebrews.html", (req, res) => {
-	renderPage(req, res, "HE brews", ["HE brews", "Menu"], "hebrews.pug", {pageTitle: "HE brews"});
-});
-
-router.get("/he-brews.html", (req, res) => {
-	renderPage(req, res, "HE brews", ["HE brews", "Menu"], "hebrews.pug", {pageTitle: "HE brews"});
+	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: true});
 });
 
 // Contact
@@ -131,25 +135,25 @@ router.post("/more-info.html", (req, res) => {
 });
 
 router.get("/serve.html", (req, res) => {
-	renderPage(req, res, "Contact Responses", ["Serve"], "serve.pug", _.merge(models.defaultFormRender, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["To Serve"], "serve.pug", _.merge(models.defaultFormRender, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
 });
 
 router.post("/serve.html", (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "Serve", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "email", "phone"]});
-		renderPage(req, res, "Contact Responses", ["Serve"], "serve.pug", _.merge(processedFormData, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["To Serve"], "serve.pug", _.merge(processedFormData, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
 	});
 });
 
 router.get("/prayer.html", (req, res) => {
-	renderPage(req, res, "Contact Responses", ["Prayer"], "prayer.pug", _.merge(models.defaultFormRender, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(models.defaultFormRender, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
 });
 
 router.post("/prayer.html", (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "Prayer", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "message"]});
-		renderPage(req, res, "Contact Responses", ["Prayer"], "prayer.pug", _.merge(processedFormData, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(processedFormData, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
 	});
 });

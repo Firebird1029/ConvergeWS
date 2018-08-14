@@ -1,11 +1,18 @@
 // Override Bulma vars here. Use https://bulma.io/documentation/overview/colors/, not Bulma vars.
 // $primary: hsl(217, 71%, 53%);
 @import "./node_modules/bulma/bulma.sass";
+@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro');
 
 $navbarArrowColor: $grey-dark;
 
 body {
-	font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
+	// "HelveticaNeue", "Helvetica Neue",
+	
+	// TODO
+	// h1, h2, h3, h4, h5, h6 {
+	// 	font-family: "Roboto", "Source Sans Pro", Helvetica, Arial, sans-serif;
+	// }
 }
 
 .navbar-burger {

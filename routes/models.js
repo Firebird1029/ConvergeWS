@@ -20,31 +20,39 @@ airtable.configure({ // Module for Airtable API.
 var bases = {
 	"About Sections": {
 		baseID: "appXpFAar7Nro7fRZ",
-		tables: ["Front Page", "About CLCH", "About Converge", "CoYA"]
+		tables: ["Front Page", "History"]
 	},
 	"About Staff": {
 		baseID: "appj3Hm417P5gE0oM",
-		tables: ["Leads"]
+		tables: ["Staff"]
 	},
-	"Experience and Community": {
+	"Community": {
 		baseID: "appkvA9WfE62DYGIl",
-		tables: ["Calendar", "Classes", "Ministries", "Activities", "Photos", "Leaders"]
+		tables: ["Youth", "CoYA", "Small Groups", "Ministries", "Leaders"]
+	},
+	"Experience": {
+		baseID: "appk80veA6WdxCrtB",
+		tables: ["Calendar", "Classes", "Photos", "Leaders"]
+	},
+	"HE Brews": {
+		baseID: "appamTiUaVqXSiBhf",
+		tables: ["HE Brews", "Menu"]
 	},
 	"Articles and Blogs": {
 		baseID: "appaTv4YjcvFV6f4l",
-		tables: ["Posts", "Authors", "Authentic Peace"]
+		tables: ["Authentic Peace", "Posts", "Authors"]
 	},
-	"Sermons": {
+	"Converge TV": {
+		baseID: "appFX7NBTY8z4Dqfb",
+		tables: ["Converge TV", "Topics"]
+	},
+	"Past Sermons": {
 		baseID: "appwoW5IMGdHcKf14",
 		tables: ["Sermons", "Speakers", "Series"]
 	},
-	"HE brews": {
-		baseID: "appamTiUaVqXSiBhf",
-		tables: ["HE brews", "Menu"]
-	},
 	"Contact Responses": {
 		baseID: "app5uJTO5UJ1AMpiD",
-		tables: ["More Info", "Serve", "Prayer"]
+		tables: ["More Info", "To Serve", "For Prayer"]
 	}
 }
 
