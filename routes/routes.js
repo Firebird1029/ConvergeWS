@@ -114,7 +114,7 @@ router.get("/articles-and-blogs.html", (req, res) => {
 });
 
 router.get("/tv.html", (req, res) => {
-	renderPage(req, res, "Converge TV", ["Converge TV", "Topics"], "tv.pug", {pageTitle: "Converge TV"});
+	renderPage(req, res, "Converge TV", ["Converge TV", "Topics", "Speakers"], "tv.pug", {pageTitle: "Converge TV"});
 });
 
 router.get("/sermons.html", (req, res) => {
@@ -141,7 +141,7 @@ router.get("/serve.html", (req, res) => {
 router.post("/serve.html", (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
-		var processedFormData = models.processForm("Contact Responses", "Serve", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "email", "phone"]});
+		var processedFormData = models.processForm("Contact Responses", "To Serve", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "email", "phone"]});
 		renderPage(req, res, "Contact Responses", ["To Serve"], "serve.pug", _.merge(processedFormData, {pageTitle: "Serve", csrfToken: req.csrfToken()}));
 	});
 });
@@ -153,7 +153,7 @@ router.get("/prayer.html", (req, res) => {
 router.post("/prayer.html", (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
-		var processedFormData = models.processForm("Contact Responses", "Prayer", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "message"]});
+		var processedFormData = models.processForm("Contact Responses", "For Prayer", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "message"]});
 		renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(processedFormData, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
 	});
 });
