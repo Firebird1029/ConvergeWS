@@ -24,7 +24,7 @@ function initMap () {
 function jumpToWelcome () {
 	if ($("#welcome").length) {
 		// If on home page, scroll to Welcome section
-		$('html, body').animate({
+		$("html, body").animate({
 			scrollTop: $("#welcome").offset().top
 		}, 1000);
 	} else {
@@ -107,3 +107,90 @@ $(".gallery").each(function (index, galleryElement) {
 		gallery.init();
 	});
 });
+
+// Calendar
+if ($(".hello-week").length) {
+	// https://github.com/maurovieirareis/hello-week
+	// https://maurovieirareis.github.io/hello-week/demos/documentation.html
+	var helloWeek = new HelloWeek({
+		selector: ".hello-week",
+		lang: "hello-week-en",
+		langFolder: "./lib.preferences/",
+		format: "mm/dd/yyyy",
+		onLoad: () => {
+			calendarLoaded();
+			calendarUpdated();
+		},
+		onChange: calendarUpdated,
+		onSelect: calendarUpdated,
+		onClear: calendarUpdated
+	});
+
+	// Every time visual calendar is clicked
+	function calendarUpdated () {
+		console.log(helloWeek)
+		var $selectedDaysInList = $(".event:contains(" + helloWeek.selectedDays[0] + ")");
+		console.log($selectedDaysInList);
+		if ($selectedDaysInList.length === 1) {
+			// One event on the selected calendar day.
+			// Trigger a click on the event in the list to cause the Event Details to show.
+			$selectedDaysInList.eq(0).click();
+
+			// Scroll to the event in the event list.
+			// https://stackoverflow.com/questions/635706/how-to-scroll-to-an-element-inside-a-div
+			$("#eventCalendarList").animate({
+				scrollTop: $('#eventCalendarList').scrollTop() + $selectedDaysInList.eq(0).position().top - 40
+			}, 200);
+		} else if ($selectedDaysInList.length > 1) {
+			// Multiple events on the selected calendar day.
+		} else {
+			// No event on the selected calendar day.
+		}
+	}
+
+	// Once visual calendar has loaded
+	function calendarLoaded () {
+		$(".event").each(function (eventIndex, eventEl) {
+			// Match up events pulled from Airtable with visual calendar days and add a visual small circle
+			$(eventEl).find(".eventDate").each(function (eventDateIndex, eventDateEl) {
+				var eventDate = new Date($(eventDateEl).text());
+				eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // To match timestamp given by Hello-Week DOM elements (10 am).
+				eventDate = eventDate.getTime() / 1000; // Convert to Epoch timestamp. https://www.epochconverter.com/, converts ms --> s
+				$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot");
+			});
+
+			// If link in calendar event list (below visual calendar) is clicked, show event details for the event clicked
+			$(eventEl).click(function() {
+				// Styling: change color of event in list when clicked on
+				$(".event").each(function () {
+					$(this).removeClass("calendarAddSelectedColor");
+				});
+				$(eventEl).addClass("calendarAddSelectedColor");
+
+				var recordData = $(eventEl).data("record");
+
+				// If event selected is different from event already being shown, reset and reshow animations.
+				if ($("#eventDetailsTitle") !== recordData.title) {
+					$(".eventDetails").hide();
+				}
+
+				// Set the values of the Event Details column
+				$("#eventDetailsTitle").text(recordData.title || "");
+				$("#eventDetailsMinistry").text(recordData.ministry || "");
+				$("#eventDetailsBody").text(recordData.body || "");
+
+				// Ternary operator. If true, then convert the string to a Date object, then use native .toLocaleDateString to make a nice format
+				$("#eventDetailsDate").text((recordData.date) ? (new Date(recordData.date).toLocaleDateString("en-US", {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"})) : "");
+
+				// If the event ends on the same day it starts, then show mm/dd/yy hh:ss to hh:ss rather than mm/dd/yy hh:ss to mm/dd/yy hh:ss.
+				if (new Date(recordData.date).toLocaleDateString("en-US", {timeZone: "UTC"}) === new Date(recordData.endDate).toLocaleDateString("en-US", {timeZone: "UTC"})) {
+					$("#eventDetailsEndDate").text((recordData.endDate) ? (" to " + new Date(recordData.endDate).toLocaleTimeString("en-US", {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"})) : "");
+				} else {
+					$("#eventDetailsEndDate").text((recordData.endDate) ? (" to " + new Date(recordData.endDate).toLocaleDateString("en-US", {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"})) : "");
+				}
+
+				$(".eventDetails").fadeIn(300);
+			});
+		});
+	}
+}

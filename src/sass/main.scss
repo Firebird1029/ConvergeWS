@@ -86,3 +86,23 @@ body {
 	-o-transition: max-height 0.3s, padding 0.3s;
 	transition: max-height 0.3s, padding 0.3s;
 }
+
+// https://stackoverflow.com/questions/44236541/how-to-create-a-dot-small-circle-under-text
+.calendarDayDot::before {
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	border-radius: 100%;
+	position: absolute;
+	background: #7fcbc3;
+	bottom: 10px;
+	height: 8px;
+	content: '';
+	width: 8px;
+	left: 50%;
+}
+
+.calendarAddSelectedColor {
+	color: #7fcbc3;
+}

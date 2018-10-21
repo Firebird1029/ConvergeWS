@@ -11,7 +11,41 @@ html(lang="en")
 			.hero-foot
 		article.article
 			include includes/body.pug
-			+section("Coming Soon!")
+			section.section
+				.columns
+					.column.is-half
+						.hello-week
+							.hello-week__header
+								.hello-week__prev
+									+icon("fa-arrow-left", "fa-2x")
+								.hello-week__label
+								.hello-week__next
+									+icon("fa-arrow-right", "fa-2x")
+							.hello-week__week
+							.hello-week__month
+					.column
+						.container: .content
+							#eventDetails(style="min-height: 20vh;")
+								h1#eventDetailsTitle.eventDetails
+								p: em#eventDetailsMinistry.eventDetails
+								p#eventDetailsBody.eventDetails Click an event to view more info.
+								p
+									span#eventDetailsDate.eventDetails
+									span#eventDetailsEndDate.eventDetails
+
+						+section("List")
+							#eventCalendarList(style="height: 50vh; overflow-y: scroll; overflow-x: hidden;")
+								each record in records[0]
+									if (record.publish && (record.title && record.date))
+										.event(data-record=record, style="cursor: pointer;")
+											.columns
+												.column.is-one-fifth
+													//- record.date is assumed
+													.eventDate= new Date(record.date).toLocaleDateString("en-US", {timeZone: "UTC"})
+												.column
+													//- record.title is assumed
+													span(style="font-weight: bold;")= record.title						
 
 		//- Footer
+		script(src="https://cdn.jsdelivr.net/npm/hello-week@1/dist/helloweek.min.js")
 		include includes/footer.pug
