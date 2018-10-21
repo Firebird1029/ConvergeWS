@@ -13,6 +13,7 @@ html(lang="en")
 			include includes/body.pug
 			section.section
 				.columns
+					//- Visual Calendar
 					.column.is-half
 						.hello-week
 							.hello-week__header
@@ -23,28 +24,32 @@ html(lang="en")
 									+icon("fa-arrow-right", "fa-2x")
 							.hello-week__week
 							.hello-week__month
+
 					.column
+						//- Event Details
 						.container: .content
-							#eventDetails(style="min-height: 20vh;")
+							#eventDetails(style="min-height: 30vh;")
 								h1#eventDetailsTitle.eventDetails
-								p: em#eventDetailsMinistry.eventDetails
-								p#eventDetailsBody.eventDetails Click an event to view more info.
 								p
 									span#eventDetailsDate.eventDetails
 									span#eventDetailsEndDate.eventDetails
+									br
+									em#eventDetailsMinistry.eventDetails
+								p#eventDetailsBody.eventDetails Click an event to view more info.
+								br
 
-						+section("List")
+						//- Event List
+						.container: .content
 							#eventCalendarList(style="height: 50vh; overflow-y: scroll; overflow-x: hidden;")
-								each record in records[0]
-									if (record.publish && (record.title && record.date))
-										.event(data-record=record, style="cursor: pointer;")
-											.columns
-												.column.is-one-fifth
-													//- record.date is assumed
-													.eventDate= new Date(record.date).toLocaleDateString("en-US", {timeZone: "UTC"})
-												.column
-													//- record.title is assumed
-													span(style="font-weight: bold;")= record.title						
+								table#eventCalendarTable.table.is-hoverable(style="width: 45vw;"): tbody
+									each record in records[0]
+										if (record.publish && (record.title && record.date))
+											tr.event(data-record=record, style="cursor: pointer;")
+												//- record.date is assumed to exist
+												td.eventDate= new Date(record.date).toLocaleDateString("en-US", {timeZone: "UTC"})
+
+												//- record.title is assumed to exist
+												td(style="font-weight: bold;")= record.title						
 
 		//- Footer
 		script(src="https://cdn.jsdelivr.net/npm/hello-week@1/dist/helloweek.min.js")

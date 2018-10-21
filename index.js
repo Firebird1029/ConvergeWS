@@ -6,8 +6,7 @@ console.log("Debugging: ", debug);
 /*
  * TODO
  * Fix mobile formatting: navbar-hamburger too small, mobile navbar does not scroll
- * Calendar
- * Fix dependencies via template, Browsersync
+ * Fix NEW dependencies via template, Browsersync
  *
  * Calendar: make arrows far instead of fas
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics

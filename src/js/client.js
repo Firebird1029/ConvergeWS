@@ -82,7 +82,6 @@ $(".gallery").each(function (index, galleryElement) {
 	var galleryContainer = []; // Init empty gallery array
 
 	// Loop over gallery pictures and push it to the array
-	console.log(galleryElement)
 	$(galleryElement).find("a.photoswipeElement[data-boxgroup=" + galleryID + "]").each(function () {
 		galleryContainer.push({
 			src: $(this).attr("href"),
@@ -128,23 +127,36 @@ if ($(".hello-week").length) {
 
 	// Every time visual calendar is clicked
 	function calendarUpdated () {
-		console.log(helloWeek)
+		// The rows in the Event List that correspond to the clicked date in visual calendar
 		var $selectedDaysInList = $(".event:contains(" + helloWeek.selectedDays[0] + ")");
-		console.log($selectedDaysInList);
+
 		if ($selectedDaysInList.length === 1) {
 			// One event on the selected calendar day.
+
 			// Trigger a click on the event in the list to cause the Event Details to show.
 			$selectedDaysInList.eq(0).click();
-
-			// Scroll to the event in the event list.
-			// https://stackoverflow.com/questions/635706/how-to-scroll-to-an-element-inside-a-div
+			// Scroll to the event in the event list. https://stackoverflow.com/questions/635706/how-to-scroll-to-an-element-inside-a-div
 			$("#eventCalendarList").animate({
-				scrollTop: $('#eventCalendarList').scrollTop() + $selectedDaysInList.eq(0).position().top - 40
+				scrollTop: $("#eventCalendarTable").scrollTop() + $selectedDaysInList.eq(0).position().top
 			}, 200);
 		} else if ($selectedDaysInList.length > 1) {
 			// Multiple events on the selected calendar day.
+
+			// Styling: Highlight the multiple events in the event list.
+			$(".event").each(function () { $(this).removeClass("calendarAddSelectedColor"); }); // Reset highlighting in Event List.
+			$selectedDaysInList.each(function () { $(this).addClass("calendarAddSelectedColor"); }); // Add highlighting to the multiple events in Event List.
+			// Scroll to the events in the event list.
+			$("#eventCalendarList").animate({
+				scrollTop: $("#eventCalendarTable").scrollTop() + $selectedDaysInList.eq(0).position().top
+			}, 200);
+
+			// Give a message in the Event Details.
+			$(".eventDetails").each(function () { $(this).text("").hide(); }); // Reset text in Event Details.
+			$("#eventDetailsBody").text("Multiple events on " + helloWeek.selectedDays[0] + "! Select an event from the list below.").show();
 		} else {
-			// No event on the selected calendar day.
+			// No event on the selected calendar day, so reset styling.
+			$(".eventDetails").each(function () { $(this).text("").hide(); }); // Reset text in Event Details.
+			$(".event").each(function () { $(this).removeClass("calendarAddSelectedColor"); }); // Reset highlighting in Event List.
 		}
 	}
 
@@ -152,44 +164,49 @@ if ($(".hello-week").length) {
 	function calendarLoaded () {
 		$(".event").each(function (eventIndex, eventEl) {
 			// Match up events pulled from Airtable with visual calendar days and add a visual small circle
-			$(eventEl).find(".eventDate").each(function (eventDateIndex, eventDateEl) {
-				var eventDate = new Date($(eventDateEl).text());
-				eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // To match timestamp given by Hello-Week DOM elements (10 am).
-				eventDate = eventDate.getTime() / 1000; // Convert to Epoch timestamp. https://www.epochconverter.com/, converts ms --> s
-				$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot");
-			});
+			var eventDate = new Date($(eventEl).find(".eventDate").text());
+			eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // Temporarily reset time of events match timestamp given by Hello-Week DOM elements (10 am GMT).
+			eventDate = eventDate.getTime() / 1000; // Convert to Epoch timestamp. https://www.epochconverter.com/
+			$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot"); // Add a small dot/circle under each day in visual calendar when there is an event
 
 			// If link in calendar event list (below visual calendar) is clicked, show event details for the event clicked
 			$(eventEl).click(function() {
 				// Styling: change color of event in list when clicked on
-				$(".event").each(function () {
-					$(this).removeClass("calendarAddSelectedColor");
-				});
+				$(".event").each(function () { $(this).removeClass("calendarAddSelectedColor"); }); // Reset highlighting.
 				$(eventEl).addClass("calendarAddSelectedColor");
 
+				// Styling: update selected day of the visual calendar
+				$(".hello-week__day").each(function () { $(this).removeClass("is-selected"); });
+				$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("is-selected");
+
+				// Instead of using Socket.IO (server <--> client), data of each record is stored directly in the DOM (server --> DOM <--> client).
 				var recordData = $(eventEl).data("record");
 
-				// If event selected is different from event already being shown, reset and reshow animations.
+				// If event selected is different from event already being shown, reset text and animations.
 				if ($("#eventDetailsTitle") !== recordData.title) {
-					$(".eventDetails").hide();
+					$(".eventDetails").each(function () { $(this).text("").hide(); });
 				}
 
 				// Set the values of the Event Details column
 				$("#eventDetailsTitle").text(recordData.title || "");
-				$("#eventDetailsMinistry").text(recordData.ministry || "");
+				$("#eventDetailsMinistry").text((recordData.ministry) ? recordData.ministry + " Ministry" : "");
 				$("#eventDetailsBody").text(recordData.body || "");
 
+				// Options for formatting the date & time from a JS Date object.
+				var dateLocaleOptions = {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"};
+
 				// Ternary operator. If true, then convert the string to a Date object, then use native .toLocaleDateString to make a nice format
-				$("#eventDetailsDate").text((recordData.date) ? (new Date(recordData.date).toLocaleDateString("en-US", {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"})) : "");
+				$("#eventDetailsDate").text((recordData.date) ? new Date(recordData.date).toLocaleDateString("en-US", dateLocaleOptions) : "");
 
 				// If the event ends on the same day it starts, then show mm/dd/yy hh:ss to hh:ss rather than mm/dd/yy hh:ss to mm/dd/yy hh:ss.
 				if (new Date(recordData.date).toLocaleDateString("en-US", {timeZone: "UTC"}) === new Date(recordData.endDate).toLocaleDateString("en-US", {timeZone: "UTC"})) {
-					$("#eventDetailsEndDate").text((recordData.endDate) ? (" to " + new Date(recordData.endDate).toLocaleTimeString("en-US", {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"})) : "");
+					$("#eventDetailsEndDate").text((recordData.endDate) ? " to " + new Date(recordData.endDate).toLocaleTimeString("en-US", dateLocaleOptions) : "");
 				} else {
-					$("#eventDetailsEndDate").text((recordData.endDate) ? (" to " + new Date(recordData.endDate).toLocaleDateString("en-US", {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"})) : "");
+					// Event ends on a different day, so make it clear that it ends on a different date.
+					$("#eventDetailsEndDate").text((recordData.endDate) ? " to " + new Date(recordData.endDate).toLocaleDateString("en-US", dateLocaleOptions) : "");
 				}
 
-				$(".eventDetails").fadeIn(300);
+				$(".eventDetails").fadeIn(300); // A little slower than the scrolling duration of the Event List
 			});
 		});
 	}
