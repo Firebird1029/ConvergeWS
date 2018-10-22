@@ -41,6 +41,7 @@
 		"lodash": "^4.17.10",
 		"npm": "^6.2.0",
 		"pug": "^2.0.0-rc.3",
+		"socket.io": "^2.1.1",
 		"validator": "^10.4.0"
 	},
 	"devDependencies": {

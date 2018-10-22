@@ -5,14 +5,16 @@ console.log("Debugging: ", debug);
 
 /*
  * TODO
+ * Fix Calendar glitch: when switching to another month, the dots disappear
+ * When viewed on responsive laptop, switches to mobile view
  * Fix mobile formatting: navbar-hamburger too small, mobile navbar does not scroll
  * Fix NEW dependencies via template, Browsersync, then update dependencies, audit fix
  *
  * Calendar: make arrows far instead of fas
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics
  * https://developers.google.com/speed/pagespeed/insights/
- * Add logo to navbar, Favicon (Sandy)
- * Fuzzy string matching + TextRazor NLP API (optional)
+ * Add logo to navbar (Sandy)
+ * Fuzzy string matching + TextRazor NLP API (nope)
  */
 
 // Load Node Dependencies & Custom Modules
