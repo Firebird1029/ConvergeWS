@@ -127,6 +127,16 @@ if ($(".hello-week").length) {
 
 	// Every time visual calendar is clicked
 	function calendarUpdated () {
+		// When switching between months, re-add small dot under events
+		// This is the same code as in the calendarLoaded function
+		$(".event").each(function (eventIndex, eventEl) {
+			// Match up events pulled from Airtable with visual calendar days and add a visual small circle
+			var eventDate = new Date($(eventEl).find(".eventDate").text());
+			eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // Temporarily reset time of events to match timestamp given by Hello-Week DOM elements (10 am GMT).
+			eventDate = eventDate.getTime() / 1000; // Convert to Epoch timestamp. https://www.epochconverter.com/
+			$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot"); // Add a small dot/circle under each day in visual calendar when there is an event
+		});
+		
 		// The rows in the Event List that correspond to the clicked date in visual calendar
 		var $selectedDaysInList = $(".event:contains(" + helloWeek.selectedDays[0] + ")");
 
@@ -165,7 +175,7 @@ if ($(".hello-week").length) {
 		$(".event").each(function (eventIndex, eventEl) {
 			// Match up events pulled from Airtable with visual calendar days and add a visual small circle
 			var eventDate = new Date($(eventEl).find(".eventDate").text());
-			eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // Temporarily reset time of events match timestamp given by Hello-Week DOM elements (10 am GMT).
+			eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // Temporarily reset time of events to match timestamp given by Hello-Week DOM elements (10 am GMT).
 			eventDate = eventDate.getTime() / 1000; // Convert to Epoch timestamp. https://www.epochconverter.com/
 			$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot"); // Add a small dot/circle under each day in visual calendar when there is an event
 

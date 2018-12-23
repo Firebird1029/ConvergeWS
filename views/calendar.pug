@@ -42,11 +42,15 @@ html(lang="en")
 						.container: .content
 							#eventCalendarList(style="height: 50vh; overflow-y: scroll; overflow-x: hidden;")
 								table#eventCalendarTable.table.is-hoverable(style="width: 45vw;"): tbody
+									- todaysDate = new Date()
+									- todaysDate.setHours(0,0,0,0);
 									each record in records[0]
-										if (record.publish && (record.title && record.date))
+										- recordDate = new Date(record.date)
+										//- Only show the record if .publish is true, if record has a title and a date, and if the date of the event is on or after today's date
+										if ((record.publish && record.title) && (record.date && recordDate > todaysDate))
 											tr.event(data-record=record, style="cursor: pointer;")
 												//- record.date is assumed to exist
-												td.eventDate= new Date(record.date).toLocaleDateString("en-US", {timeZone: "UTC"})
+												td.eventDate= recordDate.toLocaleDateString("en-US", {timeZone: "UTC"})
 
 												//- record.title is assumed to exist
 												td(style="font-weight: bold;")= record.title						

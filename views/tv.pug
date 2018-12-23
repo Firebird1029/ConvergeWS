@@ -37,8 +37,9 @@ html(lang="en")
 									p #[span: strong Speaker: ] &nbsp; #{records[2][record.speaker[0]]["name"]}
 
 								if record.expiration
-									span: strong Expires: &nbsp;
-									+addDate(record.expiration, "span")
+									//- Commented out per Jason's request
+									//- span: strong Expires: &nbsp;
+									//- +addDate(record.expiration, "span")
 
 					- counter++;
 

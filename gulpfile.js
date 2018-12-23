@@ -6,9 +6,6 @@ var gulp = require("gulp"),
 	// cssMin = require("gulp-cssmin"),
 	// sourcemaps = require("gulp-sourcemaps");
 
-gulp.task("default", ["css", "js", "watch", "serve"]);
-gulp.task("production", ["css", "js"]);
-
 gulp.task("css", function () {
 	return gulp.src(["./src/sass/main.scss"])
 	.pipe(plugins.sourcemaps.init())
@@ -36,8 +33,8 @@ gulp.task("js", function () {
 });
 
 gulp.task("watch", function () {
-	gulp.watch(["src/sass/*.scss", "src/sass/*.sass"], ["css"]);
-	gulp.watch(["src/js/*.js"], ["js"]);
+	gulp.watch(["src/sass/*.scss", "src/sass/*.sass"], gulp.series("css"));
+	gulp.watch(["src/js/*.js"], gulp.series("js"));
 });
 
 gulp.task("serve", function () {
@@ -55,3 +52,6 @@ gulp.task("serve", function () {
 	gulp.watch("*.pug").on("change", browserSync.reload);
 	gulp.watch("views/**/*.pug").on("change", browserSync.reload);
 });
+
+gulp.task("default", gulp.series("css", "js", gulp.parallel("watch", "serve")));
+gulp.task("production", gulp.series("css", "js"));
