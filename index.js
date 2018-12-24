@@ -8,11 +8,11 @@ console.log("Debugging: ", debug);
  * Add logo to navbar (Sandy)
  * Fix NEW dependencies via template, Browsersync, then update dependencies, audit fix
  * 			Update template, comment code
- *
- * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics
- * Calendar: make arrows far instead of fas
- * https://developers.google.com/speed/pagespeed/insights/
+ * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics, add to Dokku domains
  * Load images via thumbnail first
+ *
+ * Playground:
+ * https://developers.google.com/speed/pagespeed/insights/
  * Fuzzy string matching + TextRazor NLP API (nope)
  */
 
