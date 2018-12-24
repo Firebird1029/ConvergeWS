@@ -33,6 +33,10 @@ body {
 	}
 }
 
+.is-strong {
+	font-weight: bold;
+}
+
 .is-fullheight-aspect-ratio {
 	@media screen and (min-aspect-ratio: 220/131) {
 		min-height: 100vh;
@@ -46,10 +50,11 @@ body {
 }
 
 .navbar {
-	width: 100%;
-	position: fixed;
-	z-index: 100;
-	
+	@media screen and (min-width: 1024px) {
+		width: 100%;
+		position: fixed;
+		z-index: 100;
+	}
 }
 
 .hero .navbar.navbarBackground {

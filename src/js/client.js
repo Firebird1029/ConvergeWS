@@ -1,9 +1,26 @@
 "use strict"; /* eslint-env browser */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
 
 // Bulma Navbar Burger
-document.addEventListener("DOMContentLoaded",function(){var t=Array.prototype.slice.call(
-document.querySelectorAll(".navbar-burger"),0);t.length>0&&t.forEach(function(t){t.addEventListener("click",function(){
-var e=t.dataset.target,n=document.getElementById(e);t.classList.toggle("is-active"),n.classList.toggle("is-active")})})});
+$(document).ready(function() {
+	var scrollToPos, lastSavedScrollPos = 0;
+	// Check for click events on the navbar burger icon
+	$(".navbar-burger").click(function() {
+		// This two-var algorithm does this:
+		// If mobile nav menu is off and being toggled on, then scroll to top, else if being toggled off, restore old scroll position
+		// If the user is not already at the top of the page when mobile nav menu is being toggled on, menu will appear at top of page, not to user
+		lastSavedScrollPos = ($("article.article").is(":visible")) ? window.scrollY : lastSavedScrollPos;
+		scrollToPos = ($("article.article").is(":visible")) ? 0 : lastSavedScrollPos;
+
+		// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+		$(".navbar-burger").toggleClass("is-active");
+		$(".navbar-menu").toggleClass("is-active");
+		$(".navbar").toggleClass("is-desktop"); // Fixes glitch where mobile nav menu can't scroll
+		$(".navbarDropdownTitle").toggleClass("is-strong"); // So users will hopefully stop tapping the unlinked dropdown titles
+		// 
+		$(".hero-body, article.article").toggle(); // Stylistic choice, since nav hamburger is fixed at bottom of screen
+		window.scrollTo(0, scrollToPos);
+	});
+});
 
 // Home Page Map (Google Maps)
 function initMap () {
@@ -134,9 +151,10 @@ if ($(".hello-week").length) {
 			var eventDate = new Date($(eventEl).find(".eventDate").text());
 			eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // Temporarily reset time of events to match timestamp given by Hello-Week DOM elements (10 am GMT).
 			eventDate = eventDate.getTime() / 1000; // Convert to Epoch timestamp. https://www.epochconverter.com/
-			$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot"); // Add a small dot/circle under each day in visual calendar when there is an event
+			// Add a small dot/circle under each day in visual calendar when there is an event
+			$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot");
 		});
-		
+
 		// The rows in the Event List that correspond to the clicked date in visual calendar
 		var $selectedDaysInList = $(".event:contains(" + helloWeek.selectedDays[0] + ")");
 
@@ -177,7 +195,8 @@ if ($(".hello-week").length) {
 			var eventDate = new Date($(eventEl).find(".eventDate").text());
 			eventDate.setUTCHours(10); eventDate.setUTCMinutes(0); // Temporarily reset time of events to match timestamp given by Hello-Week DOM elements (10 am GMT).
 			eventDate = eventDate.getTime() / 1000; // Convert to Epoch timestamp. https://www.epochconverter.com/
-			$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot"); // Add a small dot/circle under each day in visual calendar when there is an event
+			// Add a small dot/circle under each day in visual calendar when there is an event
+			$(".hello-week__day[data-timestamp=" + eventDate + "]").addClass("calendarDayDot");
 
 			// If link in calendar event list (below visual calendar) is clicked, show event details for the event clicked
 			$(eventEl).click(function() {

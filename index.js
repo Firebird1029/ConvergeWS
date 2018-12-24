@@ -5,15 +5,14 @@ console.log("Debugging: ", debug);
 
 /*
  * TODO
- * When viewed on responsive laptop, switches to mobile view
- * Fix mobile formatting: mobile navbar does not scroll
+ * Add logo to navbar (Sandy)
  * Fix NEW dependencies via template, Browsersync, then update dependencies, audit fix
  * 			Update template, comment code
  *
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics
  * Calendar: make arrows far instead of fas
  * https://developers.google.com/speed/pagespeed/insights/
- * Add logo to navbar (Sandy)
+ * Load images via thumbnail first
  * Fuzzy string matching + TextRazor NLP API (nope)
  */
 
