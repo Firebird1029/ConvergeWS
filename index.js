@@ -5,7 +5,7 @@ console.log("Debugging: ", debug);
 
 /*
  * TODO
- * Calendar -- modal for Bible Ministry
+ * Calendar -- modal for Bible Ministry, https://postare.github.io/bulma-modal-fx/
  * Fix photos -- appear scrunched up
  * Fix NEW dependencies via template, Browsersync, then update dependencies, audit fix
  * 			Update template, comment code

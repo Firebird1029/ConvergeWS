@@ -23,7 +23,7 @@ gulp.task("js", function () {
 	])
 	.pipe(plugins.sourcemaps.init())
 	.pipe(plugins.babel({
-		presets: ["es2015"]
+		presets: ["@babel/env"]
 	}))
 	.pipe(plugins.concat("all.js"))
 	.pipe(plugins.uglify())
