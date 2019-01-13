@@ -60,6 +60,10 @@ router.get("/staff.html", (req, res) => {
 });
 
 // Community
+router.get("/announcements.html", (req, res) => {
+	renderPage(req, res, "Community", ["Announcements"], "tiles.pug", {pageTitle: "Announcements"});
+});
+
 router.get("/youth.html", (req, res) => {
 	renderPage(req, res, "Community", ["Youth"], "aboutSections.pug", {pageTitle: "Converge Youth"});
 });
@@ -68,12 +72,12 @@ router.get("/coya.html", (req, res) => {
 	renderPage(req, res, "Community", ["CoYA"], "aboutSections.pug", {pageTitle: "Converge Co.Y.A."});
 });
 
-router.get("/small-groups.html", (req, res) => {
-	renderPage(req, res, "Community", ["Small Groups"], "tiles.pug", {pageTitle: "Small Groups"});
-});
-
 router.get("/ministries.html", (req, res) => {
 	renderPage(req, res, "Community", ["Ministries", "Leaders"], "tiles.pug", {pageTitle: "Ministries"});
+});
+
+router.get("/forms.html", (req, res) => {
+	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms & Reg"});
 });
 
 // Experience
@@ -99,6 +103,14 @@ router.get("/he-brews.html", (req, res) => {
 });
 
 // Resources
+router.get("/tv.html", (req, res) => {
+	renderPage(req, res, "Converge TV", ["Converge TV", "Topics", "Speakers"], "tv.pug", {pageTitle: "Converge TV"});
+});
+
+router.get("/sermons.html", (req, res) => {
+	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: true});
+});
+
 router.get("/authentic-peace.html", (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceRedirect.pug", {pageTitle: "Redirecting..."});
 });
@@ -111,14 +123,6 @@ router.get("/authentic-peace/:articleID", (req, res) => {
 
 router.get("/articles-and-blogs.html", (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles & Blogs", collapsible: true});
-});
-
-router.get("/tv.html", (req, res) => {
-	renderPage(req, res, "Converge TV", ["Converge TV", "Topics", "Speakers"], "tv.pug", {pageTitle: "Converge TV"});
-});
-
-router.get("/sermons.html", (req, res) => {
-	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: true});
 });
 
 // Contact

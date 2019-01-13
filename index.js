@@ -13,6 +13,14 @@ console.log("Debugging: ", debug);
  * Playground:
  * https://developers.google.com/speed/pagespeed/insights/
  * Fuzzy string matching + TextRazor NLP API (nope)
+ * https://www.cloudflare.com/plans/
+ *
+ * Resources:
+ * https://bulma.io/documentation/
+ * https://pugjs.org/api/getting-started.html
+ * http://html2jade.vida.io/
+ * https://fontawesome.com/icons
+ * https://airtable.com/api
  */
 
 // Load Node Dependencies & Custom Modules

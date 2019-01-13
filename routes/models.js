@@ -28,7 +28,7 @@ var bases = {
 	},
 	"Community": {
 		baseID: "appkvA9WfE62DYGIl",
-		tables: ["Youth", "CoYA", "Small Groups", "Ministries", "Leaders"]
+		tables: ["Announcements", "Youth", "CoYA", "Ministries", "Forms", "Leaders"]
 	},
 	"Experience": {
 		baseID: "appk80veA6WdxCrtB",
@@ -38,10 +38,6 @@ var bases = {
 		baseID: "appamTiUaVqXSiBhf",
 		tables: ["HE Brews", "Menu"]
 	},
-	"Articles and Blogs": {
-		baseID: "appaTv4YjcvFV6f4l",
-		tables: ["Authentic Peace", "Posts", "Authors"]
-	},
 	"Converge TV": {
 		baseID: "appFX7NBTY8z4Dqfb",
 		tables: ["Converge TV", "Topics", "Speakers"]
@@ -49,6 +45,10 @@ var bases = {
 	"Past Sermons": {
 		baseID: "appwoW5IMGdHcKf14",
 		tables: ["Sermons", "Speakers", "Series"]
+	},
+	"Articles and Blogs": {
+		baseID: "appaTv4YjcvFV6f4l",
+		tables: ["Authentic Peace", "Posts", "Authors"]
 	},
 	"Contact Responses": {
 		baseID: "app5uJTO5UJ1AMpiD",
