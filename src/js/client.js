@@ -222,13 +222,13 @@ if ($(".hello-week").length) {
 				$("#eventDetailsBody").text(recordData.body || "");
 
 				// Options for formatting the date & time from a JS Date object.
-				var dateLocaleOptions = {timeZone: "UTC", hour12: true, hour: "numeric", minute: "numeric"};
+				var dateLocaleOptions = {timeZone: "Pacific/Honolulu", hour12: true, hour: "numeric", minute: "numeric"};
 
 				// Ternary operator. If true, then convert the string to a Date object, then use native .toLocaleDateString to make a nice format
 				$("#eventDetailsDate").text((recordData.date) ? new Date(recordData.date).toLocaleDateString("en-US", dateLocaleOptions) : "");
 
 				// If the event ends on the same day it starts, then show mm/dd/yy hh:ss to hh:ss rather than mm/dd/yy hh:ss to mm/dd/yy hh:ss.
-				if (new Date(recordData.date).toLocaleDateString("en-US", {timeZone: "UTC"}) === new Date(recordData.endDate).toLocaleDateString("en-US", {timeZone: "UTC"})) {
+				if (new Date(recordData.date).toLocaleDateString("en-US", {timeZone: "Pacific/Honolulu"}) === new Date(recordData.endDate).toLocaleDateString("en-US", {timeZone: "Pacific/Honolulu"})) {
 					$("#eventDetailsEndDate").text((recordData.endDate) ? " to " + new Date(recordData.endDate).toLocaleTimeString("en-US", dateLocaleOptions) : "");
 				} else {
 					// Event ends on a different day, so make it clear that it ends on a different date.
