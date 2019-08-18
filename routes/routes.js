@@ -113,7 +113,10 @@ router.get("/tv.html", (req, res) => {
 });
 
 router.get("/sermons.html", (req, res) => {
-	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: true});
+	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermons.pug", {pageTitle: "Past Sermons", collapsible: true});
+});
+router.get("/sermons/archive.html", (req, res) => {
+	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermonArchive.pug", {pageTitle: "Past Sermons Archive", id: req.params.articleID});
 });
 
 router.get("/authentic-peace.html", (req, res) => {

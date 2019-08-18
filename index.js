@@ -5,7 +5,6 @@ console.log("Debugging: ", debug);
 
 /*
  * TODO
- * past sermons: show most recent 3, search bar with archive
  * Storefront: like ministries.html
  * 
  * Calendar -- modal for Bible Ministry, https://postare.github.io/bulma-modal-fx/

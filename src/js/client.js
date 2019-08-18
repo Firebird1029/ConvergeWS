@@ -144,6 +144,22 @@ $(".gallery").each(function (index, galleryElement) {
 	});
 });
 
+// Search Functionality
+function searchArchive () {
+	var $input, filter, $rows, txtValue;
+		$input = $("#searchBar");
+		filter = $input.val().toUpperCase();
+		$rows = $("#archiveTable").find("tr");
+		$rows.each(function (i, el) {
+			txtValue = $(this).find("td").text();
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				$(this).css("display", "");
+			} else {
+				$(this).css("display", "none");
+			}
+		});
+}
+
 // Calendar
 if ($(".hello-week").length) {
 	// https://github.com/maurovieirareis/hello-week
