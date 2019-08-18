@@ -112,3 +112,9 @@ body {
 .calendarAddSelectedColor {
 	color: #7fcbc3;
 }
+
+// Fixes scrunching up of main popup image issue on Photos page
+// https://github.com/dimsemenov/PhotoSwipe/issues/741
+.pswp__img {
+	height: auto !important;
+}

@@ -102,6 +102,11 @@ router.get("/he-brews.html", (req, res) => {
 	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "HE Brews"});
 });
 
+// Storefront
+// router.get("/storefront.html", (req, res) => {
+// 	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms & Reg"});
+// });
+
 // Resources
 router.get("/tv.html", (req, res) => {
 	renderPage(req, res, "Converge TV", ["Converge TV", "Topics", "Speakers"], "tv.pug", {pageTitle: "Converge TV"});
@@ -159,5 +164,17 @@ router.post("/prayer.html", (req, res) => {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "For Prayer", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "message"]});
 		renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(processedFormData, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
+	});
+});
+
+router.get("/baptism-and-confirmation.html", (req, res) => {
+	renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(models.defaultFormRender, {pageTitle: "Baptism & Confirmation", csrfToken: req.csrfToken()}));
+});
+
+router.post("/baptism-and-confirmation.html", (req, res) => {
+	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
+		// Sending to models.js for validation and sanitization.
+		var processedFormData = models.processForm("Contact Responses", "Baptism and Confirmation", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "message"]});
+		renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", csrfToken: req.csrfToken()}));
 	});
 });

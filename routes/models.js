@@ -52,7 +52,7 @@ var bases = {
 	},
 	"Contact Responses": {
 		baseID: "app5uJTO5UJ1AMpiD",
-		tables: ["More Info", "To Serve", "For Prayer"]
+		tables: ["More Info", "To Serve", "For Prayer", "Baptism and Confirmation"]
 	}
 }
 
