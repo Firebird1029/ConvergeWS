@@ -6,13 +6,12 @@ console.log("Debugging: ", debug);
 /*
  * TODO
  * 
- * Calendar -- modal for Bible Ministry, https://postare.github.io/bulma-modal-fx/
+ * Calendar -- modal for Bible Ministry, https://postare.github.io/bulma-modal-fx/ (?)
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics, add to Dokku domains
- * Load images via thumbnail first
  *
  * Playground:
  * https://developers.google.com/speed/pagespeed/insights/
- * Fuzzy string matching + TextRazor NLP API (nope)
+ * Fuzzy string matching + TextRazor NLP API (?)
  * https://www.cloudflare.com/plans/
  *
  * Resources:
