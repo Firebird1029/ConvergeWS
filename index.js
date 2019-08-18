@@ -5,7 +5,6 @@ console.log("Debugging: ", debug);
 
 /*
  * TODO
- * Storefront: like ministries.html
  * 
  * Calendar -- modal for Bible Ministry, https://postare.github.io/bulma-modal-fx/
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics, add to Dokku domains

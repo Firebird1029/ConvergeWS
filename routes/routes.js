@@ -103,9 +103,9 @@ router.get("/he-brews.html", (req, res) => {
 });
 
 // Storefront
-// router.get("/storefront.html", (req, res) => {
-// 	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms & Reg"});
-// });
+router.get("/storefront.html", (req, res) => {
+	renderPage(req, res, "Storefront", ["Storefront"], "tiles.pug", {pageTitle: "Storefront"});
+});
 
 // Resources
 router.get("/tv.html", (req, res) => {
