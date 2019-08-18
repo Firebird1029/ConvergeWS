@@ -7,8 +7,6 @@ console.log("Debugging: ", debug);
  * TODO
  * past sermons: show most recent 3, search bar with archive
  * Storefront: like ministries.html
- * Homepage video
- * Converge TV -- fix formatting for mobile and for me
  * 
  * Calendar -- modal for Bible Ministry, https://postare.github.io/bulma-modal-fx/
  * Once domain is set: add domain to FA CDN account, add domain to Google reCAPTCHA, add Google Analytics, add to Dokku domains

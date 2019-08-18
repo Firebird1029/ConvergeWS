@@ -37,6 +37,20 @@ function initMap () {
 	});
 }
 
+// Home Page Video
+if ($("#frontPageHero").length) {
+	var instance = new vidbg("#frontPageHero", {
+		mp4: "assets/img/night.mp4", // URL or relative path to MP4 video
+		// webm: "path/to/video.webm", // URL or relative path to webm video
+		poster: "assets/img/decal_large.jpg", // URL or relative path to fallback image
+		overlay: false, // Boolean to display the overlay or not
+		// overlayColor: "#000", // The overlay color as a HEX
+		// overlayAlpha: 0.3 // The overlay alpha. Think of this as the last integer in RGBA()
+	}, {
+		// Attributes
+	});
+}
+
 // Go to Welcome Section on Home Page When Nav Button is Clicked
 function jumpToWelcome () {
 	if ($("#welcome").length) {
@@ -58,8 +72,13 @@ $(window).on("load resize", function () {
 		// Desktop view since the navbar-burger only shows on mobile devices
 		if ($(".hero-body > .container > h1").length) {
 			// If it contains a regular heading at the top of the page and not a full height hero, add the navbar background automatically.
-		   $(".navbar").addClass("navbarBackground");
+		$(".navbar").addClass("navbarBackground");
 		} else {
+			$(".navbar").addClass("navbarBackground");
+
+
+			// With vidbg and a full background video, the navbar might not be visible against certain backgrounds, so show the background all the time.
+			/*
 			// If it contains a full height hero with no text heading, add the navbar background after scrolling past the hero.
 			$(document).on("scroll", function () {
 				if($(this).scrollTop() >= $(".hero-foot").position().top) {
@@ -70,6 +89,7 @@ $(window).on("load resize", function () {
 					$(".navbar").removeClass("navbarBackground");
 				}
 			});
+			*/
 		}
 	}
 });
