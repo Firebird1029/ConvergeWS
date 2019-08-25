@@ -23,7 +23,7 @@ $(document).ready(function() {
 });
 
 // Home Page Map (Google Maps)
-function initMap () {
+$(document).ready(function () {
 	var clchCoordinates = {lat: 21.322523, lng: -157.859298};
 	var map = new google.maps.Map($("#map")[0], {
 		zoom: 15,
@@ -35,7 +35,7 @@ function initMap () {
 		map: map,
 		title: "CLCH"
 	});
-}
+});
 
 // Home Page Video
 if ($("#frontPageHero").length) {
