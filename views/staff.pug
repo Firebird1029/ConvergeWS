@@ -2,15 +2,10 @@ doctype html
 html(lang="en")
 	include includes/head.pug
 	body
-		section.hero.is-full-height
-			.hero-head
-				include includes/nav.pug
-			.hero-body
-				.container.has-text-centered
-					h1.title.is-1(style="padding-top: 1rem;")= (options.pageTitle || "")
-			.hero-foot
+		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
+			+addPageHeader(options.pageTitle)
 			+section()
 				.columns.is-multiline
 					each record in records[0]

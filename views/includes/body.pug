@@ -6,6 +6,13 @@ mixin section(title)
 					h1= title
 				block
 
+mixin addPageHeader(title)
+	section.hero.is-full-height
+		.hero-body
+			.container.has-text-centered
+				if title
+					h1.title.is-1(style="padding-top: 1rem;")= title
+
 mixin icon(iconClasses, spanClasses)
 	span.icon(class=spanClasses)
 		i.fa(class=iconClasses)

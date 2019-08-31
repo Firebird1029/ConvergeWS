@@ -20,6 +20,17 @@ $(document).ready(function() {
 		$("#mobileHeroImg, article.article").toggle(); // Stylistic choice, since nav hamburger is fixed at bottom of screen
 		window.scrollTo(0, scrollToPos);
 	});
+
+	// Mobile Nav Scroll Fix
+	$(".navbar-burger").click(function () {
+		if ($("#mobileHeroHead").css("position") === "fixed") {
+			$("#mobileHeroHead").css("position", "static");
+			$("#mobileHeroHeadContainer").css("height", "auto");
+		} else {
+			$("#mobileHeroHead").css("position", "fixed");
+			$("#mobileHeroHeadContainer").css("height", "3.25rem");
+		}
+	});
 });
 
 // Home Page Map (Google Maps)
