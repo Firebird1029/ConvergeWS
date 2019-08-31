@@ -16,6 +16,10 @@ mixin addText(text)
 		each paragraph in text.split("%\n")
 			p!= paragraph
 
+mixin addSpan(text)
+	if text
+		span= text
+
 //- This checks if an image is provided before displaying it, since accessing the .url property of an undefined object returns an error
 mixin addImg(image)
 	if image

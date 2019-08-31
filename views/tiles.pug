@@ -76,7 +76,15 @@ html(lang="en")
 
 									//- contact: Most
 									if record.contact
-										p #[span: strong Contact: ] &nbsp; #{records[1][record.contact[0]]["name"]} &nbsp; (#{records[1][record.contact[0]]["email"]})
+										p
+											span: strong Contact:
+											span &nbsp;
+											span: +addSpan(records[1][record.contact[0]]["name"])
+											span &nbsp;
+											span: +addSpan(records[1][record.contact[0]]["phone"])
+											span &nbsp; (
+											span: +addSpan(records[1][record.contact[0]]["email"])
+											span )
 					- counter++;
 
 		//- Footer
