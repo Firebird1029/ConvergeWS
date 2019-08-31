@@ -20,7 +20,7 @@ airtable.configure({ // Module for Airtable API.
 var bases = {
 	"About Sections": {
 		baseID: "appXpFAar7Nro7fRZ",
-		tables: ["Front Page", "History"]
+		tables: ["Front Page", "History", "Values"]
 	},
 	"About Staff": {
 		baseID: "appj3Hm417P5gE0oM",
@@ -56,7 +56,7 @@ var bases = {
 	},
 	"Storefront": {
 		baseID: "appj9yKh2t3Qh24Wl",
-		tables: ["Storefront"]
+		tables: ["Storefront", "Contact"]
 	}
 }
 

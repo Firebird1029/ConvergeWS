@@ -51,6 +51,9 @@ router.get("/index.html", (req, res) => {
 });
 
 // About
+router.get("/values.html", (req, res) => {
+	renderPage(req, res, "About Sections", ["Values"], "aboutSections.pug", {pageTitle: "Values"});
+});
 router.get("/history.html", (req, res) => {
 	renderPage(req, res, "About Sections", ["History"], "aboutSections.pug", {pageTitle: "History"});
 });
@@ -104,7 +107,7 @@ router.get("/he-brews.html", (req, res) => {
 
 // Storefront
 router.get("/storefront.html", (req, res) => {
-	renderPage(req, res, "Storefront", ["Storefront"], "tiles.pug", {pageTitle: "Storefront"});
+	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Storefront"});
 });
 
 // Resources
