@@ -105,9 +105,12 @@ router.get("/he-brews.html", (req, res) => {
 	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "HE Brews"});
 });
 
-// Storefront
-router.get("/storefront.html", (req, res) => {
-	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Storefront"});
+// Be Blessed
+router.get("/beblessed.html", (req, res) => {
+	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
+});
+router.get("/be-blessed.html", (req, res) => {
+	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
 });
 
 // Resources
