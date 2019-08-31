@@ -17,7 +17,7 @@ $(document).ready(function() {
 		$(".navbar").toggleClass("is-desktop"); // Fixes glitch where mobile nav menu can't scroll
 		$(".navbarDropdownTitle").toggleClass("is-strong"); // So users will hopefully stop tapping the unlinked dropdown titles
 		// 
-		$(".hero-body, article.article").toggle(); // Stylistic choice, since nav hamburger is fixed at bottom of screen
+		$("#mobileHeroImg, article.article").toggle(); // Stylistic choice, since nav hamburger is fixed at bottom of screen
 		window.scrollTo(0, scrollToPos);
 	});
 });
