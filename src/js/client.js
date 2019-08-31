@@ -40,7 +40,7 @@ $(document).ready(function () {
 // Home Page Video
 if ($("#frontPageHero").length) {
 	var instance = new vidbg("#frontPageHero", {
-		mp4: "assets/img/night.mp4", // URL or relative path to MP4 video
+		mp4: "assets/img/trailer.mp4", // URL or relative path to MP4 video
 		// webm: "path/to/video.webm", // URL or relative path to webm video
 		poster: "assets/img/decal_large.jpg", // URL or relative path to fallback image
 		overlay: false, // Boolean to display the overlay or not
