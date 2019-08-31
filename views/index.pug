@@ -3,15 +3,19 @@ html(lang="en")
 	include includes/head.pug
 	body
 		//- Full screen video for computer users
-		section#frontPageHero.hero.is-fullheight-aspect-ratio
+		section#frontPageHero.hero.is-fullheight-aspect-ratio.is-hidden-touch
 			.hero-head
 				include includes/nav.pug
-			.hero-body.is-hidden-touch
-				.container.has-text-centered
-					//- h1.title.is-1(style="padding-top: 1rem;") CONVERGE
-			.hero-foot
+			//- .hero-body.is-hidden-touch
+			//- 	.container.has-text-centered
+			//- 		//- h1.title.is-1(style="padding-top: 1rem;") CONVERGE
+			//- .hero-foot
 		//- Simple picture for mobile users
-		img.is-hidden-aspect-ratio(src="../../assets/img/decal_large.jpg")
+		section.is-hidden-aspect-ratio(style="height: 3.25rem;")
+			.hero-head#mobileHeroHead
+				include includes/nav.pug
+		section#mobileHeroImg.is-hidden-aspect-ratio
+			img(src="../../assets/img/decal_large.jpg")
 		article.article
 			include includes/body.pug
 			#welcome
