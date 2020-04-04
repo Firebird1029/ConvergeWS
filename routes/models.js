@@ -28,7 +28,7 @@ var bases = {
 	},
 	"Community": {
 		baseID: "appkvA9WfE62DYGIl",
-		tables: ["Announcements", "Youth", "CoYA", "Ministries", "Forms", "Leaders"]
+		tables: ["Jitsi", "Announcements", "Youth", "CoYA", "Ministries", "Forms", "Leaders"]
 	},
 	"Experience": {
 		baseID: "appk80veA6WdxCrtB",

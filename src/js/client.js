@@ -287,3 +287,17 @@ if ($(".hello-week").length) {
 		});
 	}
 }
+
+// Jitsi
+if ($("#jitsiContainer").length) {
+	let roomName = $("#jitsiContainer").data("roomname"); // Pass from Airtable to Pug rendering to DOM property to client side
+	// https://github.com/jitsi/jitsi-meet/blob/master/doc/api.md
+	const domain = "meet.jit.si";
+	const options = {
+		roomName: roomName,
+		width: "100%",
+		height: "100%",
+		parentNode: document.querySelector("#jitsiContainer")
+	}
+	const jitsiAPI = new JitsiMeetExternalAPI(domain, options);
+}

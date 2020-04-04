@@ -24,8 +24,8 @@ function renderPage (req, res, baseName, tableNames, viewToRender, options = {})
 	}, function () {
 		// Render the Pug view after all the data has been retrieved.
 		res.render(viewToRender, {
-			records: allRecords,
-			options: options
+			records: allRecords, // array
+			options: options // object
 		});
 	});
 }
@@ -63,6 +63,10 @@ router.get("/staff.html", (req, res) => {
 });
 
 // Community
+router.get("/jitsi.html", (req, res) => {
+	renderPage(req, res, "Community", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
+});
+
 router.get("/announcements.html", (req, res) => {
 	renderPage(req, res, "Community", ["Announcements"], "tiles.pug", {pageTitle: "Announcements"});
 });
