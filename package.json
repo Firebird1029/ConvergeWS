@@ -32,6 +32,7 @@
 		"body-parser": "^1.19.0",
 		"bulma": "^0.8.1",
 		"cookie-parser": "^1.4.5",
+		"cookie-session": "^1.4.0",
 		"cron": "^1.8.2",
 		"csurf": "^1.11.0",
 		"express": "^4.17.1",
@@ -55,7 +56,6 @@
 		"gulp-concat": "^2.6.1",
 		"gulp-cssmin": "^0.2.0",
 		"gulp-load-plugins": "^2.0.2",
-		"gulp-nodemon": "^2.5.0",
 		"gulp-sass": "^4.0.2",
 		"gulp-sourcemaps": "^2.6.5",
 		"gulp-uglify": "^3.0.2"
