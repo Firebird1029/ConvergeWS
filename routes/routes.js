@@ -101,16 +101,16 @@ router.get("/jitsi.html", (req, res) => {
 	renderPage(req, res, "Community", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
 });
 
-router.get("/room-one.html", (req, res) => {
-	renderPage(req, res, "Community", ["Room 1"], "jitsi.pug", {pageTitle: "Breakout Room 1"});
+router.get("/palehua-room.html", (req, res) => {
+	renderPage(req, res, "Community", ["Room 1"], "jitsi.pug", {pageTitle: "Palehua Room"});
 });
 
-router.get("/room-two.html", (req, res) => {
-	renderPage(req, res, "Community", ["Room 2"], "jitsi.pug", {pageTitle: "Breakout Room 2"});
+router.get("/mokuleia-room.html", (req, res) => {
+	renderPage(req, res, "Community", ["Room 2"], "jitsi.pug", {pageTitle: "Mokuleia Room"});
 });
 
-router.get("/room-three.html", (req, res) => {
-	renderPage(req, res, "Community", ["Room 3"], "jitsi.pug", {pageTitle: "Breakout Room 3"});
+router.get("/kauai-room.html", (req, res) => {
+	renderPage(req, res, "Community", ["Room 3"], "jitsi.pug", {pageTitle: "Kauai Room"});
 });
 
 // Be Blessed
