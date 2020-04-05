@@ -62,11 +62,20 @@ router.get("/staff.html", (req, res) => {
 	renderPage(req, res, "About Staff", ["Staff"], "staff.pug", {pageTitle: "Our Staff"});
 });
 
-// Community
-router.get("/jitsi.html", (req, res) => {
-	renderPage(req, res, "Community", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
+// Experience
+router.get("/calendar.html", (req, res) => {
+	renderPage(req, res, "Experience", ["Calendar"], "calendar.pug", {pageTitle: "Calendar"});
 });
 
+router.get("/classes.html", (req, res) => {
+	renderPage(req, res, "Experience", ["Classes", "Leaders"], "tiles.pug", {pageTitle: "Classes"});
+});
+
+router.get("/photos.html", (req, res) => {
+	renderPage(req, res, "Experience", ["Photos"], "photos.pug", {pageTitle: "Photos", collapsible: true});
+});
+
+// Community
 router.get("/announcements.html", (req, res) => {
 	renderPage(req, res, "Community", ["Announcements"], "tiles.pug", {pageTitle: "Announcements"});
 });
@@ -87,17 +96,29 @@ router.get("/forms.html", (req, res) => {
 	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms & Reg"});
 });
 
-// Experience
-router.get("/calendar.html", (req, res) => {
-	renderPage(req, res, "Experience", ["Calendar"], "calendar.pug", {pageTitle: "Calendar"});
+// Video
+router.get("/jitsi.html", (req, res) => {
+	renderPage(req, res, "Community", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
 });
 
-router.get("/classes.html", (req, res) => {
-	renderPage(req, res, "Experience", ["Classes", "Leaders"], "tiles.pug", {pageTitle: "Classes"});
+router.get("/room-one.html", (req, res) => {
+	renderPage(req, res, "Community", ["Room 1"], "jitsi.pug", {pageTitle: "Breakout Room 1"});
 });
 
-router.get("/photos.html", (req, res) => {
-	renderPage(req, res, "Experience", ["Photos"], "photos.pug", {pageTitle: "Photos", collapsible: true});
+router.get("/room-two.html", (req, res) => {
+	renderPage(req, res, "Community", ["Room 2"], "jitsi.pug", {pageTitle: "Breakout Room 2"});
+});
+
+router.get("/room-three.html", (req, res) => {
+	renderPage(req, res, "Community", ["Room 3"], "jitsi.pug", {pageTitle: "Breakout Room 3"});
+});
+
+// Be Blessed
+router.get("/beblessed.html", (req, res) => {
+	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
+});
+router.get("/be-blessed.html", (req, res) => {
+	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
 });
 
 // HE Brews
@@ -109,15 +130,15 @@ router.get("/he-brews.html", (req, res) => {
 	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "HE Brews"});
 });
 
-// Be Blessed
-router.get("/beblessed.html", (req, res) => {
-	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
-});
-router.get("/be-blessed.html", (req, res) => {
-	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
-});
 
 // Resources
+router.get("/live.html", (req, res) => {
+	res.render("livestream.pug", {
+		// records: allRecords, // array
+		options: {pageTitle: "Live Stream"} // object
+	});
+});
+
 router.get("/tv.html", (req, res) => {
 	renderPage(req, res, "Converge TV", ["Converge TV", "Topics", "Speakers"], "tv.pug", {pageTitle: "Converge TV"});
 });
