@@ -45,6 +45,16 @@ body {
 	transform: translateY(-6px) rotate(-45deg);
 }
 
+img.pageHeaderImage {
+	max-height: 30vh;
+	width: auto;
+	// width: 40%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 1rem;
+}
+
 #frontPageHero {
 	@media screen and (min-aspect-ratio: 220/131) {
 		// min-width: 1088px
