@@ -6,7 +6,7 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader(options.pageTitle)
+			+addPageHeaderImage(options.pageTitle)
 			+section()
 				//- The counter allows collapsible tiles to show/hide in their respective boxes, by correlating the heading (button) and the content.
 				- var counter = 0

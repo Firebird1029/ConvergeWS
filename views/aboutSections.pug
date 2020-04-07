@@ -5,7 +5,7 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader(options.pageTitle)
+			+addPageHeaderImage(options.pageTitle)
 			each record in records[0]
 				+section(record.title)
 					case record.style
@@ -17,7 +17,7 @@ html(lang="en")
 								.column: figure.image: +addImg(record.img)
 						when "left"
 							.columns
-								.column: figure.image: +addImg(record.img)
+								.column: figure.image.imageLeftFloatFix: +addImg(record.img)
 								.column.is-two-thirds
 									+addDate(record.date)
 									+addText(record.body)

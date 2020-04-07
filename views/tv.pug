@@ -5,12 +5,12 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader(options.pageTitle)
+			+addPageHeaderImage(options.pageTitle)
 			+section()
 				//- The counter allows collapsible tiles to show/hide in their respective boxes, by correlating the heading (button) and the content.
 				- var counter = 0
 				each record in records[0]
-					if record.title
+					if record.publish && record.title
 						.box
 							div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
 								h1.is-unselectable(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title

@@ -32,7 +32,7 @@ html(lang="en")
 								.column: figure.image: +addImg(record.img)
 						when "left"
 							.columns
-								.column: figure.image: +addImg(record.img)
+								.column: figure.image.imageLeftFloatFix: +addImg(record.img)
 								.column.is-two-thirds
 									+addDate(record.date)
 									+addText(record.body)

@@ -5,7 +5,7 @@
 vendor
 dist/
 models/*.json
-.apikey
+.env
 
 # Compiled source #
 ###################

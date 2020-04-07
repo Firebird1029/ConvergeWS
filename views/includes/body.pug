@@ -13,13 +13,13 @@ mixin addPageHeader(title)
 				if title
 					h1.title.is-1(style="padding-top: 1rem;")= title
 
-mixin addPageHeaderImage(url)
+mixin addPageHeaderImage(title)
 	section.hero.is-full-height
 		.hero-body
 			.container.has-text-centered
-				if url
+				if title
 					figure.image
-						img.pageHeaderImage(src=url)
+						img.pageHeaderImage(src="/assets/img/banners/" + title + ".png")
 
 mixin icon(iconClasses, spanClasses)
 	span.icon(class=spanClasses)

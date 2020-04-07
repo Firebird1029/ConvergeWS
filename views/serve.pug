@@ -5,7 +5,7 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader(options.pageTitle)
+			+addPageHeaderImage(options.pageTitle)
 			+section()
 				if options.passedValidation
 					p We have received your request and will get back to you soon. Thank you!

@@ -45,9 +45,10 @@ body {
 	transform: translateY(-6px) rotate(-45deg);
 }
 
+// The header image at the top of each page
 img.pageHeaderImage {
-	max-height: 30vh;
-	width: auto;
+	max-width: 30rem;
+	height: auto;
 	// width: 40%;
 	display: block;
 	margin-left: auto;
@@ -55,6 +56,21 @@ img.pageHeaderImage {
 	padding-top: 1rem;
 }
 
+// Gets rid of the spacing to the left of a picture in content when record.style == "left" (such as in aboutSections.pug)
+figure.imageLeftFloatFix {
+	margin-left: 0px;
+}
+
+// Horizontal Content Dividers
+div.is-divider {
+	margin: 0px 2rem;
+	-webkit-transform: translateY(2.5rem);
+	-ms-transform: translateY(2.5rem);
+	-o-transform: translateY(2.5rem);
+	transform: translateY(2.5rem);
+}
+
+// Front Page
 #frontPageHero {
 	@media screen and (min-aspect-ratio: 220/131) {
 		// min-width: 1088px

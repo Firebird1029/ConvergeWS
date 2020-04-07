@@ -81,7 +81,7 @@ router.get(["/youth", "/youth.html"], (req, res) => {
 });
 
 router.get(["/coya", "/coya.html"], (req, res) => {
-	renderPage(req, res, "Community", ["CoYA"], "aboutSections.pug", {pageTitle: "Converge Co.Y.A."});
+	renderPage(req, res, "Community", ["CoYA"], "aboutSections.pug", {pageTitle: "Converge CoYA"});
 });
 
 router.get(["/ministries", "/ministries.html"], (req, res) => {
@@ -89,7 +89,7 @@ router.get(["/ministries", "/ministries.html"], (req, res) => {
 });
 
 router.get(["/forms", "/forms.html"], (req, res) => {
-	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms & Reg"});
+	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms and Reg"});
 });
 
 // Video
@@ -116,7 +116,7 @@ router.get(["/beblessed", "/be-blessed", "/beblessed.html", "/be-blessed.html"],
 
 // HE Brews
 router.get(["/hebrews", "/he-brews", "/hebrews.html", "/he-brews.html"], (req, res) => {
-	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {headerImg: "/assets/img/hebrews-banner-web.png"});
+	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "He Brews"});
 });
 
 
@@ -136,7 +136,7 @@ router.get(["/sermons", "/sermons.html"], (req, res) => {
 	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermons.pug", {pageTitle: "Past Sermons", collapsible: true});
 });
 router.get(["/sermons/archive", "/sermons/archive.html"], (req, res) => {
-	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermonArchive.pug", {pageTitle: "Past Sermons Archive", id: req.params.articleID});
+	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermonArchive.pug", {pageTitle: "Past Sermons", id: req.params.articleID});
 });
 
 router.get(["/authentic-peace", "/authentic-peace.html"], (req, res) => {
@@ -150,19 +150,19 @@ router.get("/authentic-peace/:articleID", (req, res) => {
 });
 
 router.get(["/articles-and-blogs", "/articles-and-blogs.html"], (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles & Blogs", collapsible: true});
+	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles and Blogs", collapsible: true});
 });
 
 // Contact
 router.get(["/more-info", "/more-info.html"], (req, res) => {
-	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.defaultFormRender, {pageTitle: "More Info", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.defaultFormRender, {pageTitle: "More_Info", csrfToken: req.csrfToken()}));
 });
 
 router.post(["/more-info", "/more-info.html"], (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "More Info", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "email", "phone", "message"]});
-		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More_Info", csrfToken: req.csrfToken()}));
 	});
 });
 
@@ -179,25 +179,25 @@ router.post(["/serve", "/serve.html"], (req, res) => {
 });
 
 router.get(["/prayer", "/prayer.html"], (req, res) => {
-	renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(models.defaultFormRender, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(models.defaultFormRender, {pageTitle: "Prayer_Requests", csrfToken: req.csrfToken()}));
 });
 
 router.post(["/prayer", "/prayer.html"], (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "For Prayer", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "message"]});
-		renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(processedFormData, {pageTitle: "Prayer Requests", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["For Prayer"], "prayer.pug", _.merge(processedFormData, {pageTitle: "Prayer_Requests", csrfToken: req.csrfToken()}));
 	});
 });
 
 router.get(["/baptism-and-confirmation", "/baptism-and-confirmation.html"], (req, res) => {
-	renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(models.defaultFormRender, {pageTitle: "Baptism & Confirmation", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(models.defaultFormRender, {pageTitle: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
 });
 
 router.post(["/baptism-and-confirmation", "/baptism-and-confirmation.html"], (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "Baptism and Confirmation", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "message"]});
-		renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(processedFormData, {pageTitle: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
 	});
 });

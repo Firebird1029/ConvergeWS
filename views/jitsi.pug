@@ -6,7 +6,7 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader(options.pageTitle)
+			+addPageHeaderImage(options.pageTitle)
 			section.section(style="padding-top: 0")
 				- var roomName = records[0][Object.keys(records[0])[0]].roomName; // [{"rec34847473283": {roomName: "bob"}}]
 				div(style="height:80vh", data-roomname=roomName)#jitsiContainer
