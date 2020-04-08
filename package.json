@@ -22,7 +22,9 @@
 	},
 	"scripts": {
 		"start": "node index.js",
-		"dev": "nodemon --ignore 'models/*.json'",
+		"dev": "npm-run-all --parallel dev-nodemon dev-build",
+		"dev-nodemon": "nodemon -r dotenv/config --ignore 'models/*.json' index.js",
+		"dev-build": "gulp",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"postinstall": "node models/resetModels.js && gulp production"
 	},
@@ -50,6 +52,7 @@
 		"@babel/core": "^7.9.0",
 		"@babel/preset-env": "^7.9.0",
 		"browser-sync": "^2.26.7",
+		"dotenv": "^8.2.0",
 		"eslint": "^6.8.0",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^7.0.1",
@@ -59,6 +62,7 @@
 		"gulp-load-plugins": "^2.0.2",
 		"gulp-sass": "^4.0.2",
 		"gulp-sourcemaps": "^2.6.5",
-		"gulp-uglify": "^3.0.2"
+		"gulp-uglify": "^3.0.2",
+		"npm-run-all": "^4.1.5"
 	}
 }

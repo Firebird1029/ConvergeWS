@@ -6,33 +6,40 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+addPageHeaderImage(options.pageTitle)
-			- var articleFound = false
-			each record in records[0]
-				if record.id == options.id
-					- articleFound = true
-					+section(record.title)
-						if record.archived
-							p This article has been archived.
-						else
-							if record.pdf
-								//- https://pdfobject.com/static.html
-								object(data=record.pdf[0].url, type="application/pdf", width="100%", height="100%", style="height: 80vh;")
-									iframe(src=record.pdf[0].url, width="100%", height="100%", style="border: none; height: 80vh;")
-										p This browser does not support PDFs. Please download the PDF to view it: 
-										a(href=record.pdf[0].url) Download PDF
-						//- Navigation
-						nav.pagination.is-centered(style="margin-top: 2rem;")
-							a.pagination-previous(href=(record.id - 1)) Previous
-							if !record["Most Recent Article?"]
-								//- In Airtable, selecting this checkbox will prevent the Next button from being visible.
-								a.pagination-next(href=(record.id + 1)) Next
+			- var articleFound = false;
+			section.section
+				style.
+					.yp-embed-container { position: relative; padding-bottom:56.25%; height:0; overflow: hidden; max-width: 100%; } .yp-embed-container iframe, .yp-embed-container object, .yp-embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
+				#ypembedcontainer.yp-embed-container(data-page-width="495", data-page-height="640")
+					iframe(src="https://www.yumpu.com/en/embed/view/gbpSU4OG1LN5QhCt", frameborder="0", allowfullscreen="true", allowtransparency="true")
+				script(src="https://players.yumpu.com/modules/embed/yp_r_iframe.js")
 
-			if !articleFound
-				+section("")
-					p Sorry, the article could not be found. #[a(href="/authentic-peace.html") Click here] to go to the latest article.
+			//- each record in records[0]
+			//- 	if record.id == options.id
+			//- 		- articleFound = true
+			//- 		+section(record.title)
+			//- 			if record.archived
+			//- 				p This article has been archived.
+			//- 			else
+			//- 				if record.pdf
+			//- 					//- https://pdfobject.com/static.html
+			//- 					object(data=record.pdf[0].url, type="application/pdf", width="100%", height="100%", style="height: 80vh;")
+			//- 						iframe(src=record.pdf[0].url, width="100%", height="100%", style="border: none; height: 80vh;")
+			//- 							p This browser does not support PDFs. Please download the PDF to view it: 
+			//- 							a(href=record.pdf[0].url) Download PDF
+			//- 			//- Navigation
+			//- 			nav.pagination.is-centered(style="margin-top: 2rem;")
+			//- 				a.pagination-previous(href=(record.id - 1)) Previous
+			//- 				if !record["Most Recent Article?"]
+			//- 					//- In Airtable, selecting this checkbox will prevent the Next button from being visible.
+			//- 					a.pagination-next(href=(record.id + 1)) Next
+
+			//- if !articleFound
+			//- 	+section("")
+			//- 		p Sorry, the article could not be found. #[a(href="/authentic-peace.html") Click here] to go to the latest article.
 
 			+section("Archive")
-				p #[a(href="/authentic-peace/archive.html") Click here] to go to the archive.
+				p #[a(href="/authentic-peace/archive") Click here] to go to the archive.
 
 		//- Footer
 		include includes/footer.pug

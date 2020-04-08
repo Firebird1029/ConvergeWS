@@ -140,14 +140,17 @@ router.get(["/sermons/archive", "/sermons/archive.html"], (req, res) => {
 });
 
 router.get(["/authentic-peace", "/authentic-peace.html"], (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceRedirect.pug", {pageTitle: "Redirecting..."});
+	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace"});
 });
 router.get(["/authentic-peace/archive", "/authentic-peace/archive.html"], (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceArchive.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});
 });
-router.get("/authentic-peace/:articleID", (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});
-});
+// router.get(["/authentic-peace", "/authentic-peace.html"], (req, res) => {
+// 	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeaceRedirect.pug", {pageTitle: "Redirecting..."});
+// });
+// router.get("/authentic-peace/:articleID", (req, res) => {
+// 	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});
+// });
 
 router.get(["/articles-and-blogs", "/articles-and-blogs.html"], (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles and Blogs", collapsible: true});
