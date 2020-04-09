@@ -6,13 +6,19 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+addPageHeaderImage(options.pageTitle)
-			- var articleFound = false;
+
+			//- Using Yumpu
+			- var yumpuSrc = records[0][Object.keys(records[0])[0]].src; // [{"rec34847473283": {src: "bob"}}]
 			section.section
 				style.
 					.yp-embed-container { position: relative; padding-bottom:56.25%; height:0; overflow: hidden; max-width: 100%; } .yp-embed-container iframe, .yp-embed-container object, .yp-embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%;}
 				#ypembedcontainer.yp-embed-container(data-page-width="495", data-page-height="640")
-					iframe(src="https://www.yumpu.com/en/embed/view/gbpSU4OG1LN5QhCt", frameborder="0", allowfullscreen="true", allowtransparency="true")
+					iframe(src=yumpuSrc, frameborder="0", allowfullscreen="true", allowtransparency="true")
 				script(src="https://players.yumpu.com/modules/embed/yp_r_iframe.js")
+
+
+			//- Old Functionality w/ Airtable & Redirect
+			- var articleFound = false;
 
 			//- each record in records[0]
 			//- 	if record.id == options.id
@@ -38,6 +44,7 @@ html(lang="en")
 			//- 	+section("")
 			//- 		p Sorry, the article could not be found. #[a(href="/authentic-peace.html") Click here] to go to the latest article.
 
+			//- Archive
 			+section("Archive")
 				p #[a(href="/authentic-peace/archive") Click here] to go to the archive.
 

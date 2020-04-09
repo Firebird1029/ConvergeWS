@@ -48,7 +48,7 @@ var bases = {
 	},
 	"Articles and Blogs": {
 		baseID: "appaTv4YjcvFV6f4l",
-		tables: ["Authentic Peace", "Posts", "Authors"]
+		tables: ["Yumpu", "Authentic Peace", "Posts", "Authors"]
 	},
 	"Contact Responses": {
 		baseID: "app5uJTO5UJ1AMpiD",
