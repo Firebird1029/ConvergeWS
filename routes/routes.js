@@ -122,10 +122,7 @@ router.get(["/hebrews", "/he-brews", "/hebrews.html", "/he-brews.html"], (req, r
 
 // Resources
 router.get(["/live", "/live.html"], (req, res) => {
-	res.render("livestream.pug", {
-		// records: allRecords, // array
-		options: {pageTitle: "Live Stream"} // object
-	});
+	renderPage(req, res, "Converge TV", ["Youtube Live"], "livestream.pug", {pageTitle: "Live Stream"});
 });
 
 router.get(["/tv", "/tv.html"], (req, res) => {

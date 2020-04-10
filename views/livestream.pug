@@ -6,12 +6,21 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+addPageHeaderImage(options.pageTitle)
-			+section()
-				style.
-					.embed-container iframe,.embed-container object,.embed-container embed {position: absolute;top: 0;left: 0;width: 100%;height: 100%; }
-				.embed-container(style="width: 100%; height: 80vh;")
-					iframe#live(frameborder='0' src='https://yourstreamlive.com/embed/iframe/live/10232?&responsive=yes&aspect_ratio=16:9' marginheight='0' marginwidth='0' scrolling='auto' allowfullscreen='yes' allowtransparency='yes' allow='autoplay' name='live')
+			- var youtubeID = records[0][Object.keys(records[0])[0]].id; // [{"rec34847473283": {src: "bob"}}]
+			section.section
+				.columns
+					.column.is-three-quarters
+						.youtubeLiveContainer(style="height: 60vh")
+							iframe(width="100%" height="100%" src=("https://www.youtube.com/embed/" + youtubeID) frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+					.column
+						.youtubeLiveChatContainer(style="width: 100%; height: 20vh").has-text-centered
+							iframe(width="75%" height="100%" src=("https://www.youtube.com/live_chat?v=" + youtubeID + "&embed_domain=convergehawaii.org"))
 
+			//- +section()
+			//- 	style.
+			//- 		.embed-container iframe,.embed-container object,.embed-container embed {position: absolute;top: 0;left: 0;width: 100%;height: 100%; }
+			//- 	.embed-container(style="width: 100%; height: 80vh;")
+			//- 		iframe#live(frameborder="0" src="https://yourstreamlive.com/embed/iframe/live/10232?&responsive=yes&aspect_ratio=16:9" marginheight="0" marginwidth="0" scrolling="auto" allowfullscreen="yes" allowtransparency="yes" allow="autoplay" name="live")
 
 		//- Footer
 		include includes/footer.pug

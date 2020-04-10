@@ -40,7 +40,7 @@ var bases = {
 	},
 	"Converge TV": {
 		baseID: "appFX7NBTY8z4Dqfb",
-		tables: ["Converge TV", "Topics", "Speakers"]
+		tables: ["Youtube Live", "Converge TV", "Topics", "Speakers"]
 	},
 	"Past Sermons": {
 		baseID: "appwoW5IMGdHcKf14",
