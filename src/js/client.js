@@ -266,7 +266,7 @@ if ($(".hello-week").length) {
 				// Set the values of the Event Details column
 				$("#eventDetailsTitle").text(recordData.title || "");
 				$("#eventDetailsMinistry").text((recordData.ministry) ? recordData.ministry + " Ministry" : "");
-				$("#eventDetailsBody").text(recordData.body || "");
+				$("#eventDetailsBody").html(recordData.body || "");
 
 				// Options for formatting the date & time from a JS Date object.
 				var dateLocaleOptions = {timeZone: "Pacific/Honolulu", hour12: true, hour: "numeric", minute: "numeric"};
