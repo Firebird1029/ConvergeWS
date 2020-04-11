@@ -32,11 +32,12 @@ mixin addSpan(text)
 		span= text
 
 //- This checks if an image is provided before displaying it, since accessing the .url property of an undefined object returns an error
-mixin addImg(image)
-	if image
-		img(src=image[0].url)
-	else
-		img
+mixin addImg(image, figureClasses)
+	figure.image.has-text-centered-mobile(class=figureClasses)
+		if image
+			img(src=image[0].url)
+		else
+			img
 
 //- This changes the format of the Date string provided by Airtable into mm/dd/yy format.
 mixin addDate(date, style)

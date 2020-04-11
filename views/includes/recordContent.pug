@@ -1,31 +1,32 @@
 each record in records[0]
 	+section()
 		if (record.style !== "title_in_body")
-			+addTitle(record.title)
+			.has-text-centered-mobile
+				+addTitle(record.title)
 		case record.style
 			when "right"
 				.columns
 					.column.is-two-thirds
 						+addDate(record.date)
 						+addText(record.body)
-					.column: figure.image: +addImg(record.img)
+					.column: +addImg(record.img)
 			when "left"
 				.columns
-					.column: figure.image.imageLeftFloatFix: +addImg(record.img)
+					.column: +addImg(record.img, "imageLeftFloatFix")
 					.column.is-two-thirds
 						+addDate(record.date)
 						+addText(record.body)
 			when "title_in_body"
 				.columns
-					.column: figure.image.imageLeftFloatFix: +addImg(record.img)
+					.column: +addImg(record.img, "imageLeftFloatFix")
 					.column.is-two-thirds
-						+addTitle(record.title)
+						.has-text-centered-mobile: +addTitle(record.title)
 						+addDate(record.date)
 						+addText(record.body)
 			when "top"
 			default
 				.columns.is-centered
-					.column.is-half: figure.image: +addImg(record.img)
+					.column.is-half: +addImg(record.img)
 				.columns.is-centered
 					.column
 						+addDate(record.date)

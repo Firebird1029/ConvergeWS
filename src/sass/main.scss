@@ -8,7 +8,7 @@ $navbarArrowColor: $grey-dark;
 body {
 	font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
 	overflow: hidden;
-	
+
 	h1, h2, h3, h4, h5, h6 {
 		font-family: "Merriweather", "Source Sans Pro", Helvetica, Arial, sans-serif;
 		// font-family: "Roboto", "Source Sans Pro", Helvetica, Arial, sans-serif;
@@ -59,7 +59,11 @@ img.pageHeaderImage {
 
 // Gets rid of the spacing to the left of a picture in content when record.style == "left" (such as in aboutSections.pug)
 figure.imageLeftFloatFix {
-	margin-left: 0px;
+	// margin-left: 0px;
+
+	@media only screen and (min-width: 769px) {
+		margin-left: 0px;
+	}
 }
 
 // Horizontal Content Dividers
