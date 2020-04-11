@@ -6,29 +6,7 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+addPageHeaderImage(options.pageTitle)
-			each record in records[0]
-				+section(record.title)
-					case record.style
-						when "right"
-							.columns
-								.column.is-two-thirds
-									+addDate(record.date)
-									+addText(record.body)
-								.column: figure.image: +addImg(record.img)
-						when "left"
-							.columns
-								.column: figure.image.imageLeftFloatFix: +addImg(record.img)
-								.column.is-two-thirds
-									+addDate(record.date)
-									+addText(record.body)
-						when "top"
-						default
-							.columns.is-centered
-								.column.is-half: figure.image: +addImg(record.img)
-							.columns.is-centered
-								.column
-									+addDate(record.date)
-									+addText(record.body)
+			include includes/recordContent.pug
 
 		//- Footer
 		include includes/footer.pug

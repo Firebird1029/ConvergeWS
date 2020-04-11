@@ -1,11 +1,3 @@
-mixin section(title)
-	section.section
-		.container
-			.content
-				if title
-					h1= title
-				block
-
 mixin addPageHeader(title)
 	section.hero.is-full-height
 		.hero-body
@@ -24,6 +16,10 @@ mixin addPageHeaderImage(title)
 mixin icon(iconClasses, spanClasses)
 	span.icon(class=spanClasses)
 		i.fa(class=iconClasses)
+
+mixin addTitle(title)
+	if title
+		h1.title.is-3= title
 
 //- In Airtable, use % in a record to create a newline.
 mixin addText(text)
@@ -51,3 +47,10 @@ mixin addDate(date, style)
 			when "h4"
 			default
 				h4= date.replace(/(\d+)-(\d+)-(\d+)/, "$2/$3/$1")
+
+mixin section(title)
+	section.section
+		.container
+			.content
+				+addTitle(title)
+				block

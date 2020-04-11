@@ -13,6 +13,7 @@ html(lang="en")
 						.youtubeLiveContainer(style="height: 80vh")
 							iframe(width="100%" height="100%" src=("https://www.youtube.com/embed/" + youtubeID) frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
 					.column.is-paddingless
+						//- https://support.google.com/youtube/answer/2524549?hl=en
 						.youtubeLiveChatContainer(style="width: 100%; height: 80vh").has-text-centered
 							iframe(width="95%" height="100%" src=("https://www.youtube.com/live_chat?v=" + youtubeID + "&embed_domain=convergehawaii.org"))
 
