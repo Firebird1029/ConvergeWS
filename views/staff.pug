@@ -12,14 +12,18 @@ html(lang="en")
 						.column.is-one-third
 							.card
 								.card-image
-									figure.image.is-square.is-marginless
-										+addImg(record.img)
+									if record.img
+										+addImg(record.img, "is-square is-marginless")
 								.card-content
 									.content.has-text-left
-										h4= (record.name || "")
-										strong: em= (record.role) ? record.role.join(", ") : ""
-										em: +addText(record.description)
-										+addText(record.bio)
+										if record.name
+											h4= (record.name || "")
+										if record.role
+											strong: em= (record.role) ? record.role.join(", ") : ""
+										if record.description
+											em: +addText(record.description)
+										if record.bio
+											+addText(record.bio)
 
 		//- Footer
 		include includes/footer.pug
