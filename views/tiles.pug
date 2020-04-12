@@ -11,7 +11,12 @@ html(lang="en")
 				//- The counter allows collapsible tiles to show/hide in their respective boxes, by correlating the heading (button) and the content.
 				- var counter = 0
 				each record in records[0]
-					if record.publish
+					//- Sermons: Publish record if less than a month old
+					- var recordDate = new Date(record.date)
+					- var ONE_MONTH = 30 * 24 * 60 * 60 * 1000 /* ms */
+
+					//- If it's not the Sermons page, then !options.sermonPage == true. If it is Sermons page, then only publish record if less than a month old.
+					if record.publish && (!options.sermonPage || ((new Date) - recordDate) < ONE_MONTH)
 						.box
 							.columns: .column
 								//- title: All
@@ -19,11 +24,13 @@ html(lang="en")
 									div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
 										h1.is-unselectable(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
 							.columns(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleContent" : "")
+								//- Fixes glitch where padding sticks out - ???
+								//- p &nbsp;
+
 								//- img: Ministries + Articles & Blogs, Storefront
 								if record.img
 									.column.is-one-quarter
-										.has-text-centered
-											+addImg(record.img)
+											+addImg(record.img, "imageLeftFloatFix")
 								.column
 									//- passage: Sermons
 									+addText(record.passage)
@@ -51,8 +58,14 @@ html(lang="en")
 											strong Author: &nbsp;
 											span= records[1][record.author[0]]["name"]
 
+									//- embed: TV
+									if record.embed
+										div.has-text-centered(style="height: 25rem;")!= record.embed
+										p &nbsp;
+
 									//- handout: Forms & Reg
 									//- speaker, series, handout, slides, audio: Sermons
+									//- speaker: TV
 									.columns
 										if record.speaker
 											.column: p #[span: strong Speaker: ] &nbsp; #{records[1][record.speaker[0]]["name"]} &nbsp; (#{records[1][record.speaker[0]]["email"]})
@@ -69,6 +82,12 @@ html(lang="en")
 												p Your browser does not support the audio element.
 											//- margin-bottom: 4.5rem;
 
+									//- expiration: TV
+									if record.expiration
+										//- Commented out per Jason's request
+										//- span: strong Expires: &nbsp;
+										//- +addDate(record.expiration, "span")
+
 									//- contact: Most
 									if record.contact
 										p
@@ -81,6 +100,9 @@ html(lang="en")
 											span: +addSpan(records[1][record.contact[0]]["email"])
 											span )
 					- counter++;
+			if options.sermonPage
+				+section("Archive")
+					p #[a(href="/sermons/archive.html") Click here] to go to the archive for sermons done more than a month ago.
 
 		//- Footer
 		include includes/footer.pug
