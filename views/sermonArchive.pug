@@ -38,18 +38,21 @@ html(lang="en")
 											//-  &nbsp; (#{records[1][record.speaker[0]]["email"]})
 									td: +addText(record.passage)
 									td
+										if record.link
+											a(href=record.link, target="_blank")
+												+icon("fab fa-youtube")
 										if record.audio
 											a(onclick=`downloadFile("${record.audio[0].url}", "${record.title}.mp3")`)
-												span.icon: i.fa.fa-volume-up
+												+icon("fa-volume-up")
 											//- Linking it does not work because of CSP, same-site policy
 											//- a(href=record.audio[0].url)
 											//- 	span.icon: i.fa.fa-volume-up
 										if record.handout
 											a(href=record.handout[0].url)
-												span.icon: i.fa.fa-file-download
+												+icon("fa-file-download")
 										if record.slides
 											a(href=record.slides[0].url)
-												span.icon: i.fa.fa-file-powerpoint
+												+icon("fa-file-powerpoint")
 
 			+section()
 				p #[a(href="/sermons.html") Click here] to go back to the latest sermons.
