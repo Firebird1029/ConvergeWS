@@ -39,8 +39,11 @@ html(lang="en")
 									td: +addText(record.passage)
 									td
 										if record.audio
-											a(href=record.audio[0].url)
+											a(onclick=`downloadFile("${record.audio[0].url}", "${record.title}.mp3")`)
 												span.icon: i.fa.fa-volume-up
+											//- Linking it does not work because of CSP, same-site policy
+											//- a(href=record.audio[0].url)
+											//- 	span.icon: i.fa.fa-volume-up
 										if record.handout
 											a(href=record.handout[0].url)
 												span.icon: i.fa.fa-file-download
