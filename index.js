@@ -6,21 +6,11 @@ console.log("Debugging: ", debug);
 /*
  * TODO
  *
- * Domain: SSL
- * Once domain is set: add domain to Google reCAPTCHA, add Google Analytics, add to Dokku domains
- *
  * Playground:
  * https://developers.google.com/speed/pagespeed/insights/
  * Calendar -- modal for Bible Ministry, https://postare.github.io/bulma-modal-fx/ (?)
  * Fuzzy string matching + TextRazor NLP API (?)
  * https://www.cloudflare.com/plans/
- *
- * Resources:
- * https://bulma.io/documentation/
- * https://pugjs.org/api/getting-started.html
- * http://html2jade.vida.io/
- * https://fontawesome.com/icons
- * https://airtable.com/api
  */
 
 // Load Node Dependencies & Custom Modules
