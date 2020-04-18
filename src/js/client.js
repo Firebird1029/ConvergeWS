@@ -155,20 +155,39 @@ $(".gallery").each(function (index, galleryElement) {
 	});
 });
 
-// Search Functionality
+// Sermon Archive: Search Functionality
 function searchArchive () {
 	var $input, filter, $rows, txtValue;
-		$input = $("#searchBar");
-		filter = $input.val().toUpperCase();
-		$rows = $("#archiveTable").find("tr");
-		$rows.each(function (i, el) {
-			txtValue = $(this).find("td").text();
-			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				$(this).css("display", "");
-			} else {
-				$(this).css("display", "none");
-			}
-		});
+	$input = $("#searchBar");
+	filter = $input.val().toUpperCase();
+	$rows = $("#archiveTable").find("tr");
+	$rows.each(function (i, el) {
+		txtValue = $(this).find("td").text();
+		if (txtValue.toUpperCase().indexOf(filter) > -1) {
+			$(this).css("display", "");
+		} else {
+			$(this).css("display", "none");
+		}
+	});
+}
+
+// Download File (SnippetsLab or https://stackoverflow.com/questions/3749231/download-file-using-javascript-jquery)
+function downloadFile (url, filename) {
+	fetch(url)
+		.then(resp => resp.blob())
+		.then(blob => {
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement("a");
+			a.style.display = "none";
+			a.href = url;
+			// the filename you want
+			a.download = filename || url.substring(url.lastIndexOf("/") + 1).split("?")[0];
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+			// alert("your file has downloaded!");
+		})
+		.catch(() => console.log("Download failed!"));
 }
 
 // Calendar

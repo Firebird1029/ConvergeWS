@@ -130,7 +130,7 @@ router.get(["/tv", "/tv.html"], (req, res) => {
 });
 
 router.get(["/sermons", "/sermons.html"], (req, res) => {
-	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: true, sermonPage: true});
+	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: false, sermonPage: true});
 });
 router.get(["/sermons/archive", "/sermons/archive.html"], (req, res) => {
 	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermonArchive.pug", {pageTitle: "Past Sermons", id: req.params.articleID});
