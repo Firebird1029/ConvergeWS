@@ -65,9 +65,10 @@ app.use(express.static(__dirname + "/dist"));
 
 // https://davidwalsh.name/express-redirect-301
 app.use((req, res, next) => {
-	var host = req.get("Host");
+	let host = req.get("Host");
 	if (host === "converge.clch.org") {
-		return res.redirect(301, "https://convergehawaii.org/" + req.originalUrl.slice(1));
+		let newPath = "https://convergehawaii.org" + req.originalUrl
+		return res.redirect(301, newPath);
 	}
 	return next();
 });
