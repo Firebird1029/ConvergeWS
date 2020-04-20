@@ -68,6 +68,7 @@ app.use((req, res, next) => {
 	let host = req.get("Host");
 	if (host === "converge.clch.org") {
 		let newPath = "https://convergehawaii.org" + req.originalUrl
+		console.log(req.originalUrl)
 		return res.redirect(301, newPath);
 	}
 	return next();
