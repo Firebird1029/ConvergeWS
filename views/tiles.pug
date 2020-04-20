@@ -31,7 +31,7 @@ html(lang="en")
 								if record.img
 									.column.is-one-quarter
 											+addImg(record.img, "imageLeftFloatFix")
-								.column
+								.column(class=(options.sermonPage) ? "has-text-centered" : "")
 									//- passage: Sermons
 									+addText(record.passage)
 									//- body: All

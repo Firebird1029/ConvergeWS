@@ -62,6 +62,16 @@ app.use(csrf({cookies: true})); // HTML form security
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dist"));
+
+// https://davidwalsh.name/express-redirect-301
+app.use((req, res, next) => {
+	var host = req.get("Host");
+	if (host === "converge.clch.org") {
+		return res.redirect(301, "https://convergehawaii.org/" + req.originalUrl);
+	}
+	return next();
+});
+
 app.use("/", router);
 app.use((req, res, next) => {
 	res.status(404).render("404.pug");
