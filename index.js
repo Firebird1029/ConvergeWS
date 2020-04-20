@@ -63,13 +63,12 @@ app.use(csrf({cookies: true})); // HTML form security
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/dist"));
 
+// Redirect converge.clch.org --> convergehawaii.org
 // https://davidwalsh.name/express-redirect-301
 app.use((req, res, next) => {
 	let host = req.get("Host");
 	if (host === "converge.clch.org") {
-		let newPath = "https://convergehawaii.org" + req.originalUrl
-		console.log(req.originalUrl)
-		return res.redirect(301, newPath);
+		return res.redirect(301, "https://convergehawaii.org" + req.originalUrl);
 	}
 	return next();
 });
