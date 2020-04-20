@@ -67,7 +67,7 @@ app.use(express.static(__dirname + "/dist"));
 app.use((req, res, next) => {
 	var host = req.get("Host");
 	if (host === "converge.clch.org") {
-		return res.redirect(301, "https://convergehawaii.org/" + req.originalUrl);
+		return res.redirect(301, "https://convergehawaii.org" + req.originalUrl);
 	}
 	return next();
 });

@@ -71,7 +71,7 @@ function jumpToWelcome () {
 		}, 1000);
 	} else {
 		// If not on home page, redirect user
-		window.location.href = "/index.html#welcome";
+		window.location.href = "/#welcome";
 	}
 	return false;
 }
