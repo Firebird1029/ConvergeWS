@@ -65,6 +65,7 @@ app.use(express.static(__dirname + "/dist"));
 
 // Redirect converge.clch.org --> convergehawaii.org
 // https://davidwalsh.name/express-redirect-301
+// https://superuser.com/questions/304589/how-can-i-make-chrome-stop-caching-redirects
 app.use((req, res, next) => {
 	let host = req.get("Host");
 	if (host === "converge.clch.org") {

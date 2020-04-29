@@ -126,7 +126,7 @@ router.get(["/live", "/live.html"], (req, res) => {
 });
 
 router.get(["/tv", "/tv.html"], (req, res) => {
-	renderPage(req, res, "Converge TV", ["Converge TV", "Speakers", "Topics"], "tiles.pug", {pageTitle: "Converge TV"});
+	renderPage(req, res, "Converge TV", ["Converge TV", "Speakers", "Topics"], "tiles.pug", {pageTitle: "Converge TV", tvPage: true});
 });
 
 router.get(["/sermons", "/sermons.html"], (req, res) => {

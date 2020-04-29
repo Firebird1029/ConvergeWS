@@ -118,4 +118,6 @@ html(lang="en")
 					p #[a(href="/sermons/archive.html") Click here] to go to the archive for sermons from more than a month ago.
 
 		//- Footer
+		if (options.sermonPage || options.tvPage)
+			script#hs-script-loader(type="text/javascript", src="//js.hs-scripts.com/7597904.js", async, defer)
 		include includes/footer.pug
