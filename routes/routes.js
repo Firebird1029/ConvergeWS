@@ -47,95 +47,32 @@ router.get(["/", "/index.html"], (req, res) => {
 });
 
 // About
-router.get(["/values", "/values.html"], (req, res) => {
-	renderPage(req, res, "About Sections", ["Values"], "aboutSections.pug", {pageTitle: "Values"});
+router.get(["/staff", "/staff.html"], (req, res) => {
+	renderPage(req, res, "About Staff", ["Staff"], "staff.pug", {pageTitle: "Our Staff"});
 });
 router.get(["/history", "/history.html"], (req, res) => {
 	renderPage(req, res, "About Sections", ["History"], "aboutSections.pug", {pageTitle: "History"});
 });
-
-router.get(["/staff", "/staff.html"], (req, res) => {
-	renderPage(req, res, "About Staff", ["Staff"], "staff.pug", {pageTitle: "Our Staff"});
+router.get(["/values", "/values.html"], (req, res) => {
+	renderPage(req, res, "About Sections", ["Values"], "aboutSections.pug", {pageTitle: "Values"});
 });
 
-// Experience
-router.get(["/calendar", "/calendar.html"], (req, res) => {
-	renderPage(req, res, "Experience", ["Calendar"], "calendar.pug", {pageTitle: "Calendar"});
-});
-
-router.get(["/classes", "/classes.html"], (req, res) => {
-	renderPage(req, res, "Experience", ["Classes", "Leaders"], "tiles.pug", {pageTitle: "Classes"});
-});
-
-router.get(["/photos", "/photos.html"], (req, res) => {
-	renderPage(req, res, "Experience", ["Photos"], "photos.pug", {pageTitle: "Photos", collapsible: true});
-});
-
-// Community
+// Look Up
 router.get(["/announcements", "/announcements.html"], (req, res) => {
 	renderPage(req, res, "Community", ["Announcements"], "tiles.pug", {pageTitle: "Announcements"});
 });
-
-router.get(["/youth", "/youth.html"], (req, res) => {
-	renderPage(req, res, "Community", ["Youth"], "aboutSections.pug", {pageTitle: "Converge Youth"});
+router.get(["/calendar", "/calendar.html"], (req, res) => {
+	renderPage(req, res, "Experience", ["Calendar"], "calendar.pug", {pageTitle: "Calendar"});
 });
-
-router.get(["/coya", "/coya.html"], (req, res) => {
-	renderPage(req, res, "Community", ["CoYA"], "aboutSections.pug", {pageTitle: "Converge CoYA"});
-});
-
-router.get(["/ministries", "/ministries.html"], (req, res) => {
-	renderPage(req, res, "Community", ["Ministries", "Leaders"], "tiles.pug", {pageTitle: "Ministries"});
-});
-
 router.get(["/forms", "/forms.html"], (req, res) => {
 	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms and Reg"});
 });
-
-// Video
-router.get(["/jitsi", "/jitsi.html"], (req, res) => {
-	renderPage(req, res, "Community", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
-});
-
-router.get(["/palehua-room", "/palehua-room.html"], (req, res) => {
-	renderPage(req, res, "Community", ["Room 1"], "jitsi.pug", {pageTitle: "Palehua Room"});
-});
-
-router.get(["/mokuleia-room", "/mokuleia-room.html"], (req, res) => {
-	renderPage(req, res, "Community", ["Room 2"], "jitsi.pug", {pageTitle: "Mokuleia Room"});
-});
-
-router.get(["/kauai-room", "/kauai-room.html"], (req, res) => {
-	renderPage(req, res, "Community", ["Room 3"], "jitsi.pug", {pageTitle: "Kauai Room"});
-});
-
-// Be Blessed
-router.get(["/beblessed", "/be-blessed", "/beblessed.html", "/be-blessed.html"], (req, res) => {
-	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
-});
-
-// HE Brews
-router.get(["/hebrews", "/he-brews", "/hebrews.html", "/he-brews.html"], (req, res) => {
-	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "He Brews"});
-});
-
-
-// Resources
-router.get(["/live", "/live.html"], (req, res) => {
-	renderPage(req, res, "Converge TV", ["Youtube Live"], "livestream.pug", {pageTitle: "Live Stream"});
-});
-
-router.get(["/tv", "/tv.html"], (req, res) => {
-	renderPage(req, res, "Converge TV", ["Converge TV", "Speakers", "Topics"], "tiles.pug", {pageTitle: "Converge TV", tvPage: true});
-});
-
 router.get(["/sermons", "/sermons.html"], (req, res) => {
 	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: false, sermonPage: true});
 });
 router.get(["/sermons/archive", "/sermons/archive.html"], (req, res) => {
 	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermonArchive.pug", {pageTitle: "Past Sermons", id: req.params.articleID});
 });
-
 router.get(["/authentic-peace", "/authentic-peace.html"], (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Yumpu", "Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace"});
 });
@@ -148,9 +85,57 @@ router.get(["/authentic-peace/archive", "/authentic-peace/archive.html"], (req, 
 // router.get("/authentic-peace/:articleID", (req, res) => {
 // 	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});
 // });
-
 router.get(["/articles-and-blogs", "/articles-and-blogs.html"], (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles and Blogs", collapsible: true});
+});
+router.get(["/beblessed", "/be-blessed", "/beblessed.html", "/be-blessed.html"], (req, res) => {
+	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
+});
+router.get(["/photos", "/photos.html"], (req, res) => {
+	renderPage(req, res, "Experience", ["Photos"], "photos.pug", {pageTitle: "Photos", collapsible: true});
+});
+
+// Community
+// router.get(["/youth", "/youth.html"], (req, res) => {
+// 	renderPage(req, res, "Community", ["Youth"], "aboutSections.pug", {pageTitle: "Converge Youth"});
+// });
+// router.get(["/coya", "/coya.html"], (req, res) => {
+// 	renderPage(req, res, "Community", ["CoYA"], "aboutSections.pug", {pageTitle: "Converge CoYA"});
+// });
+// router.get(["/ministries", "/ministries.html"], (req, res) => {
+// 	renderPage(req, res, "Community", ["Ministries", "Leaders"], "tiles.pug", {pageTitle: "Ministries"});
+// });
+// router.get(["/classes", "/classes.html"], (req, res) => {
+// 	renderPage(req, res, "Experience", ["Classes", "Leaders"], "tiles.pug", {pageTitle: "Classes"});
+// });
+
+// Hangout
+router.get(["/live", "/live.html"], (req, res) => {
+	renderPage(req, res, "Converge TV", ["Youtube Live"], "livestream.pug", {pageTitle: "Live Stream"});
+});
+router.get(["/listen", "/listen.html"], (req, res) => {
+	renderPage(req, res, "Converge Listen", ["Listen"], "tiles.pug", {pageTitle: "Converge Listen", tvPage: false, missingHeaderImage: true});
+});
+router.get(["/tv", "/tv.html"], (req, res) => {
+	renderPage(req, res, "Converge TV", ["Converge TV", "Speakers", "Topics"], "tiles.pug", {pageTitle: "Converge TV", tvPage: true});
+});
+router.get(["/jitsi", "/jitsi.html"], (req, res) => {
+	renderPage(req, res, "Meeting Rooms", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
+});
+router.get(["/palehua-room", "/palehua-room.html"], (req, res) => {
+	renderPage(req, res, "Meeting Rooms", ["Palehua"], "jitsi.pug", {pageTitle: "Palehua Room"});
+});
+router.get(["/mokuleia-room", "/mokuleia-room.html"], (req, res) => {
+	renderPage(req, res, "Meeting Rooms", ["Mokuleia"], "jitsi.pug", {pageTitle: "Mokuleia Room"});
+});
+router.get(["/kauai-room", "/kauai-room.html"], (req, res) => {
+	renderPage(req, res, "Meeting Rooms", ["Kauai"], "jitsi.pug", {pageTitle: "Kauai Room"});
+});
+
+
+// HE Brews
+router.get(["/hebrews", "/he-brews", "/hebrews.html", "/he-brews.html"], (req, res) => {
+	renderPage(req, res, "HE Brews", ["HE Brews", "Menu"], "hebrews.pug", {pageTitle: "He Brews"});
 });
 
 // Contact
@@ -191,13 +176,25 @@ router.post(["/prayer", "/prayer.html"], (req, res) => {
 });
 
 router.get(["/baptism-and-confirmation", "/baptism-and-confirmation.html"], (req, res) => {
-	renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(models.defaultFormRender, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptismConfirmation.pug", _.merge(models.defaultFormRender, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
 });
 
 router.post(["/baptism-and-confirmation", "/baptism-and-confirmation.html"], (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "Baptism and Confirmation", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "message"]});
-		renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptism-and-confirmation.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptismConfirmation.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
 	});
 });
+
+router.get(["/booking-time", "/booking-time.html"], (req, res) => {
+	renderPage(req, res, "Contact Responses", ["Booking Time"], "bookingTime.pug", _.merge(models.defaultFormRender, {pageTitle: "Booking Time", headerImage: "", csrfToken: req.csrfToken()}));
+});
+
+// router.post(["/booking-time", "/booking-time.html"], (req, res) => {
+// 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
+// 		// Sending to models.js for validation and sanitization.
+// 		var processedFormData = models.processForm("Contact Responses", "Booking Time", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "message"]});
+// 		renderPage(req, res, "Contact Responses", ["Booking Time"], "bookingTime.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
+// 	});
+// });

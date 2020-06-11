@@ -1,0 +1,13 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		include includes/responsiveNav.pug
+		article.article
+			include includes/body.pug
+			+addPageHeader(options.pageTitle)
+			+section()
+				div!= (records[0][Object.keys(records[0])[0]]) ? records[0][Object.keys(records[0])[0]].body : ""
+
+		//- Footer
+		include includes/footer.pug

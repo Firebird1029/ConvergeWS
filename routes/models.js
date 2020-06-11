@@ -28,19 +28,11 @@ var bases = {
 	},
 	"Community": {
 		baseID: "appkvA9WfE62DYGIl",
-		tables: ["Jitsi", "Room 1", "Room 2", "Room 3", "Announcements", "Youth", "CoYA", "Ministries", "Forms", "Leaders"]
+		tables: ["Announcements", "Youth", "CoYA", "Ministries", "Forms", "Leaders"]
 	},
 	"Experience": {
 		baseID: "appk80veA6WdxCrtB",
 		tables: ["Calendar", "Classes", "Photos", "Leaders"]
-	},
-	"HE Brews": {
-		baseID: "appamTiUaVqXSiBhf",
-		tables: ["HE Brews", "Menu"]
-	},
-	"Converge TV": {
-		baseID: "appFX7NBTY8z4Dqfb",
-		tables: ["Youtube Live", "Converge TV", "Topics", "Speakers"]
 	},
 	"Past Sermons": {
 		baseID: "appwoW5IMGdHcKf14",
@@ -50,13 +42,29 @@ var bases = {
 		baseID: "appaTv4YjcvFV6f4l",
 		tables: ["Yumpu", "Authentic Peace", "Posts", "Authors"]
 	},
-	"Contact Responses": {
-		baseID: "app5uJTO5UJ1AMpiD",
-		tables: ["More Info", "To Serve", "For Prayer", "Baptism and Confirmation"]
-	},
 	"Storefront": {
 		baseID: "appj9yKh2t3Qh24Wl",
 		tables: ["Storefront", "Contact"]
+	},
+	"Converge Listen": {
+		baseID: "appCeT42SG41ZNhbD",
+		tables: ["Listen"]
+	},
+	"Converge TV": {
+		baseID: "appFX7NBTY8z4Dqfb",
+		tables: ["Youtube Live", "Converge TV", "Topics", "Speakers"]
+	},
+	"Meeting Rooms": {
+		baseID: "appLDEVLuqJcHdqdP",
+		tables: ["Jitsi", "Palehua", "Mokuleia", "Kauai"]
+	},
+	"HE Brews": {
+		baseID: "appamTiUaVqXSiBhf",
+		tables: ["HE Brews", "Menu"]
+	},
+	"Contact Responses": {
+		baseID: "app5uJTO5UJ1AMpiD",
+		tables: ["More Info", "To Serve", "For Prayer", "Baptism and Confirmation", "Booking Time"]
 	}
 }
 
@@ -74,7 +82,7 @@ function scanTable (baseID, tableName, callback) {
 		});
 		fetchNextPage();
 	}, function doneProcessing (err) {
-		if (debug && err) { throw new Error(err); }
+		if (debug && err) { console.log("Error info", baseID, tableName); throw new Error(err); }
 		// debug && console.log(`Table ${tableName} successfully scanned!`);
 		callback(dataToSend);
 	});
