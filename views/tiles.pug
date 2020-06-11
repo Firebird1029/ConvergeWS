@@ -6,7 +6,10 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeaderImage(options.pageTitle)
+			if !options.missingHeaderImage
+				+addPageHeaderImage(options.pageTitle)
+			else
+				+addPageHeader(options.pageTitle)
 			+section()
 				//- The counter allows collapsible tiles to show/hide in their respective boxes, by correlating the heading (button) and the content.
 				- var counter = 0
@@ -75,7 +78,7 @@ html(lang="en")
 
 									//- embed: TV
 									if record.embed
-										div.has-text-centered(style="height: 25rem;")!= record.embed
+										div.has-text-centered(style="height: 25rem; overflow: scroll;")!= record.embed
 										p &nbsp;
 									
 									//- speaker, series, handout, slides, audio: Sermons
@@ -115,7 +118,7 @@ html(lang="en")
 					- counter++;
 			if options.sermonPage
 				+section("Archive")
-					p #[a(href="/sermons/archive.html") Click here] to go to the archive for sermons from more than a month ago.
+					p #[a(href="/sermons/archive") Click here] to go to the archive for sermons from more than a month ago.
 
 		//- Footer
 		if (options.sermonPage || options.tvPage)
