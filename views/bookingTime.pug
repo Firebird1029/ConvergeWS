@@ -5,7 +5,7 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader(options.pageTitle)
+			+addPageHeaderImage(options.pageTitle)
 			+section()
 				div!= (records[0][Object.keys(records[0])[0]]) ? records[0][Object.keys(records[0])[0]].body : ""
 

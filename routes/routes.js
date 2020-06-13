@@ -114,7 +114,7 @@ router.get(["/live", "/live.html"], (req, res) => {
 	renderPage(req, res, "Converge TV", ["Youtube Live"], "livestream.pug", {pageTitle: "Live Stream"});
 });
 router.get(["/listen", "/listen.html"], (req, res) => {
-	renderPage(req, res, "Converge Listen", ["Listen"], "tiles.pug", {pageTitle: "Converge Listen", tvPage: false, missingHeaderImage: true});
+	renderPage(req, res, "Converge Listen", ["Listen"], "tiles.pug", {pageTitle: "Converge Listen", tvPage: false});
 });
 router.get(["/tv", "/tv.html"], (req, res) => {
 	renderPage(req, res, "Converge TV", ["Converge TV", "Speakers", "Topics"], "tiles.pug", {pageTitle: "Converge TV", tvPage: true});
@@ -140,14 +140,14 @@ router.get(["/hebrews", "/he-brews", "/hebrews.html", "/he-brews.html"], (req, r
 
 // Contact
 router.get(["/more-info", "/more-info.html"], (req, res) => {
-	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.defaultFormRender, {pageTitle: "More Info", headerImage: "More_Info", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(models.defaultFormRender, {pageTitle: "More Info", csrfToken: req.csrfToken()}));
 });
 
 router.post(["/more-info", "/more-info.html"], (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "More Info", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "email", "phone", "message"]});
-		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info", headerImage: "More_Info", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["More Info"], "moreInfo.pug", _.merge(processedFormData, {pageTitle: "More Info", csrfToken: req.csrfToken()}));
 	});
 });
 
@@ -176,25 +176,17 @@ router.post(["/prayer", "/prayer.html"], (req, res) => {
 });
 
 router.get(["/baptism-and-confirmation", "/baptism-and-confirmation.html"], (req, res) => {
-	renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptismConfirmation.pug", _.merge(models.defaultFormRender, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptismConfirmation.pug", _.merge(models.defaultFormRender, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism Confirmation", csrfToken: req.csrfToken()}));
 });
 
 router.post(["/baptism-and-confirmation", "/baptism-and-confirmation.html"], (req, res) => {
 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
 		// Sending to models.js for validation and sanitization.
 		var processedFormData = models.processForm("Contact Responses", "Baptism and Confirmation", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "message"]});
-		renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptismConfirmation.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
+		renderPage(req, res, "Contact Responses", ["Baptism and Confirmation"], "baptismConfirmation.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism Confirmation", csrfToken: req.csrfToken()}));
 	});
 });
 
 router.get(["/booking-time", "/booking-time.html"], (req, res) => {
-	renderPage(req, res, "Contact Responses", ["Booking Time"], "bookingTime.pug", _.merge(models.defaultFormRender, {pageTitle: "Booking Time", headerImage: "", csrfToken: req.csrfToken()}));
+	renderPage(req, res, "Contact Responses", ["Booking Time"], "bookingTime.pug", _.merge(models.defaultFormRender, {pageTitle: "Booking Time", csrfToken: req.csrfToken()}));
 });
-
-// router.post(["/booking-time", "/booking-time.html"], (req, res) => {
-// 	processReCaptcha(req, function finishedProcessingReCaptcha (reCaptcha) {
-// 		// Sending to models.js for validation and sanitization.
-// 		var processedFormData = models.processForm("Contact Responses", "Booking Time", req.body, {reCaptcha: reCaptcha, expectedFields: ["name", "selection", "message"]});
-// 		renderPage(req, res, "Contact Responses", ["Booking Time"], "bookingTime.pug", _.merge(processedFormData, {pageTitle: "Baptism & Confirmation", headerImage: "Baptism_Confirmation", csrfToken: req.csrfToken()}));
-// 	});
-// });
