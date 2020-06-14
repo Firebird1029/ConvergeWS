@@ -43,11 +43,11 @@ var express = require("express"),
 // Setup Express Middleware
 app.set("view engine", "pug");
 app.use(helmet());
+
 app.use(cookieSession({
 	name: "session",
 	keys: ["key1", "key2"]
 }));
-
 // For some reason, using session without using database has memory leak, so CSRF does not work in production (and SSL?) cookie-session less safe, but works without database
 // app.use(session({
 // 	secret: "jdfgyt3478h3n4v74y3vb3487yvb3487fvn3f",
@@ -56,6 +56,7 @@ app.use(cookieSession({
 // 	cookie: { maxAge: 60000 },
 // 	secure: true
 // }));
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false})); // Used for sending HTML form data within POST requests
 app.use(csrf({cookies: true})); // HTML form security
