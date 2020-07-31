@@ -190,3 +190,8 @@ router.post(["/baptism-and-confirmation", "/baptism-and-confirmation.html"], (re
 router.get(["/booking-time", "/booking-time.html"], (req, res) => {
 	renderPage(req, res, "Contact Responses", ["Booking Time"], "bookingTime.pug", _.merge(models.defaultFormRender, {pageTitle: "Booking Time", csrfToken: req.csrfToken()}));
 });
+
+// Give
+router.get(["/give", "/give.html"], (req, res) => {
+	renderPage(req, res, "About Sections", ["Front Page"], "give.pug", {pageTitle: "Give"});
+});
