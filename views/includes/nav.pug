@@ -49,6 +49,7 @@ nav.navbar.is-transparent
 				a.navbar-item(href="/kauai-room") Kauai Room
 			//- +dropdown("Resources")
 			a.navbar-item(href="/hebrews") HE BREWS
+		.navbar-end
 			+dropdown("CONTACT")
 				a.navbar-item(href="/more-info") More Info
 				a.navbar-item(href="/serve") To Serve
@@ -56,3 +57,6 @@ nav.navbar.is-transparent
 				a.navbar-item(href="/baptism-and-confirmation") Baptism &amp; Confirmation
 				a.navbar-item(href="/booking-time") Booking Time
 			a.navbar-item(href="/give") GIVE
+			//- Spacers to avoid dropdown being cut off on right side
+			a.navbar-item.is-hidden-touch &nbsp;
+			a.navbar-item.is-hidden-touch &nbsp;

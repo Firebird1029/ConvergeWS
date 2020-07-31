@@ -5,7 +5,7 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader("GIVE")
+			+addPageHeaderImage(options.pageTitle)
 			section.section
 				.columns
 					.column.is-two-thirds
@@ -18,29 +18,21 @@ html(lang="en")
 								li Select your church || Look for Chinese Lutheran Church of Honolulu in the list of registered organizations  
 								li Establish your payment method and provide account information
 								li Make a one-time payment or set up a recurring payment (weekly, bi-weekly, or monthly)
-							p After a thorough search, our finance team chose to work with #[a(href="https://www.mywell.org/give/chineselutheran/", target="_blank") mywell.org] because they offered the most efficient pricing. To help keep payment fees low for CLCH, and to maximize your donation, please consider the following interchange rates and use lower rate payment methods when possible.
-							p(style="margin-left: 2rem;")
-								| a) ACH (direct withdrawal from a checking / savings account): 0%
-								br
-								| b) Debit cards: Lowest rates of approx. 1%
-								br
-								| c) Visa / Mastercard: Nominal rates of approx. 1.5-2.5%
-								br
-								| d) American Express: High rates up to 3%
 					.column
-						.content(style="padding-right: 1rem;")
+						.content.has-text-centered
 							p
 								strong Direct Site:
 								br
 								a(href="https://www.mywell.org/give/chineselutheran/", target="_blank") https://www.mywell.org/give/chineselutheran/
-							p.has-text-centered
+							p &nbsp;
+							p
 								strong MyWell App:
 								br
 								a(href="https://apps.apple.com/us/app/my-well-giving/id1439735413", target="_blank")
-									img(src="/assets/img/apple_badge.png", style="max-width: 40%; margin-top: 1rem;")
+									img(src="/assets/img/apple_badge.png", style="max-width: 30%; margin-top: 1rem;")
 								br
 								a(href="https://play.google.com/store/apps/details?id=org.mywell.give", target="_blank")
-									img(src="/assets/img/android_badge.png", style="max-width: 50%")
+									img(src="/assets/img/android_badge.png", style="max-width: 40%")
 
 		//- Footer
 		include includes/footer.pug
