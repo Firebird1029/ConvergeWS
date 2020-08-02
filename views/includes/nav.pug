@@ -1,7 +1,7 @@
-mixin dropdown(link)
+mixin dropdown(link, dropdownAttr)
 	.navbar-item.has-dropdown.is-hoverable
 		.navbar-link.is-unselectable.navbarDropdownTitle(style="cursor: default;")= link
-		.navbar-dropdown.is-boxed
+		.navbar-dropdown.is-boxed(class=dropdownAttr)
 			block
 
 nav.navbar.is-transparent
@@ -50,13 +50,12 @@ nav.navbar.is-transparent
 			//- +dropdown("Resources")
 			a.navbar-item(href="/hebrews") HE BREWS
 		.navbar-end
-			+dropdown("CONTACT")
+			a.navbar-item(href="/give") GIVE
+			+dropdown("CONTACT", "is-right")
 				a.navbar-item(href="/more-info") More Info
 				a.navbar-item(href="/serve") To Serve
 				a.navbar-item(href="/prayer") For Prayer
 				a.navbar-item(href="/baptism-and-confirmation") Baptism &amp; Confirmation
 				a.navbar-item(href="/booking-time") Booking Time
-			a.navbar-item(href="/give") GIVE
-			//- Spacers to avoid dropdown being cut off on right side
-			a.navbar-item.is-hidden-touch &nbsp;
+			//- Spacer
 			a.navbar-item.is-hidden-touch &nbsp;
