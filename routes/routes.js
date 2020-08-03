@@ -111,6 +111,9 @@ router.get(["/photos", "/photos.html"], (req, res) => {
 
 // Hangout
 router.get(["/live", "/live.html"], (req, res) => {
+	// https://support.glitch.com/t/resolved-access-control-allow-origin-header-is-present-on-the-requested-resource/5894/5
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	renderPage(req, res, "Converge TV", ["Youtube Live"], "livestream.pug", {pageTitle: "Live Stream"});
 });
 router.get(["/listen", "/listen.html"], (req, res) => {
