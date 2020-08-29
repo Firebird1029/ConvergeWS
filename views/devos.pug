@@ -1,0 +1,125 @@
+doctype html
+html(lang="en")
+	include includes/head.pug
+	body
+		include includes/responsiveNav.pug
+		article.article
+			include includes/body.pug
+			+addPageHeader(options.pageTitle)
+			//- +addPageHeaderImage(options.headerImage)
+			+section()
+				if options.passedValidation
+					p We have received your devotion submission. Thank you!
+				else
+					form(action="/devos", method="post")
+						//- Name
+						.columns
+							.column
+								.field
+									- var fnameInvalid = options.invalid.hasOwnProperty("fname")
+									label.label First Name
+									.control.has-icons-right
+										input.input(type="text", name="fname", value=options.fields.fname, class=(fnameInvalid && "is-danger"))
+										if fnameInvalid
+											span.icon.is-small.is-right
+												i.fas.fa-exclamation-triangle
+									if fnameInvalid
+										p.help.is-danger= options.invalid.fname
+							.column
+								.field
+									- var lnameInvalid = options.invalid.hasOwnProperty("lname")
+									label.label Last Name
+									.control.has-icons-right
+										input.input(type="text", name="lname", value=options.fields.lname, class=(lnameInvalid && "is-danger"))
+										if lnameInvalid
+											span.icon.is-small.is-right
+												i.fas.fa-exclamation-triangle
+									if lnameInvalid
+										p.help.is-danger= options.invalid.lname
+
+						//- Title (of Passage)
+						.field
+							- var titleInvalid = options.invalid.hasOwnProperty("title")
+							label.label Title || Passage
+							.control.has-icons-right
+								input.input(type="text", name="title", value=options.fields.title, class=(titleInvalid && "is-danger"))
+								if titleInvalid
+									span.icon.is-small.is-right
+										i.fas.fa-exclamation-triangle
+							if titleInvalid
+								p.help.is-danger= options.invalid.title
+
+						//- Entry (Devotion/Journal Entry)
+						.field
+							- var entryInvalid = options.invalid.hasOwnProperty("entry")
+							label.label Devotion/Journal Entry
+							.control
+								textarea.textarea(name="entry", class=(entryInvalid && "is-danger"))= options.fields.entry
+							if entryInvalid
+								p.help.is-danger= options.invalid.entry
+
+						.columns
+							.column
+								//- Selection (Submission Group)
+								.field
+									- var selectionInvalid = options.invalid.hasOwnProperty("selection")
+									label.label Submission Group
+									.control.has-icons-left
+										.select: select(name="selection", value=options.fields.selection, class=(selectionInvalid && "is-danger"))
+											each val in ["Youth Fellowship", "CoYA", "Adult Small Group/Sunday School", "Young Adult Men's/Women's Group", "Youth Leadership (OYA/OYL)", "Staff"]
+												option= val
+										if selectionInvalid
+											span.icon.is-small.is-left
+												i.fas.fa-exclamation-triangle
+										else
+											span.icon.is-small.is-left
+												i.fas.fa-arrow-right
+									if selectionInvalid
+										p.help.is-danger= options.invalid.selection
+							.column
+								//- Selection 2 (Day of Week)
+								.field
+									- var selection2Invalid = options.invalid.hasOwnProperty("selection2")
+									label.label For (day of the week)
+									.control.has-icons-left
+										.select: select(name="selection2", value=options.fields.selection2, class=(selection2Invalid && "is-danger"))
+											each val in ["Monday", "Wednesday", "Friday"]
+												option= val
+										if selection2Invalid
+											span.icon.is-small.is-left
+												i.fas.fa-exclamation-triangle
+										else
+											span.icon.is-small.is-left
+												i.fas.fa-arrow-right
+									if selection2Invalid
+										p.help.is-danger= options.invalid.selection2
+						.field
+							label.checkbox
+								input(type="checkbox", name="publish", checked=options.fields.publish)
+								span: strong &nbsp; May Publish
+						.field
+							label.checkbox
+								input(type="checkbox", name="anonymous", checked=options.fields.anonymous)
+								span: strong &nbsp; Keep Anonymous
+						br
+						br
+
+						//- Notes
+						.field
+							- var notesInvalid = options.invalid.hasOwnProperty("notes")
+							label.label Additional Notes
+							.control
+								textarea.textarea(name="notes", class=(notesInvalid && "is-danger"))= options.fields.notes
+							if notesInvalid
+								p.help.is-danger= options.invalid.notes
+
+						//- reCAPTCHA & CSRF
+						.field
+							.g-recaptcha(data-sitekey="6Ld7k2UUAAAAADi8qXd_VEB6WAfMimFA63LqwS_D")
+							if options.invalid.hasOwnProperty("reCaptcha")
+								p.help.is-danger= options.invalid.reCaptcha
+						input(type="hidden", name="_csrf", value=(options.csrfToken))
+						input.button(type="submit")
+
+		//- Footer
+		include includes/footer.pug

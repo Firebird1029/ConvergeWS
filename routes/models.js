@@ -42,6 +42,10 @@ var bases = {
 		baseID: "appaTv4YjcvFV6f4l",
 		tables: ["Yumpu", "Authentic Peace", "Posts", "Authors"]
 	},
+	"Devotions": {
+		baseID: "appvfK512emYw6IiH",
+		tables: ["Entries"]
+	},
 	"Storefront": {
 		baseID: "appj9yKh2t3Qh24Wl",
 		tables: ["Storefront", "Contact"]
@@ -160,6 +164,23 @@ function processForm (baseName, tableName, userData, sysData) {
 		},
 		message: function () {
 			!validator.isLength(userData.message, {min: 1}) && (finalData.invalid.message = "Message is required");
+		},
+
+		// Devos Page
+		fname: function () {
+			!validator.isLength(userData.fname, {min: 1}) && (finalData.invalid.fname = "First name is required");
+		},
+		lname: function () {
+			!validator.isLength(userData.lname, {min: 1}) && (finalData.invalid.lname = "Last name is required");
+		},
+		title: function () {
+			!validator.isLength(userData.title, {min: 1}) && (finalData.invalid.title = "Title is required");
+		},
+		entry: function () {
+			!validator.isLength(userData.entry, {min: 1}) && (finalData.invalid.entry = "Entry is required");
+		},
+		selection2: function () {
+			!validator.isLength(userData.selection2, {min: 1}) && (finalData.invalid.selection2 = "Selection is required");
 		}
 	}
 
@@ -175,6 +196,13 @@ function processForm (baseName, tableName, userData, sysData) {
 	}
 
 	// Sanitization
+	// Devos Page
+	if (finalData.fields.hasOwnProperty("publish") && finalData.fields.publish === "on") {
+		finalData.fields.publish = true;
+	}
+	if (finalData.fields.hasOwnProperty("anonymous") && finalData.fields.anonymous === "on") {
+		finalData.fields.anonymous = true;
+	}
 
 	// Delete fields not part of HTML form
 	delete finalData.fields["g-recaptcha-response"]; // The reCAPTCHA is not an actual field, so delete it.

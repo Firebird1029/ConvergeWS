@@ -10,7 +10,7 @@ html(lang="en")
 				if options.passedValidation
 					p We have received your inquiry and will get back to you soon. Thank you!
 				else
-					form(action="/more-info.html", method="post")
+					form(action="/more-info", method="post")
 						//- Name
 						.field
 							- var nameInvalid = options.invalid.hasOwnProperty("name")
