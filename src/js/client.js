@@ -161,12 +161,12 @@ function searchArchive () {
 	$input = $("#searchBar");
 	filter = $input.val().toUpperCase();
 	$rows = $("#archiveTable").find("tr");
-	$rows.each(function (i, el) {
-		txtValue = $(this).find("td").text();
+	$rows.each(function (i, rowElement) {
+		txtValue = $(rowElement).find("td").text();
 		if (txtValue.toUpperCase().indexOf(filter) > -1) {
-			$(this).css("display", "");
+			$(rowElement).css("display", "");
 		} else {
-			$(this).css("display", "none");
+			$(rowElement).css("display", "none");
 		}
 	});
 }

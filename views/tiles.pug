@@ -1,4 +1,3 @@
-//- Sermons.pug is based on tiles.pug, update sermons.pug as necessary
 doctype html
 html(lang="en")
 	include includes/head.pug
@@ -11,12 +10,12 @@ html(lang="en")
 				//- The counter allows collapsible tiles to show/hide in their respective boxes, by correlating the heading (button) and the content.
 				- var counter = 0
 				each record in records[0]
-					//- Sermons: Publish record if less than a month old
+					//- Pages with Archive: Publish record if less than a month old
 					- var recordDate = new Date(record.date)
 					- var ONE_MONTH = 30 * 24 * 60 * 60 * 1000 /* ms */
 
-					//- If it's not the Sermons page, then !options.sermonPage == true. If it is Sermons page, then only publish record if less than a month old.
-					if record.publish && (!options.sermonPage || ((new Date) - recordDate) < ONE_MONTH)
+					//- If this page has an archive, then only publish record if less than a month old.
+					if record.publish && (!options.hasArchive || ((new Date) - recordDate) < ONE_MONTH)
 						.box
 							.columns: .column
 								//- title: All
@@ -31,7 +30,7 @@ html(lang="en")
 								if record.img
 									.column.is-one-quarter
 											+addImg(record.img, "imageLeftFloatFix")
-								.column(class=(options.sermonPage) ? "has-text-centered" : "")
+								.column(class=(options.hasArchive) ? "has-text-centered" : "")
 									//- passage: Sermons
 									+addText(record.passage)
 									//- body: All
@@ -113,11 +112,11 @@ html(lang="en")
 											span: +addSpan(records[1][record.contact[0]]["email"])
 											span )
 					- counter++;
-			if options.sermonPage
+			if options.hasArchive
 				+section("Archive")
-					p #[a(href="/sermons/archive") Click here] to go to the archive for sermons from more than a month ago.
+					p #[a(href=(options.archiveParentPath + "/archive")) Click here] to go to the archive for #{options.pageTitle.toLowerCase()} from more than a month ago.
 
 		//- Footer
-		if (options.sermonPage || options.tvPage)
+		if (options.hasArchive || options.tvPage)
 			script#hs-script-loader(type="text/javascript", src="//js.hs-scripts.com/7597904.js", async, defer)
 		include includes/footer.pug
