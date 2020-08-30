@@ -15,6 +15,7 @@ html(lang="en")
 					thead
 						tr
 							th Date
+							th Author
 							th Title
 							th Article
 					tbody#archiveTable
@@ -29,6 +30,7 @@ html(lang="en")
 									td
 										if record.date
 											+addDate(record.date, "span")
+									td: +addText(records[1][record.author[0]]["name"])
 									td: +addText(record.title)
 									td: +addText(record.body)
 
