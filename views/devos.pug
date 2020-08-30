@@ -5,8 +5,7 @@ html(lang="en")
 		include includes/responsiveNav.pug
 		article.article
 			include includes/body.pug
-			+addPageHeader(options.pageTitle)
-			//- +addPageHeaderImage(options.headerImage)
+			+addPageHeaderImage(options.headerImage)
 			+section()
 				if options.passedValidation
 					p We have received your devotion submission. Thank you!
@@ -112,6 +111,7 @@ html(lang="en")
 								textarea.textarea(name="notes", class=(notesInvalid && "is-danger"))= options.fields.notes
 							if notesInvalid
 								p.help.is-danger= options.invalid.notes
+							p.help (message to Jason, not posted: questions, comments, etc.)
 
 						//- reCAPTCHA & CSRF
 						.field
