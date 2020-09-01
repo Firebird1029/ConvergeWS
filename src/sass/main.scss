@@ -9,7 +9,12 @@ body {
 	font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;
 	overflow: hidden;
 
-	h1, h2, h3, h4, h5, h6 {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		font-family: "Merriweather", "Source Sans Pro", Helvetica, Arial, sans-serif;
 		// font-family: "Roboto", "Source Sans Pro", Helvetica, Arial, sans-serif;
 	}
@@ -98,6 +103,9 @@ div.is-divider {
 }
 
 .is-fullheight-aspect-ratio {
+	height: 40rem;
+	max-height: 100vh;
+
 	@media screen and (min-aspect-ratio: 220/131) {
 		min-height: 100vh;
 	}
@@ -105,7 +113,7 @@ div.is-divider {
 
 .is-hidden-aspect-ratio {
 	@media screen and (min-aspect-ratio: 220/131) {
-		display: none!important;
+		display: none !important;
 	}
 }
 
@@ -125,7 +133,7 @@ div.is-divider {
 	transition: background 0.3s;
 
 	&:hover {
-		background-color: rgba(255, 255, 255, 1.0);
+		background-color: rgba(255, 255, 255, 1);
 	}
 }
 
@@ -164,7 +172,7 @@ div.is-divider {
 	background: #7fcbc3;
 	bottom: 10px;
 	height: 8px;
-	content: '';
+	content: "";
 	width: 8px;
 	left: 50%;
 }
