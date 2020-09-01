@@ -1,6 +1,9 @@
 doctype html
 html(lang="en")
-	include includes/head.pug
+	if options.noIndex
+		include includes/headNoIndex.pug
+	else
+		include includes/head.pug
 	body
 		include includes/responsiveNav.pug
 		article.article
