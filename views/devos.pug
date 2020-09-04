@@ -8,7 +8,7 @@ html(lang="en")
 			+addPageHeaderImage(options.headerImage)
 			+section()
 				if options.passedValidation
-					p We have received your devotion submission. Thank you!
+					p We have received your devotion submission. Thank you! To check out posts from our congregation, please visit: #[a(href="/articles-and-blogs") Articles &amp; Blogs]
 				else
 					form(action="/devos", method="post")
 						//- Name
