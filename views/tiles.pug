@@ -15,10 +15,10 @@ html(lang="en")
 				each record in records[0]
 					//- Pages with Archive: Publish record if less than a month old
 					- var recordDate = new Date(record.date)
-					- var EIGHT_DAYS = 8 * 24 * 60 * 60 * 1000 /* ms */
+					- var ONE_MONTH = 30 * 24 * 60 * 60 * 1000 /* ms */
 
 					//- If this page has an archive, then only publish record if less than a month old.
-					if record.publish && (!options.hasArchive || ((new Date) - recordDate) <= EIGHT_DAYS)
+					if record.publish && (!options.hasArchive || ((new Date) - recordDate) < ONE_MONTH)
 						.box
 							.columns: .column
 								//- title: All
