@@ -30,7 +30,7 @@
 		"postinstall": "npm run build"
 	},
 	"dependencies": {
-		"airtable": "^0.8.1",
+		"airtable": "^0.10.0",
 		"babel-core": "^6.26.3",
 		"body-parser": "^1.19.0",
 		"bulma": "^0.9.0",
