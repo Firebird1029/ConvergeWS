@@ -125,18 +125,18 @@ router.get(["/listen", "/listen.html"], (req, res) => {
 router.get(["/tv", "/tv.html"], (req, res) => {
 	renderPage(req, res, "Converge TV", ["Converge TV", "Speakers", "Topics"], "tiles.pug", {pageTitle: "Converge TV", tvPage: true});
 });
-router.get(["/jitsi", "/jitsi.html"], (req, res) => {
-	renderPage(req, res, "Meeting Rooms", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
-});
-router.get(["/palehua-room", "/palehua-room.html"], (req, res) => {
-	renderPage(req, res, "Meeting Rooms", ["Palehua"], "jitsi.pug", {pageTitle: "Palehua Room"});
-});
-router.get(["/mokuleia-room", "/mokuleia-room.html"], (req, res) => {
-	renderPage(req, res, "Meeting Rooms", ["Mokuleia"], "jitsi.pug", {pageTitle: "Mokuleia Room"});
-});
-router.get(["/kauai-room", "/kauai-room.html"], (req, res) => {
-	renderPage(req, res, "Meeting Rooms", ["Kauai"], "jitsi.pug", {pageTitle: "Kauai Room"});
-});
+// router.get(["/jitsi", "/jitsi.html"], (req, res) => {
+// 	renderPage(req, res, "Meeting Rooms", ["Jitsi"], "jitsi.pug", {pageTitle: "Jitsi"});
+// });
+// router.get(["/palehua-room", "/palehua-room.html"], (req, res) => {
+// 	renderPage(req, res, "Meeting Rooms", ["Palehua"], "jitsi.pug", {pageTitle: "Palehua Room"});
+// });
+// router.get(["/mokuleia-room", "/mokuleia-room.html"], (req, res) => {
+// 	renderPage(req, res, "Meeting Rooms", ["Mokuleia"], "jitsi.pug", {pageTitle: "Mokuleia Room"});
+// });
+// router.get(["/kauai-room", "/kauai-room.html"], (req, res) => {
+// 	renderPage(req, res, "Meeting Rooms", ["Kauai"], "jitsi.pug", {pageTitle: "Kauai Room"});
+// });
 
 // HE Brews
 router.get(["/hebrews", "/he-brews", "/hebrews.html", "/he-brews.html"], (req, res) => {
