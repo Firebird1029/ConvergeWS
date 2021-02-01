@@ -30,7 +30,9 @@ html(lang="en")
 									td
 										if record.date
 											+addDate(record.date, "span")
-									td: +addText(records[1][record.author[0]]["name"])
+									td
+										if records[1][record.author]
+											+addText(records[1][record.author[0]]["name"])
 									td: +addText(record.title)
 									td: +addText(record.body)
 
