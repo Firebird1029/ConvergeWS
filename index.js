@@ -19,8 +19,6 @@ var express = require("express"),
 	// Project-Specific Dependencies
 	CronJob = require("cron").CronJob,
 	jsonfile = require("jsonfile"),
-	io = require("socket.io"),
-	listener = io.listen(server),
 	// Utilities & Custom Modules
 	_ = require("lodash"),
 	utils = require("./utils.js"),
