@@ -34,7 +34,9 @@ app.use(helmet());
 app.use(
 	cookieSession({
 		name: "session",
-		keys: [process.env.COOKIE_SESSION_KEY_1, process.env.COOKIE_SESSION_KEY_2, process.env.COOKIE_SESSION_KEY_3]
+		keys: [process.env.COOKIE_SESSION_KEY_1, process.env.COOKIE_SESSION_KEY_2, process.env.COOKIE_SESSION_KEY_3],
+		secure: true,
+		sameSite: "lax",
 	})
 );
 
