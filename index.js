@@ -27,7 +27,44 @@ var express = require("express"),
 
 // Setup Express Middleware
 app.set("view engine", "pug");
-app.use(helmet());
+app.use(
+	helmet({
+		contentSecurityPolicy: {
+			directives: _.assign(helmet.contentSecurityPolicy.getDefaultDirectives(), {
+				"script-src": [
+					"'self'",
+					"cdn.jsdelivr.net",
+					"cdnjs.cloudflare.com",
+					"use.fontawesome.com",
+
+					"maps.googleapis.com", // Google Maps
+					"www.google.com", // ReCaptcha
+					"www.gstatic.com", // ReCaptcha
+					"players.yumpu.com", // Authentic Peace
+
+					// Google Analytics
+					"www.googletagmanager.com www.google-analytics.com ssl.google-analytics.com",
+					"'sha256-BaMa7DEnqMbttTIFHxvpRSKIVRZeqVpRaA8EzEU8lw4='",
+					"'sha256-oByu3isyoualNW0NX6KCfG52kLL6eFagsUSOlk5jiUM='",
+
+					// Hubspot
+					"js.hs-scripts.com js.hs-analytics.net js.hscollectedforms.net js.hs-banner.com js.usemessages.com *.hubspot.com *.hsforms.net *.hsforms.com",
+				],
+				"img-src": [
+					"'self'",
+					"data:",
+					"www.googletagmanager.com www.google-analytics.com",
+					"dl.airtable.com",
+					"maps.gstatic.com",
+					"*.googleapis.com",
+					"*.hubspot.com *.hsforms.com",
+				],
+				"connect-src": ["'self'", "www.google-analytics.com", "*.hubspot.com"],
+				"frame-src": ["*"],
+			}),
+		},
+	})
+);
 
 app.use(
 	cookieSession({
