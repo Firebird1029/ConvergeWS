@@ -16,7 +16,6 @@ $(document).ready(function() {
 		$(".navbar-menu").toggleClass("is-active");
 		$(".navbar").toggleClass("is-desktop"); // Fixes glitch where mobile nav menu can't scroll
 		$(".navbarDropdownTitle").toggleClass("is-strong"); // So users will hopefully stop tapping the unlinked dropdown titles
-		// 
 		$("#mobileHeroImg, article.article").toggle(); // Stylistic choice, since nav hamburger is fixed at bottom of screen
 		window.scrollTo(0, scrollToPos);
 	});
@@ -75,6 +74,7 @@ function jumpToWelcome () {
 	}
 	return false;
 }
+$("#jumpToWelcome").click(jumpToWelcome);
 
 // Add Background Behind Navbar (if full navbar is present)
 // https://stackoverflow.com/questions/7182342/how-to-detect-when-the-user-has-scrolled-to-a-certain-area-on-the-page-using-jqu
