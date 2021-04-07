@@ -33,13 +33,12 @@ app.use(
 	cookieSession({
 		name: "session",
 		keys: [process.env.COOKIE_SESSION_KEY_1, process.env.COOKIE_SESSION_KEY_2, process.env.COOKIE_SESSION_KEY_3],
-		secure: true,
 		sameSite: "lax",
 	})
 );
 
-app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false })); // Used for sending HTML form data within POST requests
+app.use(cookieParser());
 app.use(csrf({ cookies: true })); // HTML form security
 
 app.use(express.static(__dirname + "/public"));
