@@ -59,7 +59,7 @@ app.use(
 					"*.googleapis.com",
 					"*.hubspot.com *.hsforms.com",
 				],
-				"connect-src": ["'self'", "www.google-analytics.com", "*.hubspot.com"],
+				"connect-src": ["'self'", "www.google-analytics.com", "*.hubspot.com", "*.googleapis.com"],
 				"frame-src": ["*"],
 			}),
 		},
