@@ -27,8 +27,7 @@
 		"dev-nodemon": "nodemon -r dotenv/config --ignore 'models/*.json' index.js",
 		"dev-build": "gulp",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "node models/resetModels.js && gulp production",
-		"postinstall": "npm run build"
+		"build": "node models/resetModels.js && gulp production"
 	},
 	"dependencies": {
 		"airtable": "^0.11.1",
