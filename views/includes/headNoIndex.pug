@@ -4,25 +4,25 @@ head
 	meta(name="viewport" content="width=device-width, initial-scale=1")
 
 	title Converge #{(options && options.pageTitle) ? " - " + options.pageTitle : ""}
-	link(rel="shortcut icon", href="/assets/img/favicon.ico", type="image/x-icon")
+	link(rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon")
 	meta(name="description" content="")
 	meta(name="author" content="Converge")
 	meta(name="robots" content="noindex")
 
 	//- Global site tag (gtag.js) - Google Analytics
-	script(async, src="https://www.googletagmanager.com/gtag/js?id=UA-162004547-3")
+	script(async, src="https://www.googletagmanager.com/gtag/js?id=G-9HV3G3Q6M2")
 	script.
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag("js", new Date());
-		gtag("config", "UA-162004547-3");
+		gtag("config", "G-9HV3G3Q6M2");
 
 	//- Load CSS frameworks from jsDelivr CDN.
-	link(rel="stylesheet", href="https://cdn.jsdelivr.net/combine/npm/normalize.css@8,npm/animate.css@3")
-	link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.css")
-	link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/default-skin/default-skin.css")
-	link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/hello-week@1/dist/helloweek.min.css")
-	link(rel="stylesheet", href="/vidbg/vidbg.css")
-	link(rel="stylesheet", type="text/css", href="/css/main.css")
+	link(rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/normalize.css@8,npm/animate.css@3")
+	link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/photoswipe.css")
+	link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.0/default-skin/default-skin.css")
+	link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hello-week@1/dist/helloweek.min.css")
+	link(rel="stylesheet" href="/vidbg/vidbg.css")
+	link(rel="stylesheet" type="text/css" href="/css/main.css")
 	script(defer, src="https://use.fontawesome.com/releases/v5.1.0/js/all.js")
 	script(src="https://www.google.com/recaptcha/api.js")
