@@ -47,8 +47,8 @@ router.get(["/", "/index.html"], (req, res) => {
 });
 
 // About
-router.get(["/staff", "/staff.html"], (req, res) => {
-	renderPage(req, res, "About Staff", ["Staff"], "staff.pug", {pageTitle: "Our Staff"});
+router.get(["/staff", "/staff.html", "/teamleaders", "/team-leaders", "/teamleaders.html", "/team-leaders.html"], (req, res) => {
+	renderPage(req, res, "About Staff", ["Staff"], "staff.pug", {pageTitle: "Our Team Leaders"});
 });
 router.get(["/history", "/history.html"], (req, res) => {
 	renderPage(req, res, "About Sections", ["History"], "aboutSections.pug", {pageTitle: "History"});
