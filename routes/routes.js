@@ -91,9 +91,9 @@ router.get(["/articles-and-blogs", "/articles-and-blogs.html"], (req, res) => {
 router.get(["/articles-and-blogs/archive", "/articles-and-blogs/archive.html"], (req, res) => {
 	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "articleArchive.pug", {pageTitle: "Articles and Blogs"});
 });
-router.get(["/beblessed", "/be-blessed", "/beblessed.html", "/be-blessed.html"], (req, res) => {
-	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
-});
+// router.get(["/beblessed", "/be-blessed", "/beblessed.html", "/be-blessed.html"], (req, res) => {
+// 	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});
+// });
 router.get(["/photos", "/photos.html"], (req, res) => {
 	renderPage(req, res, "Experience", ["Photos"], "photos.pug", {pageTitle: "Photos", collapsible: true});
 });
