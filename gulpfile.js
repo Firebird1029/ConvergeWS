@@ -1,7 +1,7 @@
 var gulp = require("gulp"),
 	plugins = require("gulp-load-plugins")(),
-	browserSync = require("browser-sync").create();
-	// sass = require("gulp-sass"),
+	browserSync = require("browser-sync").create(),
+	sass = require("gulp-sass")(require("sass"));
 	// autoprefixer = require("gulp-autoprefixer"),
 	// cssMin = require("gulp-cssmin"),
 	// sourcemaps = require("gulp-sourcemaps");
@@ -9,7 +9,7 @@ var gulp = require("gulp"),
 gulp.task("css", function () {
 	return gulp.src(["./src/sass/main.scss"])
 	.pipe(plugins.sourcemaps.init())
-	.pipe(plugins.sass().on("error", plugins.sass.logError))
+	.pipe(sass().on("error", sass.logError))
 	.pipe(plugins.cssmin())
 	.pipe(plugins.autoprefixer())
 	.pipe(plugins.sourcemaps.write())
