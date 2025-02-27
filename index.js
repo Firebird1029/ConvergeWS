@@ -103,7 +103,7 @@ app.use((req, res, next) => {
 // */6 * * * * * -- every 10 seconds
 // */12 * * * * * -- every 5 seconds
 var job = new CronJob(
-	"*/12 * * * * *",
+	"0 0 * * *",
 	function () {
 		// Actual scanning happens in routes/models.js. This function simply transfers the pulled data into JSON files.
 		models.scanEveryTable(models.bases, function scanEveryTableCallback(data) {
