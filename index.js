@@ -25,6 +25,9 @@ var express = require("express"),
 	router = require("./routes/routes.js"),
 	models = require("./routes/models.js");
 
+const strapiService = require("./services/strapi.js");
+const STRAPI_ENDPOINTS = strapiService.STRAPI_ENDPOINTS;
+
 // Setup Express Middleware
 app.set("view engine", "pug");
 app.use(
@@ -80,7 +83,7 @@ app.use(
 if (!process.env.WEBHOOK_AUTH_TOKEN) {
 	throw new Error("WEBHOOK_AUTH_TOKEN environment variable is required");
 }
-app.post("/webhook/strapi-update", bodyParser.json(), (req, res) => {
+app.post("/webhook/strapi-update", bodyParser.json(), async (req, res) => {
 	// Basic authentication check
 	const authHeader = req.headers.authorization;
 	const expectedAuth = `Bearer ${process.env.WEBHOOK_AUTH_TOKEN}`;
@@ -90,9 +93,58 @@ app.post("/webhook/strapi-update", bodyParser.json(), (req, res) => {
 		return res.status(401).json({ error: "Unauthorized" });
 	}
 
-	debug && console.log("Webhook triggered by Strapi - starting content sync...");
+	const event = req.body.event;
+	const model = req.body.model;
+	let tableName = null;
 
-	// Run the Strapi scan
+	// Map Strapi model to internal table name
+	const modelToTable = {
+		announcement: "Community_Announcements",
+		article: "Articles and Blogs_Articles",
+		"calendar-event": "Experience_Calendar",
+		"converge-listen": "Converge Listen_Listen",
+		"converge-tv": "Converge TV_Converge TV",
+		form: "Community_Forms",
+		photo: "Experience_Photos",
+		sermon: "Past Sermons_Sermons",
+		"team-leader": "About Sections_Team Leaders",
+		"front-page": "About Sections_Front Page",
+		global: null, // Not mapped to a file, add if needed
+		"he-brew": "HE Brews_HE Brews",
+		history: "About Sections_History",
+		"values-page": "About Sections_Values",
+		"youtube-live": "Converge TV_Youtube Live",
+		user: null, // Not mapped to a file, add if needed
+	};
+
+	if (modelToTable[model]) {
+		tableName = modelToTable[model];
+	}
+
+	// Ignore media.create, entry.create, and entry.update events
+	if (event === "media.create" || event === "entry.create" || event === "entry.update") {
+		return res.status(200).json({ success: true, message: `Ignored event: ${event}` });
+	}
+
+	// Optimize for publish, unpublish, and delete events
+	if (
+		(event === "entry.publish" || event === "entry.unpublish" || event === "entry.delete") &&
+		tableName &&
+		STRAPI_ENDPOINTS[tableName]
+	) {
+		// Only fetch and update the changed table
+		const data = await strapiService.fetchStrapiContentType(tableName);
+		const jsonfile = require("jsonfile");
+		const path = require("path");
+		jsonfile.writeFile(path.join(__dirname, `models/${tableName}.json`), data, function (err) {
+			if (debug && err) {
+				console.error(`Error writing ${tableName}.json:`, err);
+			}
+		});
+		return res.status(200).json({ success: true, message: `Content sync triggered for ${tableName}` });
+	}
+
+	// Fallback: full scan
 	models.scanEveryTableStrapi(models.bases, function scanEveryTableCallback(data) {
 		let filesUpdated = 0;
 		Object.keys(data).forEach(function processFullDataCallback(key) {
@@ -108,7 +160,7 @@ app.post("/webhook/strapi-update", bodyParser.json(), (req, res) => {
 		debug && console.log(`Webhook scan complete! ${filesUpdated} files updated with Strapi data.`);
 	});
 
-	res.status(200).json({ success: true, message: "Content sync triggered successfully" });
+	res.status(200).json({ success: true, message: "Content sync triggered (full scan fallback)" });
 });
 
 app.use(bodyParser.urlencoded({ extended: false })); // Used for sending HTML form data within POST requests
