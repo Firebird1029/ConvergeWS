@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "converge_tvs",
+  "info": {
+    "singularName": "converge-tv",
+    "pluralName": "converge-tvs",
+    "displayName": "Converge TV"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "embed": {
+      "type": "text"
+    },
+    "speaker": {
+      "type": "string"
+    },
+    "topics": {
+      "type": "string"
+    },
+    "expiration": {
+      "type": "datetime"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "converge_listens",
+  "info": {
+    "singularName": "converge-listen",
+    "pluralName": "converge-listens",
+    "displayName": "Converge Listen"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "embed": {
+      "type": "string"
+    }
+  }
+}

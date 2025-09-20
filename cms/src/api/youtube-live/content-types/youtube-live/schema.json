@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "youtube_lives",
+  "info": {
+    "singularName": "youtube-live",
+    "pluralName": "youtube-lives",
+    "displayName": "Youtube Live"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "youtubeID": {
+      "type": "string"
+    },
+    "discordID": {
+      "type": "string"
+    },
+    "handout": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

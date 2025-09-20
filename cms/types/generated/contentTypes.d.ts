@@ -438,6 +438,68 @@ export interface ApiCalendarEventCalendarEvent
   };
 }
 
+export interface ApiConvergeListenConvergeListen
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'converge_listens';
+  info: {
+    displayName: 'Converge Listen';
+    pluralName: 'converge-listens';
+    singularName: 'converge-listen';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    embed: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::converge-listen.converge-listen'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiConvergeTvConvergeTv extends Struct.CollectionTypeSchema {
+  collectionName: 'converge_tvs';
+  info: {
+    displayName: 'Converge TV';
+    pluralName: 'converge-tvs';
+    singularName: 'converge-tv';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    embed: Schema.Attribute.Text;
+    expiration: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::converge-tv.converge-tv'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    speaker: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    topics: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFormForm extends Struct.CollectionTypeSchema {
   collectionName: 'forms';
   info: {
@@ -637,6 +699,36 @@ export interface ApiValuesPageValuesPage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiYoutubeLiveYoutubeLive extends Struct.SingleTypeSchema {
+  collectionName: 'youtube_lives';
+  info: {
+    displayName: 'Youtube Live';
+    pluralName: 'youtube-lives';
+    singularName: 'youtube-live';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    discordID: Schema.Attribute.String;
+    handout: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::youtube-live.youtube-live'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    youtubeID: Schema.Attribute.String;
   };
 }
 
@@ -1151,6 +1243,8 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::calendar-event.calendar-event': ApiCalendarEventCalendarEvent;
+      'api::converge-listen.converge-listen': ApiConvergeListenConvergeListen;
+      'api::converge-tv.converge-tv': ApiConvergeTvConvergeTv;
       'api::form.form': ApiFormForm;
       'api::front-page.front-page': ApiFrontPageFrontPage;
       'api::global.global': ApiGlobalGlobal;
@@ -1158,6 +1252,7 @@ declare module '@strapi/strapi' {
       'api::photo.photo': ApiPhotoPhoto;
       'api::team-leader.team-leader': ApiTeamLeaderTeamLeader;
       'api::values-page.values-page': ApiValuesPageValuesPage;
+      'api::youtube-live.youtube-live': ApiYoutubeLiveYoutubeLive;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
