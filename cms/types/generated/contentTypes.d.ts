@@ -389,6 +389,7 @@ export interface ApiAnnouncementAnnouncement
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.DateTime;
     img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -398,6 +399,38 @@ export interface ApiAnnouncementAnnouncement
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     style: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
+  collectionName: 'articles';
+  info: {
+    displayName: 'Articles';
+    pluralName: 'articles';
+    singularName: 'article';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Schema.Attribute.String;
+    body: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::article.article'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -453,6 +486,7 @@ export interface ApiConvergeListenConvergeListen
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.DateTime;
     embed: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -482,6 +516,7 @@ export interface ApiConvergeTvConvergeTv extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.DateTime;
     embed: Schema.Attribute.Text;
     expiration: Schema.Attribute.DateTime;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -515,6 +550,7 @@ export interface ApiFormForm extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.DateTime;
     handout: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::form.form'> &
@@ -587,6 +623,38 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHeBrewHeBrew extends Struct.SingleTypeSchema {
+  collectionName: 'he_brews';
+  info: {
+    displayName: 'He Brews';
+    pluralName: 'he-brews';
+    singularName: 'he-brew';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::he-brew.he-brew'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    rows: Schema.Attribute.Component<'shared.he-brews-menu-item', true>;
+    style: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHistoryHistory extends Struct.SingleTypeSchema {
   collectionName: 'histories';
   info: {
@@ -636,6 +704,41 @@ export interface ApiPhotoPhoto extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     ministry: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSermonSermon extends Struct.CollectionTypeSchema {
+  collectionName: 'sermons';
+  info: {
+    displayName: 'Sermons';
+    pluralName: 'sermons';
+    singularName: 'sermon';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    embed: Schema.Attribute.Text;
+    handout: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sermon.sermon'
+    > &
+      Schema.Attribute.Private;
+    passage: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slides: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    speaker: Schema.Attribute.String;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1242,14 +1345,17 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
+      'api::article.article': ApiArticleArticle;
       'api::calendar-event.calendar-event': ApiCalendarEventCalendarEvent;
       'api::converge-listen.converge-listen': ApiConvergeListenConvergeListen;
       'api::converge-tv.converge-tv': ApiConvergeTvConvergeTv;
       'api::form.form': ApiFormForm;
       'api::front-page.front-page': ApiFrontPageFrontPage;
       'api::global.global': ApiGlobalGlobal;
+      'api::he-brew.he-brew': ApiHeBrewHeBrew;
       'api::history.history': ApiHistoryHistory;
       'api::photo.photo': ApiPhotoPhoto;
+      'api::sermon.sermon': ApiSermonSermon;
       'api::team-leader.team-leader': ApiTeamLeaderTeamLeader;
       'api::values-page.values-page': ApiValuesPageValuesPage;
       'api::youtube-live.youtube-live': ApiYoutubeLiveYoutubeLive;

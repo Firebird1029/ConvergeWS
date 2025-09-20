@@ -1,23 +1,28 @@
 {
-  "kind": "collectionType",
-  "collectionName": "forms",
+  "kind": "singleType",
+  "collectionName": "he_brews",
   "info": {
-    "singularName": "form",
-    "pluralName": "forms",
-    "displayName": "Forms"
+    "singularName": "he-brew",
+    "pluralName": "he-brews",
+    "displayName": "He Brews"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
+    "rows": {
+      "type": "component",
+      "component": "shared.he-brews-menu-item",
+      "repeatable": true
+    },
     "title": {
       "type": "string"
     },
     "body": {
       "type": "text"
     },
-    "handout": {
+    "img": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -27,8 +32,8 @@
         "audios"
       ]
     },
-    "date": {
-      "type": "datetime"
+    "style": {
+      "type": "string"
     }
   }
 }

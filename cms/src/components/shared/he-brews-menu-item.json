@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_he_brews_menu_items",
+  "info": {
+    "displayName": "He Brews Menu Item"
+  },
+  "options": {},
+  "attributes": {
+    "drink": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "boolean"
+    },
+    "smallCost": {
+      "type": "decimal"
+    },
+    "largeCost": {
+      "type": "decimal"
+    },
+    "notes": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

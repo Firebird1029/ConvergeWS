@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "forms",
+  "collectionName": "articles",
   "info": {
-    "singularName": "form",
-    "pluralName": "forms",
-    "displayName": "Forms"
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Articles"
   },
   "options": {
     "draftAndPublish": true
@@ -14,10 +14,13 @@
     "title": {
       "type": "string"
     },
+    "date": {
+      "type": "date"
+    },
     "body": {
       "type": "text"
     },
-    "handout": {
+    "img": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -27,8 +30,8 @@
         "audios"
       ]
     },
-    "date": {
-      "type": "datetime"
+    "author": {
+      "type": "string"
     }
   }
 }

@@ -1,5 +1,19 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedHeBrewsMenuItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_he_brews_menu_items';
+  info: {
+    displayName: 'He Brews Menu Item';
+  };
+  attributes: {
+    drink: Schema.Attribute.String;
+    heading: Schema.Attribute.Boolean;
+    largeCost: Schema.Attribute.Decimal;
+    notes: Schema.Attribute.Text;
+    smallCost: Schema.Attribute.Decimal;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -86,6 +100,7 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.he-brews-menu-item': SharedHeBrewsMenuItem;
       'shared.media': SharedMedia;
       'shared.plain-text': SharedPlainText;
       'shared.quote': SharedQuote;
