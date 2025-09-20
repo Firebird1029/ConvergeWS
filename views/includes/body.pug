@@ -42,12 +42,26 @@ mixin addImg(image, figureClasses)
 //- This changes the format of the Date string provided by Airtable into mm/dd/yy format.
 mixin addDate(date, style)
 	if date
+		// Format ISO with time or plain yyyy-mm-dd as mm/dd/yyyy
+		- var formatted = date;
+		- if (typeof date === 'string') {
+		-   if (date.match(/^\d{4}-\d{2}-\d{2}T/)) {
+		-     var d = new Date(date);
+		-     var mm = String(d.getMonth() + 1).padStart(2, '0');
+		-     var dd = String(d.getDate()).padStart(2, '0');
+		-     var yyyy = d.getFullYear();
+		-     formatted = mm + '/' + dd + '/' + yyyy;
+		-   } else if (date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+		-     var parts = date.split('-');
+		-     formatted = parts[1] + '/' + parts[2] + '/' + parts[0];
+		-   }
+		- }
 		case style
 			when "span"
-				span= date.replace(/(\d+)-(\d+)-(\d+)/, "$2/$3/$1")
+				span= formatted
 			when "h4"
 			default
-				h4= date.replace(/(\d+)-(\d+)-(\d+)/, "$2/$3/$1")
+				h4= formatted
 
 mixin section(title)
 	section.section
