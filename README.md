@@ -18,3 +18,6 @@
    2. Wait for deployment to fully finish online (~10 minutes)
    3. `npm run strapi transfer -- --to https://XYZ.strapiapp.com/admin` (replace XYZ with actual Strapi cloud instance URL)
       1. Transfer token is stored in SnippetsLab
+   4. Re-set webhook in production Admin Settings: <https://XYZ.strapiapp.com/admin/settings/webhooks>
+      1. URL & Headers stored in SnippetsLab
+      2. Select ALL events
