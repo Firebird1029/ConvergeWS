@@ -24,18 +24,18 @@ mixin addTitle(title)
 //- In Airtable, use % in a record to create a newline.
 mixin addText(text)
 	if text
-		each paragraph in text.split("%\n")
+		each paragraph in text.split("\n")
 			p!= paragraph
 
 mixin addSpan(text)
 	if text
 		span= text
 
-//- This checks if an image is provided before displaying it, since accessing the .url property of an undefined object returns an error
+//- Display image with proper attributes
 mixin addImg(image, figureClasses)
 	figure.image.has-text-centered-mobile(class=figureClasses)
-		if image
-			img(src=image[0].url)
+		if image && image.url
+			img(src=image.url, alt=image.alternativeText || '')
 		else
 			img
 

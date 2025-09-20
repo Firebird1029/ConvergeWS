@@ -54,8 +54,9 @@ app.use(
 					"'self'",
 					"data:",
 					"www.googletagmanager.com www.google-analytics.com",
-					// "dl.airtable.com",
-					"v5.airtableusercontent.com",
+					// Strapi image sources:
+					...(debug ? ["localhost:1337"] : []),
+					"informed-power-b659f309b0.media.strapiapp.com",
 					"maps.gstatic.com",
 					"*.googleapis.com",
 					"*.hubspot.com *.hsforms.com",
@@ -74,6 +75,41 @@ app.use(
 		sameSite: "lax",
 	})
 );
+
+// Webhook endpoint for Strapi content updates (before CSRF middleware)
+if (!process.env.WEBHOOK_AUTH_TOKEN) {
+	throw new Error("WEBHOOK_AUTH_TOKEN environment variable is required");
+}
+app.post("/webhook/strapi-update", bodyParser.json(), (req, res) => {
+	// Basic authentication check
+	const authHeader = req.headers.authorization;
+	const expectedAuth = `Bearer ${process.env.WEBHOOK_AUTH_TOKEN}`;
+
+	if (!authHeader || authHeader !== expectedAuth) {
+		debug && console.log("Webhook authentication failed");
+		return res.status(401).json({ error: "Unauthorized" });
+	}
+
+	debug && console.log("Webhook triggered by Strapi - starting content sync...");
+
+	// Run the Strapi scan
+	models.scanEveryTableStrapi(models.bases, function scanEveryTableCallback(data) {
+		let filesUpdated = 0;
+		Object.keys(data).forEach(function processFullDataCallback(key) {
+			jsonfile.writeFile(`${__dirname}/models/${key}.json`, data[key], function jsonWriteFileCallback(err) {
+				if (debug && err) {
+					console.error(`Error writing ${key}.json:`, err);
+				} else {
+					filesUpdated++;
+					debug && console.log(`Updated ${key}.json with ${Object.keys(data[key]).length} records`);
+				}
+			});
+		});
+		debug && console.log(`Webhook scan complete! ${filesUpdated} files updated with Strapi data.`);
+	});
+
+	res.status(200).json({ success: true, message: "Content sync triggered successfully" });
+});
 
 app.use(bodyParser.urlencoded({ extended: false })); // Used for sending HTML form data within POST requests
 app.use(cookieParser());
@@ -102,19 +138,30 @@ app.use((req, res, next) => {
 // 00 */2 * * * * -- every 2 hours
 // */6 * * * * * -- every 10 seconds
 // */12 * * * * * -- every 5 seconds
+// 0 0 * * * -- every day at midnight
+
+// CRON JOB DISABLED - Uncomment below to re-enable
+/*
 var job = new CronJob(
 	"0 0 * * *",
 	function () {
+		debug && console.log("Cron job triggered - starting Strapi data sync...");
 		// Actual scanning happens in routes/models.js. This function simply transfers the pulled data into JSON files.
-		models.scanEveryTable(models.bases, function scanEveryTableCallback(data) {
+		// Updated to use Strapi
+		models.scanEveryTableStrapi(models.bases, function scanEveryTableCallback(data) {
+			let filesUpdated = 0;
 			Object.keys(data).forEach(function processFullDataCallback(key) {
 				jsonfile.writeFile(`${__dirname}/models/${key}.json`, data[key], function jsonWriteFileCallback(err) {
 					if (debug && err) {
+						console.error(`Error writing ${key}.json:`, err);
 						throw new Error(err);
+					} else {
+						filesUpdated++;
+						debug && console.log(`Updated ${key}.json with ${Object.keys(data[key]).length} records`);
 					}
 				});
 			});
-			// debug && console.log(`Cron job successful! Files ${__dirname}/models/*.json updated.`);
+			debug && console.log(`Cron job successful! ${filesUpdated} files updated with Strapi data.`);
 		});
 	},
 	function () {
@@ -123,3 +170,22 @@ var job = new CronJob(
 	true,
 	"Pacific/Honolulu"
 );
+*/
+
+// Initial One-Time Strapi Scan On Startup
+debug && console.log("Running one-time Strapi scan on startup...");
+models.scanEveryTableStrapi(models.bases, function scanEveryTableCallback(data) {
+	let filesUpdated = 0;
+	Object.keys(data).forEach(function processFullDataCallback(key) {
+		jsonfile.writeFile(`${__dirname}/models/${key}.json`, data[key], function jsonWriteFileCallback(err) {
+			if (debug && err) {
+				console.error(`Error writing ${key}.json:`, err);
+				throw new Error(err);
+			} else {
+				filesUpdated++;
+				debug && console.log(`Updated ${key}.json with ${Object.keys(data[key]).length} records`);
+			}
+		});
+	});
+	debug && console.log(`Startup scan complete! ${filesUpdated} files updated with Strapi data.`);
+});

@@ -1,126 +1,91 @@
 "use strict"; /* eslint-env node */ /* global */ /* eslint no-warning-comments: [1, { "terms": ["todo", "fix", "help"], "location": "anywhere" }] */
 var debug = !process.env.NODE_ENV;
 
+// Strapi code written by Claude
+
 // Load Node Dependencies & Custom Modules
 var path = require("path"),
 	_ = require("lodash"),
 	jsonfile = require("jsonfile"),
-	airtable = require("airtable"),
 	validator = require("validator"),
-	utils = require("../utils.js");
+	utils = require("../utils.js"),
+	strapiService = require("../services/strapi.js");
 
-// Setup Airtable API
-airtable.configure({ // Module for Airtable API.
-	endpointUrl: "https://api.airtable.com",
-	apiKey: process.env.AIRTABLE_KEY // https://airtable.com/account
-});
-
-// Bases To Pull From Airtable
-// https://airtable.com/api to get base ID.
+// Strapi content structure - keeping minimal compatibility for existing routes
 var bases = {
 	"About Sections": {
-		baseID: "appXpFAar7Nro7fRZ",
-		tables: ["Front Page", "History", "Values"]
-	},
-	"About Staff": {
-		baseID: "appj3Hm417P5gE0oM",
-		tables: ["Staff"]
-	},
-	"Community": {
-		baseID: "appkvA9WfE62DYGIl",
-		tables: ["Announcements", "Youth", "CoYA", "Ministries", "Forms", "Leaders"]
-	},
-	"Experience": {
-		baseID: "appk80veA6WdxCrtB",
-		tables: ["Calendar", "Classes", "Photos", "Leaders"]
-	},
-	"Past Sermons": {
-		baseID: "appwoW5IMGdHcKf14",
-		tables: ["Sermons", "Speakers", "Series"]
-	},
-	"Articles and Blogs": {
-		baseID: "appaTv4YjcvFV6f4l",
-		tables: ["Yumpu", "Authentic Peace", "Posts", "Authors"]
-	},
-	"Devotions": {
-		baseID: "appvfK512emYw6IiH",
-		tables: ["Entries"]
-	},
-	"Storefront": {
-		baseID: "appj9yKh2t3Qh24Wl",
-		tables: ["Storefront", "Contact"]
-	},
-	"Converge Listen": {
-		baseID: "appCeT42SG41ZNhbD",
-		tables: ["Listen"]
-	},
-	"Converge TV": {
-		baseID: "appFX7NBTY8z4Dqfb",
-		tables: ["Youtube Live", "Converge TV", "Topics", "Speakers"]
-	},
-	"Meeting Rooms": {
-		baseID: "appLDEVLuqJcHdqdP",
-		tables: ["Jitsi", "Palehua", "Mokuleia", "Kauai"]
-	},
-	"HE Brews": {
-		baseID: "appamTiUaVqXSiBhf",
-		tables: ["HE Brews", "Menu"]
-	},
-	"Contact Responses": {
-		baseID: "app5uJTO5UJ1AMpiD",
-		tables: ["More Info", "To Serve", "For Prayer", "Baptism and Confirmation", "Booking Time"]
+		tables: ["Front Page"]
 	}
 }
 
-// Airtable: Scan Table
-function scanTable (baseID, tableName, callback) {
-	var dataToSend = {},
-		base = airtable.base(baseID),
-		table = base(tableName);
-	table.select({
-		view: "Main View" // This is a common cause for an error, since creating a new Airtable table sets the view as "Grid view" not "Main View".
-	}).eachPage(function processPage (records, fetchNextPage) {
-		records.forEach(function processRecord (record) {
-			// "record.id" to get ID, "record.fields" to get object literal, "record.get('FIELD NAME')" to get value.
-			dataToSend[record.id] = record.fields;
-		});
-		fetchNextPage();
-	}, function doneProcessing (err) {
-		if (debug && err) { console.log("Error info", baseID, tableName); throw new Error(err); }
-		// debug && console.log(`Table ${tableName} successfully scanned!`);
-		callback(dataToSend);
-	});
-}
+// Fetch all Strapi content
+async function scanEveryTableStrapi(bases, callback) {
+	debug && console.log("Starting Strapi scan...");
+	try {
+		// Create a mapping of all table names to fetch from Strapi
+		const tableMapping = {};
 
-// Airtable: Scan Every Table
-function scanEveryTable (bases, callback) {
-	var fullData = {}; // This is where all the data will be temporarily stored.
-	// Loop through the bases.
-	utils.waterfallOverObject(bases, function waterfallOverObjectCallback (base, report) {
-		// Loop through the tables of each base.
-		utils.waterfallOverArray(bases[base].tables, function waterfallOverArrayCallback (table, innerReport) {
-			// Scan each table.
-			scanTable(bases[base].baseID, table, function scanTableCallback (data) {
-				fullData[`${base}_${table}`] = data; // Add the scanned data to the fullData object.
-				innerReport(); // Move on to the next table.
+		// Convert the base structure to a flat table mapping
+		Object.keys(bases).forEach(baseName => {
+			bases[baseName].tables.forEach(tableName => {
+				const fullTableName = `${baseName}_${tableName}`;
+				tableMapping[fullTableName] = true;
 			});
-		}, function finishedWaterfallingOverTables () {
-			report(); // Move on to the next base.
 		});
-	}, function finishedWaterfallingOverBases () {
-		callback(fullData); // Send the data back to the cron job.
-	});
+
+
+		// Fetch all data from Strapi
+		const fullData = await strapiService.fetchAllStrapiContent(tableMapping);
+
+		const totalRecords = Object.values(fullData).reduce((sum, data) => sum + Object.keys(data).length, 0);
+		debug && console.log(`Strapi scan complete: ${totalRecords} records from ${Object.keys(fullData).length} endpoints`);
+
+		// Call the callback with the fetched data
+		callback(fullData);
+	} catch (error) {
+		debug && console.error("Error scanning Strapi tables:", error);
+		// Fallback to empty data on error
+		callback({});
+	}
 }
 
-// Airtable: Create a Record in a Table
-function createAirtableRecord (baseID, tableName, data, callback) {
-	var base = airtable.base(baseID),
-		table = base(tableName);
+// Create a Strapi record
+async function createStrapiRecord(baseName, tableName, data, callback) {
+	try {
+		// Map base name and table name to Strapi content type
+		const contentTypeMap = {
+			"Contact Responses": {
+				"More Info": "contact-submissions",
+				"To Serve": "serve-submissions",
+				"For Prayer": "prayer-requests",
+				"Baptism and Confirmation": "baptism-confirmations",
+				"Booking Time": "booking-requests"
+			},
+			"Devotions": {
+				"Entries": "devotions"
+			}
+		};
 
-	table.create(data, function (err, record) {
-		if (debug && err) { throw new Error(err); }
+		let contentType = null;
+		if (contentTypeMap[baseName] && contentTypeMap[baseName][tableName]) {
+			contentType = contentTypeMap[baseName][tableName];
+		}
+
+		if (!contentType) {
+			debug && console.error(`No Strapi content type mapping found for ${baseName}_${tableName}`);
+			throw new Error(`No Strapi content type mapping found for ${baseName}_${tableName}`);
+		}
+
+
+		// Create the record in Strapi
+		const record = await strapiService.createStrapiRecord(contentType, data);
+
+		debug && console.log(`Created record in ${contentType}:`, record.id || record.documentId);
 		callback(record);
-	});
+	} catch (error) {
+		debug && console.error(`Error creating Strapi record for ${baseName}_${tableName}:`, error);
+		throw error;
+	}
 }
 
 // Get Data From JSON Model
@@ -211,8 +176,8 @@ function processForm (baseName, tableName, userData, sysData) {
 	// After Validation & Sanitization
 	finalData.passedValidation = !(_.size(finalData.invalid)); // If no invalid fields, data passed validation, vice versa.
 	if (finalData.passedValidation) {
-		// Create record in Airtable
-		createAirtableRecord(bases[baseName].baseID, tableName, finalData.fields, function finishedCreatingAirtableRecord (record) {
+		// Create record in Strapi
+		createStrapiRecord(baseName, tableName, finalData.fields, function finishedCreatingStrapiRecord (record) {
 			return _.defaults({fields: {}}, finalData); // Clear input data
 		});
 	}
@@ -220,10 +185,9 @@ function processForm (baseName, tableName, userData, sysData) {
 }
 
 module.exports = {
-	bases: bases, // Object
-	scanTable: scanTable, // Function
-	scanEveryTable: scanEveryTable, // Function
-	createAirtableRecord: createAirtableRecord, // Function
+	bases: bases, // Object (kept for compatibility with existing structure)
+	scanEveryTableStrapi: scanEveryTableStrapi, // Function (Strapi)
+	createStrapiRecord: createStrapiRecord, // Function (Strapi)
 	getFileData: getFileData, // Function
 	defaultFormRender: defaultFormRender, // Object
 	processForm: processForm // Function
