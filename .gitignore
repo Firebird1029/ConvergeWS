@@ -28,6 +28,7 @@ models/*.json
 *.rar
 *.tar
 *.zip
+!2025-strapi-import-scripts/csv-data.zip
 
 # Logs and databases #
 ######################
