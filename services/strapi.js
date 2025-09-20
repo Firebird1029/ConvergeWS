@@ -284,8 +284,9 @@ function transformStrapiData(strapiData, tableName) {
 function transformImageData(imgData) {
 	if (!imgData) return null;
 
+	const isAbsoluteUrl = imgData.url && (imgData.url.startsWith("http://") || imgData.url.startsWith("https://"));
 	return {
-		url: imgData.url ? `${STRAPI_URL}${imgData.url}` : null,
+		url: imgData.url ? (isAbsoluteUrl ? imgData.url : `${STRAPI_URL}${imgData.url}`) : null,
 		alternativeText: imgData.alternativeText || "",
 		caption: imgData.caption || "",
 		width: imgData.width || null,
