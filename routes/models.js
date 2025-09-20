@@ -21,6 +21,12 @@ var bases = {
 	},
 	"Experience": {
 		tables: ["Calendar", "Photos"]
+	},
+	"Converge Listen": {
+		tables: ["Listen"]
+	},
+	"Converge TV": {
+		tables: ["Youtube Live", "Converge TV"]
 	}
 }
 

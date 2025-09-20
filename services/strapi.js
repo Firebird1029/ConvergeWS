@@ -144,6 +144,24 @@ const STRAPI_ENDPOINTS = {
 			populate: "*",
 		},
 	},
+	"Converge TV_Youtube Live": {
+		endpoint: "youtube-live",
+		query: {
+			populate: "*",
+		},
+	},
+	"Converge Listen_Listen": {
+		endpoint: "converge-listens",
+		query: {
+			populate: "*",
+		},
+	},
+	"Converge TV_Converge TV": {
+		endpoint: "converge-tvs",
+		query: {
+			populate: "*",
+		},
+	},
 };
 
 // Transform Strapi data for template compatibility

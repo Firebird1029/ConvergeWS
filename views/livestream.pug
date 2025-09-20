@@ -6,13 +6,13 @@ html(lang="en")
 		article.article
 			include includes/body.pug
 			+addPageHeaderImage(options.pageTitle)
-			- var youtubeID = (records[0][Object.keys(records[0])[0]]) ? records[0][Object.keys(records[0])[0]].id : ""; // [{"rec34847473283": {id: "bob"}}]
-			- var discordID = (records[0][Object.keys(records[0])[0]]) ? records[0][Object.keys(records[0])[0]].discord : ""; // [{"rec34847473283": {id: "bob"}}]
+			- var youtubeID = (records[0][Object.keys(records[0])[0]]) ? records[0][Object.keys(records[0])[0]].youtubeID : "";
+			- var discordID = (records[0][Object.keys(records[0])[0]]) ? records[0][Object.keys(records[0])[0]].discordID : "";
 			- var handout = (records[0][Object.keys(records[0])[0]]) ? (records[0][Object.keys(records[0])[0]].handout) || null : null;
 			+section()
-				if handout
+				if handout && ((Array.isArray(handout) && handout[0] && handout[0].url) || (handout.url))
 					.content.has-text-centered
-						h1.title.is-5: a(href=(handout[0].url), target="_blank") Download bulletin
+						h1.title.is-5: a(href=(Array.isArray(handout) ? handout[0].url : handout.url), target="_blank") Download bulletin
 			section.section
 				.columns
 					.column.is-three-quarters.is-paddingless
