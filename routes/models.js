@@ -14,7 +14,13 @@ var path = require("path"),
 // Strapi content structure - keeping minimal compatibility for existing routes
 var bases = {
 	"About Sections": {
-		tables: ["Front Page"]
+		tables: ["Front Page", "History", "Values", "Team Leaders"]
+	},
+	"Community": {
+		tables: ["Announcements", "Forms"]
+	},
+	"Experience": {
+		tables: ["Calendar", "Photos"]
 	}
 }
 

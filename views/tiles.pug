@@ -23,7 +23,8 @@ html(lang="en")
 							- var ARCHIVE_TIME = 30 * 24 * 60 * 60 * 1000 /* ms */
 
 					//- If this page has an archive, then only publish record if less than a month old.
-					if record.publish && (!options.hasArchive || ((new Date) - recordDate) <= ARCHIVE_TIME)
+					//- if record.publish && (!options.hasArchive || ((new Date) - recordDate) <= ARCHIVE_TIME)
+					if !options.hasArchive || ((new Date) - recordDate) <= ARCHIVE_TIME
 						.box
 							.columns: .column
 								//- title: All
@@ -37,7 +38,7 @@ html(lang="en")
 								//- img: Ministries + Articles & Blogs, Storefront
 								if record.img
 									.column.is-one-quarter
-											+addImg(record.img, "imageLeftFloatFix")
+										+addImg(record.img, "imageLeftFloatFix")
 								.column(class=(options.hasArchive) ? "has-text-centered" : "")
 									//- passage: Sermons
 									+addText(record.passage)
@@ -70,21 +71,21 @@ html(lang="en")
 									if record.handout || record.slides
 										.container.has-text-centered
 											.columns
-												if record.handout
+												if record.handout && ((Array.isArray(record.handout) && record.handout[0] && record.handout[0].url) || (record.handout.url))
 													.column
 														h1.title.is-5
-															a(href=(record.handout[0].url), target="_blank") Download handout
-												if record.slides
+															a(href=(Array.isArray(record.handout) ? record.handout[0].url : record.handout.url), target="_blank") Download handout
+												if record.slides && ((Array.isArray(record.slides) && record.slides[0] && record.slides[0].url) || (record.slides.url))
 													.column
 														h1.title.is-5
-															a(href=(record.slides[0].url), target="_blank") Download slides
+															a(href=(Array.isArray(record.slides) ? record.slides[0].url : record.slides.url), target="_blank") Download slides
 											p &nbsp;
 
 									//- embed: TV
 									if record.embed
 										div.has-text-centered(style="height: 25rem; overflow: scroll;")!= record.embed
 										p &nbsp;
-									
+
 									//- speaker, series, handout, slides, audio: Sermons
 									//- speaker: TV
 									//- series: Sermons
@@ -94,7 +95,7 @@ html(lang="en")
 												.column: p #[span: strong Speaker: ] &nbsp; #{records[1][record.speaker[0]]["name"]} &nbsp; (#{records[1][record.speaker[0]]["email"]})
 											if record.series
 												.column: p This sermon is part of the series #{records[2][record.series[0]]["name"]}.
-									
+
 									if record.audio
 										.columns: .column
 											audio(controls, style="height: 3rem;")
@@ -126,5 +127,5 @@ html(lang="en")
 
 		//- Footer
 		if (options.hasArchive || options.tvPage)
-			script#hs-script-loader(type="text/javascript", src="//js.hs-scripts.com/7597904.js", async, defer)
+			script#hs-script-loader(type="text/javascript" src="//js.hs-scripts.com/7597904.js", async, defer)
 		include includes/footer.pug

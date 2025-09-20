@@ -19,7 +19,7 @@ html(lang="en")
 										if record.name
 											h4= (record.name || "")
 										if record.role
-											strong: em= (record.role) ? record.role.join(", ") : ""
+											strong: em= record.role
 										if record.description
 											em: +addText(record.description)
 										if record.bio

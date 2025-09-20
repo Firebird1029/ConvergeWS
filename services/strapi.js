@@ -76,6 +76,74 @@ const STRAPI_ENDPOINTS = {
 			},
 		},
 	},
+	"About Sections_History": {
+		endpoint: "history",
+		query: {
+			populate: {
+				rows: {
+					on: {
+						"shared.row": {
+							fields: ["*"],
+							populate: {
+								img: {
+									fields: ["*"],
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+	"About Sections_Values": {
+		endpoint: "values-page",
+		query: {
+			populate: {
+				rows: {
+					on: {
+						"shared.row": {
+							fields: ["*"],
+							populate: {
+								img: {
+									fields: ["*"],
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+	"About Sections_Team Leaders": {
+		endpoint: "team-leaders",
+		query: {
+			populate: "*",
+		},
+	},
+	Community_Announcements: {
+		endpoint: "announcements",
+		query: {
+			populate: "*",
+		},
+	},
+	Community_Forms: {
+		endpoint: "forms",
+		query: {
+			populate: "*",
+		},
+	},
+	Experience_Calendar: {
+		endpoint: "calendar-events",
+		query: {
+			populate: "*",
+		},
+	},
+	Experience_Photos: {
+		endpoint: "photos",
+		query: {
+			populate: "*",
+		},
+	},
 };
 
 // Transform Strapi data for template compatibility
@@ -89,8 +157,13 @@ function transformStrapiData(strapiData, tableName) {
 
 	items.forEach((item) => {
 		if (item && item.id) {
-			// Front-page with component-based rows structure
-			if (tableName === "About Sections_Front Page" && item.rows) {
+			// Pages with component-based rows structure
+			if (
+				(tableName === "About Sections_Front Page" ||
+					tableName === "About Sections_History" ||
+					tableName === "About Sections_Values") &&
+				item.rows
+			) {
 				// Transform each row into a template-compatible record
 				item.rows.forEach((row, index) => {
 					const rowRecord = {
@@ -116,7 +189,13 @@ function transformStrapiData(strapiData, tableName) {
 					title: item.title || item.name,
 					createdTime: item.createdAt,
 					updatedTime: item.updatedAt,
-					img: item.img ? transformImageData(item.img) : null,
+					img: item.img
+						? Array.isArray(item.img)
+							? item.img.map(transformImageData)
+							: transformImageData(item.img)
+						: null,
+					handout: item.handout ? transformImageData(item.handout) : null,
+					slides: item.slides ? transformImageData(item.slides) : null,
 				};
 
 				const recordKey = item.documentId || item.id;

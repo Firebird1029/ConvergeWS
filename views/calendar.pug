@@ -41,8 +41,8 @@ html(lang="en")
 									- todaysDate.setHours(0,0,0,0);
 									each record in records[0]
 										- recordDate = new Date(record.date);
-										//- Only show the record if .publish is true, if record has a title and a date, and if the date of the event is on or after today's date
-										if ((record.publish && record.title) && (record.date && recordDate.getTime() > todaysDate.getTime()))
+										//- Only show the record if published, if record has a title and a date, and if the date of the event is on or after today's date
+										if (record.title && (record.date && recordDate.getTime() > todaysDate.getTime()))
 											tr.event(data-record=record, style="cursor: pointer;")
 												//- record.date is assumed to exist
 												td.eventDate= recordDate.toLocaleDateString("en-US", {timeZone: "Pacific/Honolulu"})

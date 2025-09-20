@@ -10,7 +10,7 @@ html(lang="en")
 				//- The counter allows collapsible tiles to show/hide in their respective boxes, by correlating the heading (button) and the content.
 				- var counter = 0
 				each record in records[0]
-					if (record.publish && record.title)
+					if record.title
 						.box
 							div(data-boxgroup=counter, class=(options.collapsible) ? "collapsibleButton" : "")
 								h1.is-unselectable(data-boxgroup=counter, class=(options.collapsible) ? ["collapsibleHeading", "has-text-grey"] : "")= record.title
