@@ -68,10 +68,10 @@ router.get(["/forms", "/forms.html"], (req, res) => {
 	renderPage(req, res, "Community", ["Forms"], "tiles.pug", {pageTitle: "Forms and Reg"});
 });
 router.get(["/sermons", "/sermons.html"], (req, res) => {
-	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: false, hasArchive: true, archiveParentPath: "sermons", archiveTime: "a month"});
+	renderPage(req, res, "Past Sermons", ["Sermons"], "tiles.pug", {pageTitle: "Past Sermons", collapsible: false, hasArchive: true, archiveParentPath: "sermons", archiveTime: "a month"});
 });
 router.get(["/sermons/archive", "/sermons/archive.html"], (req, res) => {
-	renderPage(req, res, "Past Sermons", ["Sermons", "Speakers", "Series"], "sermonArchive.pug", {pageTitle: "Past Sermons"});
+	renderPage(req, res, "Past Sermons", ["Sermons"], "sermonArchive.pug", {pageTitle: "Past Sermons"});
 });
 // router.get(["/authentic-peace", "/authentic-peace.html"], (req, res) => {
 // 	renderPage(req, res, "Articles and Blogs", ["Yumpu", "Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace"});
@@ -86,10 +86,10 @@ router.get(["/sermons/archive", "/sermons/archive.html"], (req, res) => {
 // 	renderPage(req, res, "Articles and Blogs", ["Authentic Peace"], "authenticPeace.pug", {pageTitle: "Authentic Peace", id: req.params.articleID});
 // });
 router.get(["/articles-and-blogs", "/articles-and-blogs.html"], (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "tiles.pug", {pageTitle: "Articles and Blogs", collapsible: true, noIndex: true, hasArchive: true, archiveParentPath: "articles-and-blogs", archiveTime: "a week"});
+	renderPage(req, res, "Articles and Blogs", ["Articles"], "tiles.pug", {pageTitle: "Articles and Blogs", collapsible: true, noIndex: true, hasArchive: true, archiveParentPath: "articles-and-blogs", archiveTime: "a week"});
 });
 router.get(["/articles-and-blogs/archive", "/articles-and-blogs/archive.html"], (req, res) => {
-	renderPage(req, res, "Articles and Blogs", ["Posts", "Authors"], "articleArchive.pug", {pageTitle: "Articles and Blogs"});
+	renderPage(req, res, "Articles and Blogs", ["Articles"], "articleArchive.pug", {pageTitle: "Articles and Blogs"});
 });
 // router.get(["/beblessed", "/be-blessed", "/beblessed.html", "/be-blessed.html"], (req, res) => {
 // 	renderPage(req, res, "Storefront", ["Storefront", "Contact"], "tiles.pug", {pageTitle: "Be Blessed"});

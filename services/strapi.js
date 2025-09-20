@@ -162,6 +162,30 @@ const STRAPI_ENDPOINTS = {
 			populate: "*",
 		},
 	},
+	"HE Brews_HE Brews": {
+		endpoint: "he-brew",
+		query: {
+			populate: "*",
+		},
+	},
+	"HE Brews_Menu": {
+		endpoint: "he-brew",
+		query: {
+			populate: "*",
+		},
+	},
+	"Articles and Blogs_Articles": {
+		endpoint: "articles",
+		query: {
+			populate: "*",
+		},
+	},
+	"Past Sermons_Sermons": {
+		endpoint: "sermons",
+		query: {
+			populate: "*",
+		},
+	},
 };
 
 // Transform Strapi data for template compatibility
@@ -192,6 +216,37 @@ function transformStrapiData(strapiData, tableName) {
 						style: row.style,
 						component: row.__component,
 						img: row.img ? transformImageData(row.img) : null,
+						createdTime: item.createdAt,
+						updatedTime: item.updatedAt,
+					};
+
+					const recordKey = `${item.documentId || item.id}_row_${index}`;
+					transformedData[recordKey] = rowRecord;
+				});
+			} else if (tableName === "HE Brews_HE Brews" && item.rows) {
+				// For HE Brews page content table - only the main page content
+				const mainRecord = {
+					id: item.documentId || item.id,
+					documentId: item.documentId || item.id,
+					title: item.title,
+					body: item.body,
+					style: item.style,
+					img: item.img ? transformImageData(item.img) : null,
+					createdTime: item.createdAt,
+					updatedTime: item.updatedAt,
+				};
+				transformedData[item.documentId || item.id] = mainRecord;
+			} else if (tableName === "HE Brews_Menu" && item.rows) {
+				// For HE Brews menu table - only the menu items
+				item.rows.forEach((row, index) => {
+					const rowRecord = {
+						id: `${item.documentId || item.id}_row_${index}`,
+						documentId: `${item.documentId || item.id}_row_${index}`,
+						drink: row.drink,
+						heading: row.heading,
+						smallCost: row.smallCost,
+						largeCost: row.largeCost,
+						notes: row.notes,
 						createdTime: item.createdAt,
 						updatedTime: item.updatedAt,
 					};
@@ -257,14 +312,51 @@ async function fetchStrapiContentType(tableName) {
 	}
 
 	try {
-		// Build the query string using qs for proper encoding
-		const queryString = buildStrapiQuery(endpointConfig.query);
-		const fullEndpoint = `${endpointConfig.endpoint}?${queryString}`;
+		let allData = [];
+		let page = 1;
+		let hasMorePages = true;
 
-		debug && console.log(`Fetching: ${STRAPI_URL}/api/${fullEndpoint}`);
+		// Fetch all pages
+		while (hasMorePages) {
+			// Add pagination to the query
+			const paginatedQuery = {
+				...endpointConfig.query,
+				pagination: {
+					page: page,
+					pageSize: 100, // Max page size
+				},
+			};
 
-		const strapiData = await strapiRequest(fullEndpoint);
-		const transformedData = transformStrapiData(strapiData, tableName);
+			const queryString = buildStrapiQuery(paginatedQuery);
+			const fullEndpoint = `${endpointConfig.endpoint}?${queryString}`;
+
+			debug && console.log(`Fetching page ${page}: ${STRAPI_URL}/api/${fullEndpoint}`);
+
+			const strapiData = await strapiRequest(fullEndpoint);
+
+			if (strapiData && strapiData.data) {
+				// Handle both single items and arrays
+				const pageData = Array.isArray(strapiData.data) ? strapiData.data : [strapiData.data];
+				allData = allData.concat(pageData);
+
+				// Check if there are more pages
+				if (strapiData.meta && strapiData.meta.pagination) {
+					const { page: currentPage, pageCount } = strapiData.meta.pagination;
+					hasMorePages = currentPage < pageCount;
+					page++;
+				} else {
+					// No pagination info, assume this is the only page
+					hasMorePages = false;
+				}
+			} else {
+				hasMorePages = false;
+			}
+		}
+
+		debug && console.log(`Fetched ${allData.length} total records for ${tableName}`);
+
+		// Transform all the collected data
+		const transformedData = transformStrapiData({ data: allData }, tableName);
 
 		return transformedData;
 	} catch (error) {

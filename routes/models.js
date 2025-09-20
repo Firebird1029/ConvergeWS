@@ -27,6 +27,15 @@ var bases = {
 	},
 	"Converge TV": {
 		tables: ["Youtube Live", "Converge TV"]
+	},
+	"HE Brews": {
+		tables: ["HE Brews", "Menu"]
+	},
+	"Articles and Blogs": {
+		tables: ["Articles"]
+	},
+	"Past Sermons": {
+		tables: ["Sermons"]
 	}
 }
 

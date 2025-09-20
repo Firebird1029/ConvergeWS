@@ -7,7 +7,7 @@ html(lang="en")
 			include includes/body.pug
 			+addPageHeaderImage(options.pageTitle)
 			+section("Archive")
-				input#searchBar.input.is-rounded(type="text", placeholder="Search", onkeyup="searchArchive()")
+				input#searchBar.input.is-rounded(type="text" placeholder="Search" onkeyup="searchArchive()")
 				br
 				br
 
@@ -20,13 +20,13 @@ html(lang="en")
 							th Passage
 							th Download
 					tbody#archiveTable
-						each record in records[0]
+						each record in Object.values(records[0] || {})
 							//- https://stackoverflow.com/questions/14581610/check-date-greater-than-30-days-from-todays-date/14581743
 							//- https://stackoverflow.com/questions/9224773/js-check-if-date-is-less-than-1-hour-ago
 							- var recordDate = new Date(record.date)
 							- var ONE_MONTH = 30 * 24 * 60 * 60 * 1000 /* ms */
 							//- If more than a month old
-							if record.publish && (((new Date) - recordDate) > ONE_MONTH)
+							if ((new Date) - recordDate) > ONE_MONTH
 								tr
 									td
 										if record.date
@@ -34,25 +34,25 @@ html(lang="en")
 									td: +addText(record.title)
 									td
 										if record.speaker
-											span #{records[1][record.speaker[0]]["name"]}
-											//-  &nbsp; (#{records[1][record.speaker[0]]["email"]})
+											+addText(record.speaker)
 									td: +addText(record.passage)
 									td
 										if record.link
 											a(href=record.link, target="_blank")
 												+icon("fab fa-youtube")
-										if record.audio
-											a(onclick=`downloadFile("${record.audio[0].url}", "${record.title}.mp3")`)
+											| &nbsp;
+										if record.audio && record.audio.url
+											a(onclick=`downloadFile("${record.audio.url}", "${record.title}.mp3")`)
 												+icon("fa-volume-up")
-											//- Linking it does not work because of CSP, same-site policy
-											//- a(href=record.audio[0].url)
-											//- 	span.icon: i.fa.fa-volume-up
-										if record.handout
-											a(href=record.handout[0].url)
+											| &nbsp;
+										if record.handout && record.handout.url
+											a(href=record.handout.url, target="_blank")
 												+icon("fa-file-download")
-										if record.slides
-											a(href=record.slides[0].url)
+											| &nbsp;
+										if record.slides && record.slides.url
+											a(href=record.slides.url, target="_blank")
 												+icon("fa-file-powerpoint")
+											| &nbsp;
 
 			+section()
 				p #[a(href="/sermons") Click here] to go back to the latest sermons.

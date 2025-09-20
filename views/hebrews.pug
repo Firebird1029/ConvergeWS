@@ -18,10 +18,10 @@ html(lang="en")
 							th Large*
 							th &nbsp;
 					tbody
-						each record in records[1]
+						each record in Object.values(records[1] || {})
 							tr
 								if (record.heading)
-									td(align="center", colspan="4", style="text-align: center; background-color: hsl(0, 0%, 86%);")= record.drink
+									td(align="center" colspan="4" style="text-align: center; background-color: hsl(0, 0%, 86%);")= record.drink
 								else
 									td= (record.drink || "")
 									td= (record.smallCost) ? "$" + record.smallCost : ""
