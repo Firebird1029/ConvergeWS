@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "values_pages",
+  "info": {
+    "singularName": "values-page",
+    "pluralName": "values-pages",
+    "displayName": "Values Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rows": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.row"
+      ]
+    }
+  }
+}

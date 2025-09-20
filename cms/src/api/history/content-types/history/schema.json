@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "histories",
+  "info": {
+    "singularName": "history",
+    "pluralName": "histories",
+    "displayName": "History"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rows": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.row"
+      ]
+    }
+  }
+}
