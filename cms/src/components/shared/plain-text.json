@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_plain_texts",
+  "info": {
+    "displayName": "Plain text"
+  },
+  "options": {},
+  "attributes": {
+    "Text": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

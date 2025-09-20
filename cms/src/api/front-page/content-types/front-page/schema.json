@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "front_pages",
+  "info": {
+    "singularName": "front-page",
+    "pluralName": "front-pages",
+    "displayName": "Front Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "rows": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.row"
+      ]
+    }
+  }
+}
